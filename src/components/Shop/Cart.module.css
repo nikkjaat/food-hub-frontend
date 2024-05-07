@@ -1,0 +1,417 @@
+/* .container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+}
+
+.container > div:last-child {
+  background-color: var(---yellowColor);
+  position: sticky;
+  top: 1rem;
+  width: 30em;
+  padding: 1rem;
+  margin: 0 1rem 0 0;
+  border: 3px solid var(---primaryColor);
+  border-radius: 8px;
+  height: 100%;
+}
+
+.priceDetails h4 {
+  color: var(---mainColor) !important;
+  margin-bottom: 1rem;
+}
+
+.priceDetails ul {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.priceDetails ul li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalAmountAndBuy {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px solid var(---mainColor);
+  padding-top: 1rem;
+}
+.totalAmountAndBuy span:first-child {
+  color: var(---secMainColor);
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.orderNowBtn {
+  background-color: var(---secMainColor) !important;
+  color: var(---primaryColor) !important;
+  width: 6.3em;
+  border: 3px solid var(---secMainColor);
+  font-weight: bold;
+}
+
+.priceDetails ul li span {
+  color: var(---secMainColor);
+  font-weight: bold;
+}
+
+.container > div:first-child {
+  width: 60%;
+  margin: 0 1rem;
+}
+
+.card {
+  background-color: var(---yellowColor);
+  width: 45em;
+}
+
+.body {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+}
+.body > div {
+  width: 49% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.body > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quantityBox {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.6em;
+  min-width: 6.5em;
+  margin: 1rem 0;
+}
+
+.quantityBox button {
+  background-color: transparent;
+  color: var(---mainColor) !important;
+  border: solid 3px var(---primaryColor);
+  color: black;
+  min-width: 3em;
+  font-weight: bolder;
+  border-radius: 6px;
+}
+
+.quantityBox button:hover:not(.quantity) {
+  color: var(---secMainColor) !important;
+  border: 3px solid var(---secMainColor);
+}
+
+.quantityBox .quantity {
+  text-align: center;
+  border: solid 3px var(---primaryColor) !important;
+  background-color: var(---secMainColor);
+  border: none;
+  color: var(---primaryColor) !important;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: default;
+  user-select: none;
+}
+
+.name {
+  color: var(---secMainColor);
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+.description {
+  color: var(---mainColor);
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.price h4 {
+  color: var(---mainColor);
+}
+
+.price span {
+  color: var(---secMainColor);
+  text-decoration: underline;
+}
+
+.delANDbuyBtnParent {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.delANDbuyBtnParent .delANDbuyBtn {
+  width: 6em !important;
+  background-color: var(---secMainColor) !important;
+}
+
+.delANDbuyBtnParent button {
+  border: 2px solid var(---secMainColor);
+  background-color: var(---secMainColor);
+  color: white;
+  font-weight: bold;
+}
+
+.delANDbuyBtnParent button:hover {
+  color: black;
+  border: 2px solid var(---secMainColor);
+  background-color: transparent !important;
+}
+
+.nameAndDescription {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: grid;
+  }
+} */
+
+/* 2nd  */
+
+/* .mainContainer {
+  padding: 1rem;
+}
+
+.itemContainer {
+  background-color: aliceblue;
+}
+
+.totalDetailsCard {
+  background-color: var(---yellowColor) !important;
+  margin: 0 !important;
+  position: sticky !important;
+  top: 1em;
+  height: 20rem;
+}
+
+.totalDetailsCard h4 {
+  color: var(---mainColor) !important;
+  margin-bottom: 1rem;
+}
+
+.totalDetailsCard ul {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.totalDetailsCard ul li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalDetailsCard ul li span:nth-child(1) {
+  color: var(---mainColor);
+}
+
+.totalDetailsCard ul li span:nth-child(2) {
+  color: var(---secMainColor);
+  font-weight: bold;
+}
+
+.item {
+  background-color: var(---yellowColor) !important;
+  padding: 1em !important;
+  border-radius: 0.6rem !important;
+}
+
+.description,
+.name {
+  color: aliceblue !important;
+  font-weight: bold !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.priceContainer {
+  align-items: center;
+  display: flex !important;
+  gap: 2em !important;
+  margin: 0.6em 0;
+  justify-content: space-between;
+}
+
+.quantityBox .child {
+  background-color: aliceblue;
+}
+
+.delANDbuyBtnParent {
+  width: 14rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.delANDbuyBtnParent .delANDbuyBtn {
+  min-width: 6em !important;
+  background-color: var(---secMainColor) !important;
+}
+
+.delANDbuyBtnParent button {
+  border: 2px solid var(---secMainColor);
+  background-color: var(---secMainColor);
+  color: white;
+  font-weight: bold;
+}
+
+.delANDbuyBtnParent button:hover {
+  color: black;
+  border: 2px solid var(---secMainColor);
+  background-color: transparent !important;
+} */
+
+/* NEW */
+
+.container {
+  /* background-color: antiquewhite; */
+  border: 2px solid var(---yellowColor);
+  margin: 1rem auto;
+  /* padding: 2rem; */
+  border-radius: 1rem;
+}
+
+.cardContainer div {
+  background-color: var(---yellowColor);
+}
+
+.cardBody {
+  background-color: aliceblue;
+  position: relative;
+}
+
+.totalCartItem {
+  color: var(---mainColor);
+  font-weight: bold !important;
+  text-transform: capitalize !important;
+  font-size: 1.6em;
+}
+
+.imageContainer {
+  height: 12rem !important;
+  background-color: aliceblue !important;
+}
+
+.imageContainer .image {
+  background-color: aliceblue !important;
+  border-radius: 0.3rem;
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+hr {
+  background-color: black !important;
+  color: var(---mainColor);
+  size: 10px !important;
+}
+
+.singleCard {
+  /* background-color: aliceblue !important; */
+  color: black !important;
+}
+
+.allProductDetails div:nth-child(1) {
+  position: sticky !important;
+  top: 1em !important;
+  /* background-color: var(---yellowColor); */
+}
+
+.delANDbuyBtn {
+  background-color: var(---secMainColor) !important;
+  width: 6em;
+}
+
+.delANDbuyBtn * {
+  background-color: transparent !important;
+}
+
+.description {
+  color: aliceblue !important;
+  font-weight: bold !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+.quantityBox {
+  /* background-color: var(---secMainColor) !important; */
+  /* border: 2px solid var(---secMainColor) !important; */
+  border-radius: 0.5rem;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: 5em !important;
+  top: 7em !important;
+  width: 9rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.quantityBox .quantity {
+  /* background-color: var(---secMainColor) !important; */
+  /* color: var(---primaryColor) !important; */
+  font-weight: bold;
+  border: 2px solid var(---secMainColor) !important;
+  /* border-right: 2px solid var(---secMainColor) !important; */
+}
+
+.quantityBox .child {
+  /* background-color: var(---secMainColor); */
+  border: 2px solid var(---secMainColor) !important;
+}
+
+.allProductDetails > div:first-child {
+  background-color: var(---secMainColor);
+}
+
+.cardBody,
+.cardBody * {
+  background-color: var(---yellowColor);
+}
+
+.orderBtn {
+  /* width: 10rem; */
+  background-color: var(---secMainColor) !important;
+  /* margin-top: 4rem !important; */
+  color: white;
+}
+
+.orderBtn:hover {
+  color: aqua;
+}
+
+.orderBtn * {
+  background-color: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .quantityBox {
+    position: relative;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}

@@ -1,0 +1,77 @@
+.container {
+  background-color: var(---yellowColor);
+  margin: 1rem auto !important;
+  border-radius: 1rem;
+}
+
+.container form {
+  padding: 1rem;
+}
+
+.container select option {
+  background-color: var(---yellowColor) !important;
+  color: var(---secMainColor);
+  width: 1rem !important;
+  height: 2rem !important;
+}
+
+.dropdown div {
+  color: var(---mainColor);
+  font-weight: bold;
+}
+
+.dropdown span {
+  color: var(---primaryColor);
+}
+
+.dropdown .optionTag:hover span {
+  /* color: var(---yellowColor); */
+  font-size: 1.1em;
+}
+
+.dropdown i {
+  color: black !important;
+}
+
+.dropdown::placeholder {
+  color: red !important;
+  background-color: aqua !important;
+}
+
+.optionTag {
+  background-color: rgb(48, 50, 50) !important;
+}
+
+.container input:-webkit-autofill {
+  -webkit-text-fill-color: black !important;
+}
+
+.container input {
+  font-weight: bold;
+}
+
+.submitBtn {
+  background-color: var(---secMainColor) !important;
+  color: var(---primaryColor) !important;
+  font-weight: bold !important;
+  border: 2px solid var(---secMainColor) !important;
+  transition: 0.2s !important;
+}
+
+.submitBtn:hover {
+  background-color: transparent !important;
+  color: var(---secMainColor) !important;
+  border: 2px solid var(---secMainColor) !important;
+}
+
+.buttons {
+  margin: 2rem 0 1rem 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.buttons button {
+  min-width: 12em;
+}

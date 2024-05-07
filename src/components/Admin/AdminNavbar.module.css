@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitter&family=Dancing+Script:wght@600&display=swap");
+
+.logo {
+  font-family: "Kalam", cursive;
+  text-decoration: underline;
+  color: yellow;
+}
+
+.logo:hover {
+  color: yellow !important;
+}
+
+.logo span {
+  font-family: "Fugaz One", sans-serif;
+  font-size: 2.2rem;
+}
+
+.navbar {
+  background-color: var(---secMainColor);
+}
+.navbar a {
+  color: yellow;
+}
+
+.navbar a:hover {
+  color: yellow;
+}
+
+.active {
+  color: aqua;
+}
+
+#navbarNav {
+  margin-right: 3rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+#navbarNav ul {
+  gap: 2rem;
+}
+
+.btn {
+  background-color: var(---yellowColor);
+  color: var(---secMainColor);
+  font-weight: bold;
+  border: 2px solid var(---yellowColor);
+}
+
+.btn:hover {
+  background-color: transparent;
+  border: 2px solid var(---yellowColor);
+  color: var(---primaryColor);
+}
+
+.adminNavbar div a {
+  text-decoration: none;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* background-color: rgb(5, 8, 8); */
+  margin-left: 1rem;
+}

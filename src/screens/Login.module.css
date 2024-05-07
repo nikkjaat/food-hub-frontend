@@ -1,0 +1,89 @@
+input:focus {
+  box-shadow: none !important;
+  /* border: transparent !important; */
+}
+.form {
+  width: 90% !important;
+  background-color: var(---yellowColor) !important;
+  margin-bottom: 3em;
+  font-weight: bold;
+}
+
+.form label {
+  color: var(---secMainColor) !important;
+}
+
+.form input {
+  font-weight: bold !important;
+}
+
+.form span {
+  user-select: none;
+  color: var(---secMainColor);
+  /* background-color: #c51605 !important; */
+  cursor: pointer;
+}
+
+.submitBtn {
+  background-color: var(---secMainColor);
+  color: var(---primaryColor);
+  font-weight: bold;
+  border: 2px solid var(---secMainColor);
+}
+
+.submitBtn:hover {
+  border: 2px solid var(---secMainColor);
+  color: var(---secMainColor) !important;
+  background-color: transparent;
+}
+
+input {
+  outline: none;
+}
+
+.newAccountBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.newAccountBtn a {
+  /* text-decoration: none; */
+  color: var(---secMainColor);
+  font-weight: bold;
+}
+
+.rolesContainer {
+  margin-bottom: 1rem;
+}
+
+.rolesContainer div:first-child {
+  color: var(---secMainColor) !important;
+  margin-bottom: 0.6rem;
+}
+
+.rolesContainer div:last-child {
+  /* background-color: aliceblue; */
+  width: 40%;
+  display: flex;
+  gap: 1rem;
+}
+
+.rolesContainer div:last-child label {
+  width: 10rem;
+  background-color: aliceblue !important;
+  border-radius: 1rem !important;
+  border: 2px solid aliceblue;
+  font-weight: bold;
+  color: var(---mainColor) !important;
+}
+
+.rolesContainer div:last-child label:hover {
+  border: 2px solid var(---secMainColor);
+  color: var(---secMainColor) !important;
+}
+
+.rolesContainer div:last-child input:checked + label {
+  background-color: var(---secMainColor) !important;
+  border: 2px solid aliceblue;
+  color: var(---primaryColor) !important;
+}

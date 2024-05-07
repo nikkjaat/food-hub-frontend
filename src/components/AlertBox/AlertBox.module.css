@@ -1,0 +1,28 @@
+.container {
+  text-align: center;
+}
+
+.alertBox {
+  position: fixed;
+  top: -4rem;
+  z-index: 100;
+  width: 50%;
+  margin: 0 25% !important;
+  text-align: center;
+  animation: animate 4s ease-in-out 0s 1;
+}
+
+@keyframes animate {
+  0% {
+    top: -4rem;
+  }
+  20% {
+    top: 0;
+  }
+  80% {
+    top: 0;
+  }
+  100% {
+    top: -4rem;
+  }
+}

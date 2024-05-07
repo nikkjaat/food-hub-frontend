@@ -1,0 +1,147 @@
+* {
+  user-select: none;
+}
+
+.card {
+  overflow: hidden;
+  margin: 0 10px;
+  background-color: rgba(0, 0, 0, 0.322) !important;
+  min-width: 20em;
+  display: flex !important;
+  flex-wrap: nowrap;
+  min-height: 28rem;
+  /* flex: 1; */
+  width: calc(100% / 5);
+}
+
+#cardTitle {
+  color: var(---yellowColor);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* max-width: ; */
+  /* background-color: aliceblue; */
+}
+
+.imageContainer {
+  overflow: hidden;
+  width: 100%;
+  height: 17rem;
+}
+
+.imageContainer:hover .cardImage {
+  transform: scale(1.1);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  transition: 0.3s ease-in-out;
+}
+
+.quantityBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  /* gap: ; */
+}
+
+.quantityBoxParent {
+  /* background-color: aqua; */
+  display: flex;
+  gap: 0.5em;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.6em;
+}
+
+.quantityBoxParent button {
+  width: 2em;
+  background-color: transparent;
+  color: white !important;
+  border: solid 2px white;
+  color: black;
+  text-align: center;
+  font-weight: bolder;
+  /* font-size: 2rem; */
+  border-radius: 6px;
+  /* padding-bottom: 0.2em; */
+  height: 2rem;
+}
+
+.quantityBoxParent > input {
+  /* min-width: 25px; */
+  width: 2em;
+  text-align: center;
+  border: solid 2px white;
+  background-color: white;
+  border: none;
+  color: black;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: default;
+  user-select: none;
+  height: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100% !important;
+  /* background-color: aliceblue; */
+}
+
+.cartBtn div * {
+  color: var(---secMainColor);
+}
+
+.cartBtn {
+  background-color: var(---yellowColor) !important;
+  color: var(---yellowColor) !important;
+  display: flex;
+  width: 7rem;
+}
+
+.cartBtn i,
+.cartBtn div {
+  color: var(---secMainColor) !important;
+  font-weight: bolder;
+}
+
+.cartAndOrderBtn,
+.updateandDeleteBtn {
+  background-color: var(---yellowColor);
+  color: var(---secMainColor) !important;
+  font-weight: bolder;
+  border: 2px solid var(---yellowColor);
+  transition: 0.2s;
+}
+
+.cartAndOrderBtn:hover,
+.updateandDeleteBtn:hover {
+  border: 2px solid var(---yellowColor);
+  color: aliceblue;
+  background-color: transparent;
+}
+
+.updateandDeleteBtn {
+  text-decoration: none;
+  padding: 0.6em 0.7em;
+  border-radius: 6px;
+}
+
+.descriptionText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* max-width: 100%; */
+}
+
+/* @media (max-width: 614px) {
+  .card {
+    flex: 0 1 calc(48% - 10px);
+  }
+} */

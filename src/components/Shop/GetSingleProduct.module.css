@@ -1,0 +1,111 @@
+.card {
+  width: 90% !important;
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: var(---yellowColor);
+  border: 2px solid var(---yellowColor);
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.descriptionData {
+  width: 100%;
+  /* background-color: aliceblue; */
+  word-wrap: normal;
+}
+
+.imageContainer {
+  width: 40%;
+  max-height: 30rem;
+}
+
+.imageContainer > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.buttons {
+  display: flex;
+  /* background-color: aliceblue; */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100% !important;
+}
+
+.btn {
+  background-color: var(---secMainColor) !important;
+  border: 3px solid var(---secMainColor);
+  color: var(---primaryColor);
+  font-weight: bold;
+  display: flex;
+  width: 10rem;
+  /* gap: 2rem; */
+  margin: 1rem 0 !important;
+}
+
+.btn i,
+.btn div {
+  color: var(---primaryColor);
+}
+
+.btn:hover {
+  border: 3px solid var(---secMainColor);
+  color: var(---secMainColor);
+}
+
+.title {
+  color: var(---secMainColor);
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.ulList {
+  background-color: transparent !important;
+  width: 100%;
+  display: grid;
+  gap: 1.4rem;
+  margin: 0;
+}
+
+.ulList li {
+  color: var(---secMainColor);
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.ulList li div {
+  min-width: 12em;
+  color: var(---primaryColor);
+  /* background-color: aqua; */
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    display: grid;
+  }
+  .card .imageContainer {
+    /* background-color: aliceblue !important; */
+    margin: 0 auto;
+  }
+
+  .descriptionData {
+    width: 100%;
+    /* background-color: aliceblue; */
+    font-size: 1em;
+  }
+
+  .description {
+    font-size: 1em;
+  }
+
+  @media screen and (max-width: 522px) {
+    .ulList li {
+      display: grid;
+    }
+  }
+}

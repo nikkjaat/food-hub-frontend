@@ -1,0 +1,8 @@
+.cardContainer {
+  /* width: 78.96rem; */
+  /* background-color: rgb(55, 138, 211); */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-evenly;
+}

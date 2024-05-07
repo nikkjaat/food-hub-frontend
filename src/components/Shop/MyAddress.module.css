@@ -1,0 +1,114 @@
+.container {
+  background-color: var(---yellowColor);
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.container div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.addContainer {
+  border-radius: 1rem;
+  background-color: aliceblue;
+  padding: 0 0 0 0.5rem;
+  text-align: start;
+  color: black !important;
+}
+
+.address {
+  width: 100%;
+  color: black !important;
+}
+
+.address div {
+  color: black !important;
+}
+
+.addressPrint {
+  display: grid;
+  gap: 1em;
+}
+
+.addContainer label {
+  text-align: start;
+  padding: 1rem;
+  /* border: 1px solid red; */
+  /* background-color: aqua; */
+  height: 100% !important;
+  width: 100% !important;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.addContainer label:active {
+  border: 1px solid transparent !important;
+}
+
+.addContainer input[type="radio"]:checked {
+  background-color: yellow !important;
+  accent-color: var(---secMainColor) !important;
+}
+
+.container p {
+  color: black;
+}
+
+.addNewAdd {
+  color: var(---mainColor);
+  min-width: 11rem !important;
+  width: 100%;
+  font-weight: bold;
+  background-color: var(---secMainColor) !important;
+}
+
+.addNewAdd div:last-child {
+  /* background-color: aliceblue; */
+  /* color: black; */
+  text-align: center !important;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container a {
+  max-width: 10rem !important;
+  /* background-color: aqua; */
+  width: 100% !important;
+}
+
+.editDelBtn {
+  display: flex;
+  /* background-color: aqua; */
+  width: 9em;
+  /* margin: 0em auto !important; */
+  justify-content: space-between;
+}
+.editDelBtn .btn {
+  width: 5em;
+  background-color: var(---secMainColor) !important;
+}
+
+.editDelBtn .btn div {
+  color: var(---primaryColor) !important;
+  /* background-color: var(---secMainColor); */
+}
+
+.payBtn {
+  background-color: var(---secMainColor);
+  color: var(---primaryColor);
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: 10rem;
+  border: 2px solid var(---secMainColor);
+}
+
+.payBtn:hover {
+  border: 2px solid var(---secMainColor);
+  color: var(---secMainColor);
+}

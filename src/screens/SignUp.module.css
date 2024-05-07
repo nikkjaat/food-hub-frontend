@@ -1,0 +1,30 @@
+.signupForm {
+  max-width: 90%;
+  margin: 1rem auto;
+  padding-bottom: 2rem;
+  border-radius: 1rem;
+  background-color: var(---yellowColor);
+}
+
+.signupForm label {
+  color: var(---secMainColor);
+  font-weight: bold;
+}
+
+.signUpBtn {
+  background-color: var(---secMainColor);
+  color: var(---primaryColor);
+  font-weight: bold;
+  border: 2px solid var(---secMainColor);
+}
+
+.signUpBtn:hover {
+  border: 2px solid var(---secMainColor);
+  color: var(---secMainColor);
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

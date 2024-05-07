@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitter&family=Dancing+Script:wght@600&family=Fugaz+One&family=Kalam&display=swap");
+
+:root {
+  ---primaryColor: #f7f1e5;
+  ---secColor: #898121;
+  ---mainColor: #242424;
+  ---secMainColor: #b91b03;
+  ---yellowColor: rgb(255, 174, 0);
+
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  color: var(---primaryColor);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* html {
+  width: 98.72vw;
+  height: 100vh;
+} */
+
+body {
+  background-color: #242424;
+  width: 98.8vw;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+}

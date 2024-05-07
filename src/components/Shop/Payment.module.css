@@ -1,0 +1,42 @@
+.container {
+  background-color: var(---yellowColor);
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.container > div:last-child {
+  display: grid;
+  gap: 2em;
+}
+
+.addNewAdd {
+  width: 100% !important;
+  background-color: var(---secMainColor) !important;
+}
+
+.container a * {
+  text-align: start !important;
+}
+
+.addNewAdd div {
+  color: var(---primaryColor);
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  line-height: 1.5em;
+  font-size: 100%;
+  padding: 0.5em 0;
+}
+
+.addNewAdd div > span:first-child {
+  margin-right: 1rem;
+}
+
+.locationIcon {
+  /* background-color: var(---mainColor); */
+  color: var(---mainColor) !important;
+}
