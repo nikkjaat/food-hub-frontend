@@ -1,7 +1,7 @@
 .card {
   position: absolute;
-  top: 5rem;
-  right: 1.3rem;
+  top: 5em;
+  right: .3em;
   width: 20rem;
   transition: 0.3s;
   z-index: 100;
@@ -79,4 +79,11 @@
   cursor: pointer;
   color: var(---secMainColor) !important;
   /* background-color: aqua; */
+}
+
+@media screen and (max-width: 991.5px) {
+  .card {
+    top: 14.7em !important;
+    right: 0;
+  }
 }

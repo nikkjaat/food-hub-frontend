@@ -110,7 +110,9 @@ export default function PostProduct() {
       }
     } else {
       const response = await axios.put(
-        `${import.meta.env.VITE_API_BACKEND_URL}/admin/updateproduct?productId=${productId}`,
+        `${
+          import.meta.env.VITE_API_BACKEND_URL
+        }/admin/updateproduct?productId=${productId}`,
         formData,
         {
           headers: {
