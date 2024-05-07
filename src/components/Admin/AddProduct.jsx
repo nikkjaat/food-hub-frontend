@@ -84,7 +84,7 @@ export default function AddProduct() {
   // useEffect(() => {
   //   const addAndUpdateProduct = async () => {
   //     const response = await axios.put(
-  //       "http://localhost:4000/admin/addproduct",
+  //       `${import.meta.env.VITE_API_BACKEND_URL}/admin/addproduct`,
   //       {
   //         headers: {
   //           "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export default function AddProduct() {
   // }, []);
 
   //   const response = await axios.post(
-  //     "http://localhost:4000/admin/addproduct",
+  //     `${import.meta.env.VITE_API_BACKEND_URL}/admin/addproduct`,
   //     {
   //       categoryName: category.current.value,
   //       name: title.current.value,
@@ -177,7 +177,7 @@ export default function AddProduct() {
 
     const addORupdateProduct = async () => {
       const response = await axios.post(
-        "http://localhost:4000/admin/addproduct",
+        `${import.meta.env.VITE_API_BACKEND_URL}/admin/addproduct`,
         product,
         {
           headers: {

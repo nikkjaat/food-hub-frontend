@@ -41,7 +41,7 @@ export default function AdminProducts() {
   // console.log(products);
   const onDelete = async (prodId) => {
     const response = await axios.delete(
-      `http://localhost:4000/admin/deleteproduct/${prodId}`,
+      `${import.meta.env.VITE_API_BACKEND_URL}/admin/deleteproduct/${prodId}`,
       {
         headers: {
           "Content-Type": "application/json",

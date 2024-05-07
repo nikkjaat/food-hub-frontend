@@ -34,7 +34,7 @@ export default function Navbar(props) {
 
   useEffect(() => {
     const getCartItem = async () => {
-      const response = await axios.get("http://localhost:4000/getcartitem", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/getcartitem`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + authCtx.token,

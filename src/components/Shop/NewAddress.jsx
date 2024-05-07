@@ -367,7 +367,7 @@ export default function Address() {
         const queryParams = new URLSearchParams(queryString);
         const addressId = queryParams.get("addressId");
         const response = await axios.get(
-          `http://localhost:4000/getsingleaddress?addressId=${addressId}`,
+          `${import.meta.env.VITE_API_BACKEND_URL}/getsingleaddress?addressId=${addressId}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -401,7 +401,7 @@ export default function Address() {
       const queryParams = new URLSearchParams(queryString);
       const addressId = queryParams.get("addressId");
       const response = await axios.patch(
-        `http://localhost:4000/updateaddress?addressId=${addressId}`,
+        `${import.meta.env.VITE_API_BACKEND_URL}/updateaddress?addressId=${addressId}`,
         address,
         {
           headers: {
@@ -415,7 +415,7 @@ export default function Address() {
       }
     } else {
       const response = await axios.post(
-        "http://localhost:4000/addaddress",
+        `${import.meta.env.VITE_API_BACKEND_URL}/addaddress`,
         address,
         {
           headers: {

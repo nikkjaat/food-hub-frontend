@@ -26,10 +26,14 @@ export default function Login() {
 
   const loginSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost:4000/login", {
-      email: email.current.value,
-      password: password.current.value,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BACKEND_URL}/login`,
+      {
+        email: email.current.value,
+        password: password.current.value,
+      }
+    );
+    console.log(response);
     const json = await response.data;
 
     if (json.success) {

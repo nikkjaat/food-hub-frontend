@@ -105,7 +105,7 @@ export default function ImageUpload(props) {
 //           <img
 //             src={
 //               props.image
-//                 ? `http://localhost:4000/${props.image}`
+//                 ? `${import.meta.env.VITE_ASSET_URL}/${props.image}`
 //                 : "http://via.placeholder.com/640x360"
 //             }
 //             alt="Preview"

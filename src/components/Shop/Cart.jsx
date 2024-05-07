@@ -57,7 +57,7 @@ export default function Cart() {
 
   useEffect(() => {
     const getCart = async () => {
-      const response = await axios.get("http://localhost:4000/getcartitem", {
+      const response = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/getcartitem`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + authCtx.token,
@@ -105,7 +105,7 @@ export default function Cart() {
     authCtx.refreshData();
     setUpdatedCart({ prodId, changeQty });
     const response = await axios.patch(
-      `http://localhost:4000/updatecart/?productId=${prodId}&changeQty=${changeQty}`,
+      `${import.meta.env.VITE_API_BACKEND_URL}/updatecart/?productId=${prodId}&changeQty=${changeQty}`,
       {},
       {
         headers: {
@@ -119,7 +119,7 @@ export default function Cart() {
   const deleteCartItem = async (prodId) => {
     authCtx.refreshData();
     const response = await axios.delete(
-      `http://localhost:4000/deletecartitem/?productId=${prodId}`,
+      `${import.meta.env.VITE_API_BACKEND_URL}/deletecartitem/?productId=${prodId}`,
 
       {
         headers: {

@@ -71,7 +71,7 @@ export default function MyProfile(props) {
 
   const submitUserData = async () => {
     const response = await axios.put(
-      `http://localhost:4000/updateuserinfo/?userId=${props.user._id.toString()}`,
+      `${import.meta.env.VITE_API_BACKEND_URL}/updateuserinfo/?userId=${props.user._id.toString()}`,
       formData,
       {
         headers: {

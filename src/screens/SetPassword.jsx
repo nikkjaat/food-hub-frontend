@@ -53,11 +53,14 @@ export default function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post("http://localhost:4000/setpassword", {
-      newPassword: newPassword,
-      userId: userId,
-      otp: otp,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_BACKEND_URL}/setpassword`,
+      {
+        newPassword: newPassword,
+        userId: userId,
+        otp: otp,
+      }
+    );
     if (response.status === 200) {
       navigate("/login");
     }

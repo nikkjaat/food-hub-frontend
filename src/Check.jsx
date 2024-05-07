@@ -37,7 +37,7 @@ export default function Check() {
     formData.append("price", 120);
 
     const response = await axios.post(
-      "http://localhost:4000/admin/fileupload",
+      `${import.meta.env.VITE_API_BACKEND_URL}/admin/fileupload`,
       formData,
       {
         headers: {

@@ -26,10 +26,13 @@ export default function ResetPassword() {
         <h5 style={{ color: "red" }}>Please enter a valid email address.</h5>
       );
     } else {
-      const response = await axios.post("http://localhost:4000/getotp", {
-        email: email.current.value,
-        otp: otp,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BACKEND_URL}/getotp`,
+        {
+          email: email.current.value,
+          otp: otp,
+        }
+      );
       console.log(response);
       setDisplay(true);
       setError(
@@ -47,10 +50,13 @@ export default function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (OTP) {
-      const response = await axios.post("http://localhost:4000/resetpassword", {
-        email: email.current.value,
-        OTP: OTP.current.value,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BACKEND_URL}/resetpassword`,
+        {
+          email: email.current.value,
+          OTP: OTP.current.value,
+        }
+      );
       console.log(response);
       if (response.status == 200) {
         navigate(

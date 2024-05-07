@@ -29,7 +29,9 @@ export default function PostProduct() {
   useEffect(() => {
     const getProduct = async (prodId) => {
       const response = await axios.get(
-        `http://localhost:4000/admin/getsingleproduct?productId=${prodId}`,
+        `${
+          import.meta.env.VITE_API_BACKEND_URL
+        }/admin/getsingleproduct?productId=${prodId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -94,7 +96,7 @@ export default function PostProduct() {
 
     if (!queryString) {
       const response = await axios.post(
-        "http://localhost:4000/admin/addproduct",
+        `${import.meta.env.VITE_API_BACKEND_URL}/admin/addproduct`,
         formData,
         {
           headers: {
@@ -108,7 +110,7 @@ export default function PostProduct() {
       }
     } else {
       const response = await axios.put(
-        `http://localhost:4000/admin/updateproduct?productId=${productId}`,
+        `${import.meta.env.VITE_API_BACKEND_URL}/admin/updateproduct?productId=${productId}`,
         formData,
         {
           headers: {

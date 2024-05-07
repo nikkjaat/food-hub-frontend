@@ -45,17 +45,20 @@ export default function Login() {
   const newUserFormSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:4000/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: credentials.name,
-        email: credentials.email,
-        location: credentials.location,
-        password: credentials.password,
-        roles: roles,
-      }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BACKEND_URL}/signup`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: credentials.name,
+          email: credentials.email,
+          location: credentials.location,
+          password: credentials.password,
+          roles: roles,
+        }),
+      }
+    );
     const json = await response.json();
 
     if (json.success) {

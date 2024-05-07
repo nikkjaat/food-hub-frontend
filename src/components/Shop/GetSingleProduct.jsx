@@ -18,7 +18,7 @@ export default function GetSingleProduct() {
   useEffect(() => {
     const getProduct = async () => {
       const response = await axios.get(
-        `http://localhost:4000/admin/getsingleproduct?productId=${productId}`,
+        `${import.meta.env.VITE_API_BACKEND_URL}/admin/getsingleproduct?productId=${productId}`,
         {
           headers: {
             "Content-Type": "application/json",

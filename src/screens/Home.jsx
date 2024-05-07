@@ -22,7 +22,7 @@ export default function Home() {
 
   // useEffect(() => {
   //   const getProducts = async () => {
-  //     const response = await axios.get("http://localhost:4000/getfood", {
+  //     const response = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/getfood`, {
   //       headers: {
   //         "Content-Type": "application/json",
   //         Authorization: "Bearer " + authCtx.token,

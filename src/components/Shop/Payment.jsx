@@ -21,7 +21,7 @@ export default function Payment() {
     if (queryString) {
       const getAddress = async () => {
         const response = await axios.get(
-          `http://localhost:4000/getsingleaddress/?addressId=${addId}`,
+          `${import.meta.env.VITE_API_BACKEND_URL}/getsingleaddress/?addressId=${addId}`,
           {
             headers: {
               "Content-Type": "application/json",

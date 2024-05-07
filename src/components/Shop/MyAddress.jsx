@@ -22,12 +22,15 @@ export default function MyAddress() {
   const authCtx = useContext(AuthContext);
   useEffect(() => {
     const getAddress = async () => {
-      const response = await axios.get("http://localhost:4000/getaddress", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + authCtx.token,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BACKEND_URL}/getaddress`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + authCtx.token,
+          },
+        }
+      );
       console.log(response);
       setAddress(response.data.data);
     };
@@ -36,7 +39,7 @@ export default function MyAddress() {
 
   const deleteAddress = async (prodId) => {
     const response = await axios.delete(
-      `http://localhost:4000/deleteaddress?prodId=${prodId}`,
+      `${import.meta.env.VITE_API_BACKEND_URL}/deleteaddress?prodId=${prodId}`,
       {
         headers: {
           "Content-Type": "application/json",
