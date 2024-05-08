@@ -71,23 +71,27 @@ export default function MyProfile(props) {
   formData.append("profilePicture", data.profilePicture);
 
   const submitUserData = async () => {
-    const response = await axios.put(
-      `${
-        import.meta.env.VITE_API_BACKEND_URL
-      }/updateuserinfo/?userId=${props.user._id.toString()}`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Bearer " + authCtx.token,
-        },
+    try {
+      const response = await axios.put(
+        `${
+          import.meta.env.VITE_API_BACKEND_URL
+        }/updateuserinfo/?userId=${props.user._id.toString()}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + authCtx.token,
+          },
+        }
+      );
+      if (response.status === 200) {
+        authCtx.refreshData();
+        props.setDisplay(false);
+        authCtx.alertBoxHandler("Profile updated successfully");
+        authCtx.refreshData();
       }
-    );
-    if (response.status === 200) {
-      authCtx.refreshData();
-      props.setDisplay(false);
-      authCtx.alertBoxHandler("Profile updated successfully");
-      authCtx.refreshData();
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
