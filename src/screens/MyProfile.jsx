@@ -22,6 +22,7 @@ export default function MyProfile(props) {
   const authCtx = useContext(AuthContext);
   const logoutHandler = () => {
     authCtx.logoutHandler();
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -71,7 +72,9 @@ export default function MyProfile(props) {
 
   const submitUserData = async () => {
     const response = await axios.put(
-      `${import.meta.env.VITE_API_BACKEND_URL}/updateuserinfo/?userId=${props.user._id.toString()}`,
+      `${
+        import.meta.env.VITE_API_BACKEND_URL
+      }/updateuserinfo/?userId=${props.user._id.toString()}`,
       formData,
       {
         headers: {

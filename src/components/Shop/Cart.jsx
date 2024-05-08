@@ -57,12 +57,15 @@ export default function Cart() {
 
   useEffect(() => {
     const getCart = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/getcartitem`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + authCtx.token,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BACKEND_URL}/getcartitem`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + authCtx.token,
+          },
+        }
+      );
       console.log(response);
       if (response) {
         setLoader(false);
@@ -102,10 +105,11 @@ export default function Cart() {
   }, [cartData]);
 
   const updateCartItemHandler = async (prodId, changeQty) => {
-    authCtx.refreshData();
     setUpdatedCart({ prodId, changeQty });
     const response = await axios.patch(
-      `${import.meta.env.VITE_API_BACKEND_URL}/updatecart/?productId=${prodId}&changeQty=${changeQty}`,
+      `${
+        import.meta.env.VITE_API_BACKEND_URL
+      }/updatecart/?productId=${prodId}&changeQty=${changeQty}`,
       {},
       {
         headers: {
@@ -114,12 +118,16 @@ export default function Cart() {
         },
       }
     );
+    if (response.status === 200) {
+      authCtx.refreshData();
+    }
   };
 
   const deleteCartItem = async (prodId) => {
-    authCtx.refreshData();
     const response = await axios.delete(
-      `${import.meta.env.VITE_API_BACKEND_URL}/deletecartitem/?productId=${prodId}`,
+      `${
+        import.meta.env.VITE_API_BACKEND_URL
+      }/deletecartitem/?productId=${prodId}`,
 
       {
         headers: {
@@ -129,6 +137,9 @@ export default function Cart() {
       }
     );
     console.log(response);
+    if (response.status === 200) {
+      authCtx.refreshData();
+    }
   };
 
   // setTotalItem(cartState.cartItems.length);

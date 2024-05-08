@@ -17,38 +17,56 @@ export default function Home() {
   const queryString = useLocation().search;
 
   const authCtx = useContext(AuthContext);
-  // const [products, setProducts] = useState([]);
-  let { loading, data: products, error, get } = useApi();
+  const [products, setProducts] = useState([]);
+  // let { loading, data: products, error, get } = useApi();
+
+  const getProducts = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BACKEND_URL}/getfood`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + authCtx.token,
+          },
+        }
+      );
+      // console.log(response);
+      const products = await response.data.products;
+      setProducts(products);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    getProducts();
+  }, [authCtx.refresh]);
+
+  // console.log(products);
 
   // useEffect(() => {
-  //   const getProducts = async () => {
-  //     const response = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/getfood`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: "Bearer " + authCtx.token,
-  //       },
-  //     });
-  //     // console.log(response);
-  //     const products = await response.data.products;
-  //     setProducts(products);
+  //   const getLatestProducts = async () => {
+  //     get("/getfood");
+  //     console.log(products);
   //   };
-  //   getProducts();
-  // }, [authCtx.refresh]);
-
-  useEffect(() => {
-    const getLatestProducts = async () => {
-      get("/getfood");
-      console.log(products);
-    };
-    getLatestProducts();
-  }, []);
+  //   getLatestProducts();
+  // }, []);
 
   const filterProduct = (filter) => {
     useEffect(() => {
-      const filterProduct = async () => {
-        get("/filterproducts", { filter: filter });
+      const filterProducts = async () => {
+        if (filter.trim() === "") {
+          getProducts();
+        } else {
+          // Filter products based on the search keyword
+          const filteredProducts = products.filter((product) =>
+            product.name.toLowerCase().includes(filter.toLowerCase())
+          );
+          // console.log(filteredProducts);
+          setProducts(filteredProducts);
+        }
       };
-      filterProduct();
+      filterProducts();
     }, [filter]);
   };
 

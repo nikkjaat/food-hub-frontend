@@ -34,12 +34,15 @@ export default function Navbar(props) {
 
   useEffect(() => {
     const getCartItem = async () => {
-      const response = await axios.get(`${import.meta.env.VITE_API_BACKEND_URL}/getcartitem`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + authCtx.token,
-        },
-      });
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BACKEND_URL}/getcartitem`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + authCtx.token,
+          },
+        }
+      );
 
       const cartItem = response.data.data;
       // console.log(response);
@@ -109,12 +112,6 @@ export default function Navbar(props) {
                   placeholder="Search"
                   aria-label="Search"
                 />
-                <button
-                  // onClick={submitFilter}
-                  className={`${styles.btn}`}
-                  type="submit">
-                  Search
-                </button>
               </form>
               <Link
                 to={!authCtx.isLoggedIn ? "/login" : "/cart"}

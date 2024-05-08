@@ -25,7 +25,7 @@ export default function AddToCart(props) {
     console.log(response);
 
     if (response.status == 200) {
-      authCtx.alertBoxHandler(response.data.message);
+      // authCtx.alertBoxHandler(response.data.message);
       authCtx.refreshData();
     }
 

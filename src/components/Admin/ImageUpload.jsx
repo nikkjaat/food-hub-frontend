@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import styles from "./ImageUpload.module.css";
 
 export default function ImageUpload(props) {
   const imagePreview = useRef();
@@ -29,7 +30,7 @@ export default function ImageUpload(props) {
         <label htmlFor="image" className="col-sm-2 col-form-label">
           Image
         </label>
-        <div className="col-sm-10">
+        <div className="">
           <input
             onChange={pickedhandler}
             type="file"
@@ -43,9 +44,9 @@ export default function ImageUpload(props) {
         </div>
       </div>
 
-      <div style={{ margin: "0 20rem" }}>
+      <div style={{ margin: "0em 20% 2em" }}>
         <img
-          style={{ width: "10rem", height: "10rem" }}
+          style={{ width: "10rem", height: "10rem", cursor: "pointer" }}
           src={
             props.imgUrl
               ? `${import.meta.env.VITE_ASSET_URL}` + props.imgUrl

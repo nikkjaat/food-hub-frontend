@@ -209,3 +209,9 @@
   border: 2px solid var(---yellowColor);
   color: var(---secMainColor);
 }
+
+@media screen and (max-width: 394.5px) {
+  .searchInputBox {
+    width: 8em;
+  }
+}
