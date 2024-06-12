@@ -130,7 +130,7 @@ export default function Navbar(props) {
                     <Button
                       className={styles.logoutBtn}
                       onClick={logoutHandler}>
-                      My Profile
+                      Profile
                     </Button>
                     {display && (
                       <MyProfile
@@ -140,7 +140,14 @@ export default function Navbar(props) {
                       />
                     )}
                   </div>
-                  <div onClick={logoutHandlerr} className="ui red button">
+                  <div
+                    style={{
+                      width: "fit-content",
+                      padding: ".5em",
+                      marginLeft: ".5em",
+                    }}
+                    onClick={logoutHandlerr}
+                    className="ui red button">
                     Logout
                   </div>
                 </>

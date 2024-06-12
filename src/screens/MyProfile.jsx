@@ -171,9 +171,6 @@ export default function MyProfile(props) {
               </div>
             </div>
           </div>
-          <div onClick={logoutHandler} className="ui red button">
-            Logout
-          </div>
         </div>
       </div>
     </>
