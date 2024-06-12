@@ -20,6 +20,11 @@ export default function Navbar(props) {
     setDisplay(!display);
   };
 
+  const logoutHandlerr = () => {
+    authCtx.logoutHandler();
+    navigate("/login");
+  };
+
   const filterProduct = (e) => {
     // e.preventDefault();
     // setCapitalize(
@@ -120,18 +125,25 @@ export default function Navbar(props) {
                 <div className={styles.numberOfCartItem}>{cartItem}</div>
               </Link>
               {authCtx.isLoggedIn ? (
-                <div className="">
-                  <Button className={styles.logoutBtn} onClick={logoutHandler}>
-                    My Profile
-                  </Button>
-                  {display && (
-                    <MyProfile
-                      setDisplay={setDisplay}
-                      user={user}
-                      display={display}
-                    />
-                  )}
-                </div>
+                <>
+                  <div className="">
+                    <Button
+                      className={styles.logoutBtn}
+                      onClick={logoutHandler}>
+                      My Profile
+                    </Button>
+                    {display && (
+                      <MyProfile
+                        setDisplay={setDisplay}
+                        user={user}
+                        display={display}
+                      />
+                    )}
+                  </div>
+                  <div onClick={logoutHandlerr} className="ui red button">
+                    Logout
+                  </div>
+                </>
               ) : (
                 <div className={styles.myAccountBtn}>
                   <Link to={localStorage.getItem("authToken") ? "" : "/login"}>
