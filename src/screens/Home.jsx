@@ -5,12 +5,8 @@ import Footer from "../components/Shop/Footer";
 import Carousel from "../components/Shop/Carousel";
 import styles from "./Home.module.css";
 import axios from "axios";
-import Error from "../../Error";
 import AuthContext from "../context/AuthContext";
-import { Link, useLocation } from "react-router-dom";
-import useApi from "../hooks/useApi";
-import MyProfile from "./MyProfile";
-import AlertBox from "../components/AlertBox/AlertBox";
+import { useLocation } from "react-router-dom";
 import Loader from "../components/Shop/components/Loader/Loader";
 
 export default function Home() {
@@ -18,6 +14,7 @@ export default function Home() {
 
   const authCtx = useContext(AuthContext);
   const [products, setProducts] = useState([]);
+  const [loader, setLoader] = useState(true);
   // let { loading, data: products, error, get } = useApi();
 
   const getProducts = async () => {
@@ -32,8 +29,11 @@ export default function Home() {
         }
       );
       // console.log(response);
-      const products = await response.data.products;
-      setProducts(products);
+      if (response.status === 200) {
+        const products = await response.data.products;
+        setProducts(products);
+        setLoader(false);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -41,16 +41,6 @@ export default function Home() {
   useEffect(() => {
     getProducts();
   }, [authCtx.refresh]);
-
-  // console.log(products);
-
-  // useEffect(() => {
-  //   const getLatestProducts = async () => {
-  //     get("/getfood");
-  //     console.log(products);
-  //   };
-  //   getLatestProducts();
-  // }, []);
 
   const filterProduct = (filter) => {
     useEffect(() => {
@@ -81,14 +71,16 @@ export default function Home() {
         <Carousel />
       </div>
 
-      {/* m-2 d-flex flex-wrap justify-content-around */}
-
-      <div className={`${styles.cardContainer}`}>
-        {products &&
-          products.map((product) => {
-            return <Card products={product} key={product._id} />;
-          })}
-      </div>
+      {loader ? (
+        <Loader />
+      ) : (
+        <div className={`${styles.cardContainer}`}>
+          {products &&
+            products.map((product) => {
+              return <Card products={product} key={product._id} />;
+            })}
+        </div>
+      )}
 
       <div>
         <Footer />
