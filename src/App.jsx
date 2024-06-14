@@ -42,7 +42,7 @@ function App() {
     <>
       {showAlert && <AlertBox />}
       <BrowserRouter>
-        <Suspense fallback={<div></div>}>
+        <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
