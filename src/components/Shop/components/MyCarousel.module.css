@@ -1,0 +1,68 @@
+.carousel_container {
+  width: 100%;
+  margin: auto;
+  padding: 1em;
+  position: relative; /* Needed for absolutely positioned elements */
+  border-radius: 1em;
+}
+
+.carousel_slide {
+  display: flex;
+  border-radius: 1em;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Needed for absolutely positioned elements */
+}
+
+.carousel_image {
+  width: 100%;
+  height: 300px; /* Set the desired height for images */
+  object-fit: cover;
+  border: 2px solid;
+}
+
+.slick_prev,
+.slick_next {
+  z-index: 100;
+  top: 130px;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.slick_prev:hover,
+.slick_next:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.slick_prev {
+  left: 25px;
+}
+
+.slick_next {
+  right: 0px;
+}
+
+.slick_prev::before,
+.slick_next::before {
+  font-size: 20px;
+  line-height: 33.5px;
+}
+
+.slick-dots {
+  bottom: -50px; /* Position the dots below the images */
+}
+
+.slick-dots li button {
+  color: gray; /* Color of the inactive dots */
+}
+
+.slick-dots li.slick-active button {
+  color: white; /* Color of the active dot */
+}
