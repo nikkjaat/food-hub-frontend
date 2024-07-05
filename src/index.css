@@ -33,7 +33,26 @@
 
 body {
   background-color: #242424;
-  width: 98.8vw;
+  width: 100vw;
+}
+
+::-webkit-scrollbar {
+  width: 6px; /* Adjust width as needed */
+}
+
+/* Change scrollbar track color */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Change color as needed */
+}
+
+/* Change scrollbar thumb color */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Change color as needed */
+}
+
+/* Change scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #686868; /* Change color as needed */
 }
 
 @media (prefers-color-scheme: light) {

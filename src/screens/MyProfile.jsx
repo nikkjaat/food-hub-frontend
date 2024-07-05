@@ -20,10 +20,6 @@ export default function MyProfile(props) {
   const imagePreview = useRef();
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  const logoutHandler = () => {
-    authCtx.logoutHandler();
-    navigate("/login");
-  };
 
   useEffect(() => {
     if (props.user) {
@@ -85,7 +81,6 @@ export default function MyProfile(props) {
         }
       );
       if (response.status === 200) {
-        authCtx.refreshData();
         props.setDisplay(false);
         authCtx.alertBoxHandler("Profile updated successfully");
         authCtx.refreshData();
@@ -138,9 +133,10 @@ export default function MyProfile(props) {
                 />
               </div>
             </div>
-            {props.user.roles.map((role) => {
-              return <div className="meta">{role}</div>;
-            })}
+            {props.user &&
+              props.user.roles.map((role) => {
+                return <div className="meta">{role}</div>;
+              })}
 
             <div className={`${styles.descriptionContainer} description`}>
               <div>

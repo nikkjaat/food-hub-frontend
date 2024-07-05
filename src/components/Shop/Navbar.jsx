@@ -6,6 +6,7 @@ import AuthContext from "../../context/AuthContext";
 import Button from "./Button";
 import axios from "axios";
 import MyProfile from "../../screens/MyProfile";
+import Profile from "../../screens/Profile";
 
 export default function Navbar(props) {
   // const [filter, setFilter] = useState();
@@ -13,24 +14,19 @@ export default function Navbar(props) {
   const [user, setUser] = useState("");
   const [capitalize, setCapitalize] = useState();
   const [cartItem, setCartItem] = useState(0);
-  // const filter = useRef();
+  const profileRef = useRef();
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const logoutHandler = () => {
+  const displayProfile = (e) => {
     setDisplay(!display);
   };
 
-  const logoutHandlerr = () => {
+  const logoutHandler = () => {
     authCtx.logoutHandler();
     navigate("/login");
   };
 
   const filterProduct = (e) => {
-    // e.preventDefault();
-    // setCapitalize(
-    //   filter.current.value.charAt(0).toUpperCase() +
-    //     filter.current.value.slice(1).toLowerCase()
-    // );
     setCapitalize(e.target.value);
   };
   if (props.filterProduct) {
@@ -61,6 +57,21 @@ export default function Navbar(props) {
   if (authCtx.role) {
     roles = roles.find((role) => role == "Admin");
   }
+
+  const handleClickOutside = (e) => {
+    if (profileRef.current && !profileRef.current.contains(e.target)) {
+      setDisplay(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener for clicks outside the element
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Clean up the event listener on component unmount
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // console.log(cartItem);
   return (
@@ -127,28 +138,21 @@ export default function Navbar(props) {
               {authCtx.isLoggedIn ? (
                 <>
                   <div className="">
-                    <Button
-                      className={styles.logoutBtn}
-                      onClick={logoutHandler}>
-                      Profile
-                    </Button>
+                    <Profile
+                      logoutHandler={logoutHandler}
+                      user={user}
+                      setDisplay={setDisplay}
+                    />
                     {display && (
-                      <MyProfile
-                        setDisplay={setDisplay}
-                        user={user}
-                        display={display}
-                      />
+                      <div ref={profileRef}>
+                        {" "}
+                        <MyProfile
+                          user={user}
+                          setDisplay={setDisplay}
+                          display={display}
+                        />
+                      </div>
                     )}
-                  </div>
-                  <div
-                    style={{
-                      width: "fit-content",
-                      padding: ".5em",
-                      marginLeft: ".5em",
-                    }}
-                    onClick={logoutHandlerr}
-                    className="ui red button">
-                    Logout
                   </div>
                 </>
               ) : (
