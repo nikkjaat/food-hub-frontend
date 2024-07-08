@@ -46,7 +46,7 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         {/* <Typography sx={{ minWidth: 80 }}>Contact</Typography> */}
         {/* <Typography sx={{ minWidth: 100 }}>Profile</Typography> */}
-        <Tooltip title="Account settings">
+        <Tooltip followCursor title="Account settings">
           {dp ? (
             <img
               style={{
@@ -54,6 +54,7 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
                 height: "2.5em",
                 margin: "1em",
                 borderRadius: "50%",
+                cursor: "pointer",
               }}
               onClick={handleClick}
               src={`${import.meta.env.VITE_ASSET_URL}${dp}`}
@@ -159,7 +160,7 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
           <Link
             style={{ color: "white" }}
             target="blank"
-            to={"https://wa.me/+918859407873"}>
+            to={"https://wa.me/+919760258097"}>
             Contact
           </Link>
         </MenuItem>

@@ -1,11 +1,44 @@
-.card {
-  width: 90% !important;
-  margin: 1rem auto;
-  padding: 1rem;
+.container {
+  /* background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2lzMTYwNjItaW1hZ2Uta3d2eWZrd3IuanBn.jpg"); */
+  position: absolute;
+  width: 100%;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: inherit;
+  background-size: inherit;
+  background-repeat: inherit;
+  filter: blur(3px) brightness(0.3);
+  z-index: 0;
+  transform: scale(1.05);
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(36, 36, 36, 0.5);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.itemDetails {
+  width: 90%;
+  margin: 6rem auto 3em;
+  padding: 1rem 1em;
   background-color: var(---yellowColor);
   border: 2px solid var(---yellowColor);
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   gap: 3rem;
 }
 
@@ -16,14 +49,15 @@
 }
 
 .imageContainer {
-  width: 40%;
-  max-height: 30rem;
+  width: 50%;
+  height: 30rem;
+  margin: auto;
 }
 
 .imageContainer > img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   margin: 0 auto;
 }
 
@@ -85,10 +119,10 @@
 }
 
 @media screen and (max-width: 768px) {
-  .card {
+  .itemDetails {
     display: grid;
   }
-  .card .imageContainer {
+  .itemDetails .imageContainer {
     /* background-color: aliceblue !important; */
     margin: 0 auto;
   }

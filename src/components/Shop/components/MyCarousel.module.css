@@ -1,14 +1,14 @@
 .carousel_container {
-  width: 100%;
-  margin: auto;
-  padding: 1em;
-  position: relative; /* Needed for absolutely positioned elements */
+  width: 30rem;
+  position: relative;
   border-radius: 1em;
+  padding: 0 0 3em 0;
+  overflow: hidden; /* Ensure the overlay doesn't overflow the container */
 }
 
 .carousel_slide {
   display: flex;
-  border-radius: 1em;
+  border-radius: 1em !important;
   justify-content: center;
   align-items: center;
   position: relative; /* Needed for absolutely positioned elements */
@@ -16,15 +16,26 @@
 
 .carousel_image {
   width: 100%;
-  height: 300px; /* Set the desired height for images */
+  height: 350px; /* Set the desired height for images */
   object-fit: cover;
-  border: 2px solid;
+  border-radius: 1em;
+}
+
+.carousel_slide::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1em;
+  pointer-events: none; /* Ensure the overlay does not interfere with interactions */
 }
 
 .slick_prev,
 .slick_next {
   z-index: 100;
-  top: 130px;
+  top: 360px;
   transform: translateX(-50%);
   width: 30px;
   height: 30px;
@@ -42,11 +53,11 @@
 }
 
 .slick_prev {
-  left: 25px;
+  left: 125px;
 }
 
 .slick_next {
-  right: 0px;
+  right: 90px;
 }
 
 .slick_prev::before,
@@ -65,4 +76,10 @@
 
 .slick-dots li.slick-active button {
   color: white; /* Color of the active dot */
+}
+
+@media (max-width: 614px) {
+  .card {
+    flex: 0 1 calc(48% - 10px);
+  }
 }

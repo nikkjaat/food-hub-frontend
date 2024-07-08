@@ -18,7 +18,9 @@ export default function GetSingleProduct() {
   useEffect(() => {
     const getProduct = async () => {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_BACKEND_URL}/admin/getsingleproduct?productId=${productId}`,
+        `${
+          import.meta.env.VITE_API_BACKEND_URL
+        }/admin/getsingleproduct?productId=${productId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -36,9 +38,9 @@ export default function GetSingleProduct() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Navbar />
-      <div className={`${styles.card} card`} style={{ width: "100%" }}>
+      <div className={`${styles.itemDetails} card`}>
         <div className={styles.imageContainer}>
           <img
             src={
@@ -75,7 +77,7 @@ export default function GetSingleProduct() {
               className={styles.btn}
               addToCart={product && product._id}
             />
-            <OrderNow className={styles.btn}>Order</OrderNow>
+            <OrderNow className={styles.btn}>Order Now</OrderNow>
           </div>
         </div>
       </div>

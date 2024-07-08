@@ -1,9 +1,10 @@
 .container {
-  margin: 2rem auto;
+  margin: 5rem auto 1em;
   /* background-color: aliceblue; */
   border: 2px solid var(---yellowColor);
   border-radius: 1em;
   padding: 1rem;
+  backdrop-filter: blur(8px);
 }
 
 .categoryBox {

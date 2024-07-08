@@ -42,6 +42,7 @@ export default function AddToCart(props) {
         {props.children}
       </Button> */}
       <div
+        style={{ height: "2.8em" }}
         className={`${props.className} ui vertical animated button`}
         onClick={(e) => {
           addToCart(props.addToCart, e.target);

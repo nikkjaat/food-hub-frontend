@@ -327,7 +327,6 @@ export default function Cart() {
                           Go to checkout
                         </button>
                       </Link>
-                      {/* <OrderNow className={styles.orderBtn}>Buy</OrderNow> */}
                     </div>
                   </div>
                 </div>
@@ -335,69 +334,6 @@ export default function Cart() {
             </div>
           </section>
         )}
-
-        {/* <div className={styles.mainContainer}>
-          <div className={`${styles.itemContainer} ui unstackable items`}>
-            {cartState.cartItems.map((cartItem) => {
-              return (
-                <div className={`${styles.item} item`}>
-                  <div className="image">
-                    <img src="https://cdn.siasat.com/wp-content/uploads/2022/07/noodles-july19.jpg" />
-                  </div>
-                  <div className={`${styles.itemDetails} content`}>
-                    <div className={`${styles.name} name`}>
-                      <span>{cartItem.productId.name}</span>
-                    </div>
-                    <div className={`${styles.description} description`}>
-                      <span>{cartItem.productId.description}</span>
-                    </div>
-
-                    <div className="extra">Free Delivery</div>
-                    <div className={`${styles.priceContainer} `}>
-                      <div className="price">
-                        {cartItem.productId.price * cartItem.quantity}
-                      </div>
-                      <div className={styles.quantityBox}>
-                        <Button
-                          className={styles.child}
-                          onClick={() => {
-                            updateCartItemHandler(cartItem.productId._id, -1);
-                          }}>
-                          -
-                        </Button>
-                        <Button className={styles.quantity}>
-                          {cartItem.quantity}
-                        </Button>
-
-                        <Button
-                          className={styles.child}
-                          onClick={() => {
-                            updateCartItemHandler(cartItem.productId._id, 1);
-                          }}>
-                          +
-                        </Button>
-                      </div>
-                    </div>
-                    <div>
-                      <div className={styles.delANDbuyBtnParent}>
-                        <Delete
-                          className={styles.delANDbuyBtn}
-                          onClick={() => {
-                            deleteCartItem(cartItem.productId._id);
-                          }}
-                        />
-                        <OrderNow className={styles.delANDbuyBtn}>Buy</OrderNow>
-                      </div>
-                      <p className="card-text">
-                        <small className="text-muted"></small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div> */}
 
         <Footer />
       </div>

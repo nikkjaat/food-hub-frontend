@@ -9,6 +9,7 @@ import AuthContext from "../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import Loader from "../components/Shop/components/Loader/Loader";
 import MyCarousel from "../components/Shop/components/MyCarousel";
+import AdPage from "../components/Shop/AdPage";
 
 export default function Home() {
   const queryString = useLocation().search;
@@ -68,10 +69,21 @@ export default function Home() {
         <Navbar filterProduct={filterProduct} refresh={authCtx.refresh} />
       </div>
 
-      <div>
-        {/* <Carousele /> */}
+      <div className={styles.showCase}>
+        <div className={styles.text}>
+          <p>
+            Taste Our Delicious <br /> <span> Best Foods</span>
+          </p>
+          <p>
+            it's not just food <br /> It's an Experience
+          </p>
+        </div>
         <MyCarousel />
       </div>
+
+      <section>
+        <AdPage />
+      </section>
 
       {loader ? (
         <Loader />

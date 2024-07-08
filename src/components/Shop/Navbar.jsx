@@ -7,6 +7,7 @@ import Button from "./Button";
 import axios from "axios";
 import MyProfile from "../../screens/MyProfile";
 import Profile from "../../screens/Profile";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export default function Navbar(props) {
   // const [filter, setFilter] = useState();
@@ -82,7 +83,8 @@ export default function Navbar(props) {
             food<span>H</span>ub
           </span>
           <button
-            className="navbar-toggler"
+            style={{ backgroundColor: "white" }}
+            className="navbar-toggler primary-color"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -132,7 +134,9 @@ export default function Navbar(props) {
               <Link
                 to={!authCtx.isLoggedIn ? "/login" : "/cart"}
                 className={styles.myCartBtn}>
-                <div className={styles.cartHead}>Cart</div>
+                <div className={styles.cartHead}>
+                  <ShoppingCartIcon />
+                </div>
                 <div className={styles.numberOfCartItem}>{cartItem}</div>
               </Link>
               {authCtx.isLoggedIn ? (
