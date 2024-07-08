@@ -42,7 +42,7 @@ const MyCarousel = () => {
     // nextArrow: <NextArrow />,
     // prevArrow: <PrevArrow />,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 2500,
     fade: true, // Add fade effect
     responsive: [
       {
