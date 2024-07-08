@@ -1,8 +1,10 @@
 .carousel_container {
-  width: 30rem;
+  width: 30em;
+  min-width: 15em;
   position: relative;
   border-radius: 1em;
-  padding: 0 0 3em 0;
+  /* padding: 0 0 3em 0; */
+  height: fit-content;
   overflow: hidden; /* Ensure the overlay doesn't overflow the container */
 }
 
@@ -32,7 +34,7 @@
   pointer-events: none; /* Ensure the overlay does not interfere with interactions */
 }
 
-.slick_prev,
+/* .slick_prev,
 .slick_next {
   z-index: 100;
   top: 360px;
@@ -45,9 +47,9 @@
   border-radius: 50%;
   cursor: pointer;
   text-align: center;
-}
+} */
 
-.slick_prev:hover,
+/* .slick_prev:hover,
 .slick_next:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -64,22 +66,58 @@
 .slick_next::before {
   font-size: 20px;
   line-height: 33.5px;
-}
+} */
 
-.slick-dots {
-  bottom: -50px; /* Position the dots below the images */
+/* .slick-dots {
+  bottom: -50px;
 }
 
 .slick-dots li button {
-  color: gray; /* Color of the inactive dots */
+  color: gray;
 }
 
 .slick-dots li.slick-active button {
-  color: white; /* Color of the active dot */
+  color: white;
+} */
+
+@media (max-width: 1011.5px) {
+  .carousel_container {
+    width: 25em;
+  }
+}
+
+@media (max-width: 854.5px) {
+  .carousel_container {
+    width: 23em;
+  }
+
+  .carousel_image {
+    height: 300px; /* Set the desired height for images */
+  }
+}
+
+@media (max-width: 742.5px) {
+  .carousel_container {
+    width: 15em;
+  }
+
+  .carousel_image {
+    height: 200px; /* Set the desired height for images */
+  }
 }
 
 @media (max-width: 614px) {
   .card {
     flex: 0 1 calc(48% - 10px);
+  }
+}
+
+@media (max-width: 372.5px) {
+  .carousel_container {
+    width: 100%;
+  }
+
+  .carousel_image {
+    height: 200px; /* Set the desired height for images */
   }
 }

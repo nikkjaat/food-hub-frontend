@@ -14,11 +14,11 @@
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
-  padding: 10em 6em 0 6em;
-  margin-bottom: 7em;
+  padding: 10em 6em;
   display: flex;
+  gap: 1em;
   justify-content: space-between;
-  height: 43rem;
+  height: fit-content;
 }
 
 /* .showCase::before {
@@ -78,17 +78,78 @@
   color: var(---yellowColor);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1184.5px) {
   .showCase {
-    padding: 5em 2em;
+    padding: 7em 3em 3em;
   }
 
   .text > p:nth-of-type(1) {
-    font-family: "Pacifico", cursive;
-    font-weight: 400;
-    font-style: normal;
+    font-size: 4.2em;
+  }
+}
+
+@media (max-width: 950.5px) {
+  .showCase {
+    padding: 5em 2em 3em;
+  }
+
+  .text > p:nth-of-type(1) {
+    font-size: 3.7em;
+  }
+
+  .text > p:nth-of-type(2) {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 854.5px) {
+  .showCase {
+    padding: 7em 2em 3em;
+  }
+
+  .text > p:nth-of-type(1) {
     font-size: 3em;
-    padding: 0;
-    margin: 0;
+  }
+}
+
+@media (max-width: 742.5px) {
+  .showCase {
+    /* flex-direction: column-reverse; */
+    padding: 7em 1em 3em;
+  }
+
+  .text > p:nth-of-type(1) {
+    font-size: 3em;
+  }
+  .text > p:nth-of-type(2) {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 435.5px) {
+  .showCase {
+    /* flex-direction: column-reverse; */
+    padding: 7em 1em 3em;
+  }
+
+  .text > p:nth-of-type(1) {
+    font-size: 2em;
+  }
+  .text > p:nth-of-type(2) {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 372.5px) {
+  .showCase {
+    flex-direction: column-reverse;
+    padding: 7em 1em 3em;
+  }
+
+  .text > p:nth-of-type(1) {
+    font-size: 2em;
+  }
+  .text > p:nth-of-type(2) {
+    font-size: 1em;
   }
 }

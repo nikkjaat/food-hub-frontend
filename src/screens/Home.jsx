@@ -72,11 +72,9 @@ export default function Home() {
       <div className={styles.showCase}>
         <div className={styles.text}>
           <p>
-            Taste Our Delicious <br /> <span> Best Foods</span>
+            Taste Our Delicious <span> Best Foods</span>
           </p>
-          <p>
-            it's not just food <br /> It's an Experience
-          </p>
+          <p>it's not just food It's an Experience</p>
         </div>
         <MyCarousel />
       </div>
