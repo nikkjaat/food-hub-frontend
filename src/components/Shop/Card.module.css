@@ -287,8 +287,8 @@
 @media (max-width: 428.5px) {
   .card {
     margin: 0 3px;
-    min-width: 10rem;
-    max-width: 10rem;
+    min-width: 12rem;
+    max-width: 12rem;
     min-height: 18rem;
     /* min-width: calc(100% / 5); */
   }
@@ -336,7 +336,7 @@
   }
 
   .cartBtn {
-    width: 4.4em;
+    width: 5em;
     height: 2em !important;
   }
 
@@ -354,6 +354,6 @@
 
   .buttons {
     margin: 0 !important;
-    padding: 0.2em !important;
+    padding: 0.3em !important;
   }
 }
