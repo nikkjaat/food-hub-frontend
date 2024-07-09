@@ -93,6 +93,7 @@ export default function MyAddress() {
                       name="same"
                       onChange={inputHandler}
                       value={add._id}
+                      checked
                     />
                     <label class={`${styles.addressPrint} btn`} for={add._id}>
                       <div>
