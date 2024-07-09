@@ -82,7 +82,7 @@ export default function Card(props) {
         </Link>
         <div className="border-warning border-top"></div>
         {props.admin ? (
-          <div className="container my-3 px-4 d-flex flex-wrap justify-content-between">
+          <div className={styles.updateandDeleteBtnContainer}>
             <Link
               to={`/admin/addproduct?prodId=${props.products.productId._id}`}
               className={styles.updateandDeleteBtn}

@@ -56,7 +56,7 @@ export default function AdminProducts() {
       <Navbar />
       {loader && <Loader />}
       <div
-        style={{ margin: "6em 2em 2em" }}
+        style={{ margin: "6em 0" }}
         className="d-flex flex-wrap justify-content-around">
         {admin ? (
           products.map((product) => {

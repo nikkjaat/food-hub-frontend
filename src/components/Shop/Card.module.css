@@ -109,6 +109,12 @@
   font-weight: bolder;
 }
 
+.updateandDeleteBtnContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
 .cartAndOrderBtn,
 .updateandDeleteBtn {
   background-color: var(---yellowColor);
@@ -128,7 +134,9 @@
 .updateandDeleteBtn {
   text-decoration: none;
   padding: 0.6em 0.7em;
+  margin: 1em 0.7em;
   border-radius: 6px;
+  width: 5em;
 }
 
 .descriptionText {
@@ -282,6 +290,15 @@
     margin: 0 !important;
     padding: 0.5em !important;
   }
+
+  .updateandDeleteBtn {
+    margin: 0.5em;
+    border-radius: 6px;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media (max-width: 428.5px) {
@@ -311,6 +328,14 @@
     /* background-color: rgb(159, 159, 159); */
     padding: 0;
     margin: 0;
+  }
+  .updateandDeleteBtn {
+    margin: 0.3em;
+    border-radius: 6px;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .quantityBoxParent {
