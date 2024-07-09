@@ -39,19 +39,18 @@
   border: 2px solid var(---yellowColor);
   display: flex;
   /* flex-direction: row; */
-  gap: 3rem;
+  /* gap: 3rem; */
 }
 
 .descriptionData {
   width: 100%;
-  /* background-color: aliceblue; */
   word-wrap: normal;
 }
 
 .imageContainer {
-  width: 50%;
-  height: 30rem;
-  margin: auto;
+  width: 60%;
+  height: fit-content;
+  margin: 2em auto;
 }
 
 .imageContainer > img {
@@ -101,7 +100,6 @@
   width: 100%;
   display: grid;
   gap: 1.4rem;
-  margin: 0;
 }
 
 .ulList li {
@@ -119,6 +117,18 @@
 }
 
 @media screen and (max-width: 768px) {
+  .imageContainer {
+    width: 80%;
+    height: fit-content;
+    margin: 2em auto;
+  }
+
+  .title {
+    color: var(---secMainColor);
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+
   .itemDetails {
     display: grid;
   }
@@ -137,9 +147,31 @@
     font-size: 1em;
   }
 
+  .ulList {
+    padding: 0;
+  }
+
   @media screen and (max-width: 522px) {
+    .imageContainer {
+      width: 100%;
+      height: fit-content;
+      margin: 2em auto;
+    }
+
+    .ulList {
+      padding: 0;
+    }
+
     .ulList li {
       display: grid;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .title {
+      color: var(---secMainColor);
+      font-weight: bold;
+      font-size: 2rem;
     }
   }
 }

@@ -283,3 +283,77 @@
     padding: 0.5em !important;
   }
 }
+
+@media (max-width: 428.5px) {
+  .card {
+    margin: 0 3px;
+    min-width: 10rem;
+    max-width: 10rem;
+    min-height: 18rem;
+    /* min-width: calc(100% / 5); */
+  }
+
+  .imageContainer {
+    width: 8em;
+    margin: 1em auto 0;
+    border-radius: 50%;
+    height: 8em;
+    padding: 0.3em;
+  }
+
+  .quantityBox {
+    display: flex;
+    gap: 0.3em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    height: fit-content;
+    /* background-color: rgb(159, 159, 159); */
+    padding: 0;
+    margin: 0;
+  }
+
+  .quantityBoxParent {
+    display: flex;
+    gap: 0.3em;
+    justify-content: flex-start;
+    align-items: start;
+    height: fit-content;
+  }
+
+  .quantityBoxParent button {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .quantityBoxParent > input {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .quantityBox > div:last-child {
+    font-size: 1em !important;
+  }
+
+  .cartBtn {
+    width: 4.5em;
+    height: 2em !important;
+  }
+
+  .cartBtn i {
+    position: relative;
+    top: -0.6em;
+  }
+
+  .cartBtn i,
+  .cartBtn div {
+    color: var(---secMainColor) !important;
+    font-weight: bolder;
+    font-size: 0.8em;
+  }
+
+  .buttons {
+    margin: 0 !important;
+    padding: 0.2em !important;
+  }
+}
