@@ -9,8 +9,9 @@ export default function AddToCart(props) {
   const authCtx = useContext(AuthContext);
 
   const addToCart = async (prodId, e) => {
+    e.stopPropagation(); // Stop the click event from propagating
     setCartText("Added");
-    // console.log(e);
+
     const response = await axios.post(
       `${import.meta.env.VITE_API_BACKEND_URL}/addtocart/${prodId}`,
       {},
@@ -22,37 +23,21 @@ export default function AddToCart(props) {
       }
     );
 
-    console.log(response);
-
-    if (response.status == 200) {
-      // authCtx.alertBoxHandler(response.data.message);
+    if (response.status === 200) {
       authCtx.refreshData();
     }
-
-    authCtx.refreshData();
   };
 
   return (
-    <>
-      {/* <Button
-        className={props.className}
-        onClick={() => {
-          addToCart(props.addToCart);
-        }}>
-        {props.children}
-      </Button> */}
-      <div
-        style={{ height: "2.8em" }}
-        className={`${props.className} ui vertical animated button`}
-        onClick={(e) => {
-          addToCart(props.addToCart, e.target);
-        }}
-        tabindex="0">
-        <div class="hidden content">{cartText}</div>
-        <div class="visible content">
-          <i class="shop icon"></i>
-        </div>
+    <div
+      style={{ height: "2.8em" }}
+      className={`${props.className} ui vertical animated button`}
+      onClick={(e) => addToCart(props.addToCart, e)} // Make sure to pass `e` here
+      tabIndex="0">
+      <div className="hidden content">{cartText}</div>
+      <div className="visible content">
+        <i className="shop icon"></i>
       </div>
-    </>
+    </div>
   );
 }

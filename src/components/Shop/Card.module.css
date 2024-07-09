@@ -5,14 +5,14 @@
 .card {
   overflow: hidden;
   margin: 0 10px;
-  background-color: rgba(0, 0, 0, 0.322) !important;
-  min-width: 20em;
-  display: flex !important;
+  background-color: rgba(0, 0, 0, 0.322);
+  min-width: 20rem;
+  max-width: 20rem;
+  display: flex;
   flex-wrap: nowrap;
   min-height: 28rem;
   border-radius: 20em 20em 1em 1em;
-  /* flex: 1; */
-  width: calc(100% / 5);
+  min-width: calc(100% / 5);
   backdrop-filter: blur(8px);
 }
 
@@ -21,8 +21,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* max-width: ; */
-  /* background-color: aliceblue; */
 }
 
 .imageContainer {
@@ -30,7 +28,7 @@
   width: 17em;
   margin: 1em auto;
   border-radius: 50%;
-  height: 17rem;
+  height: 17em;
   border: 2px solid;
   padding: 0.7em;
 }
@@ -52,11 +50,9 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
-  /* gap: ; */
 }
 
 .quantityBoxParent {
-  /* background-color: aqua; */
   display: flex;
   gap: 0.5em;
   justify-content: space-between;
@@ -69,17 +65,13 @@
   background-color: transparent;
   color: white !important;
   border: solid 2px white;
-  color: black;
   text-align: center;
   font-weight: bolder;
-  /* font-size: 2rem; */
   border-radius: 6px;
-  /* padding-bottom: 0.2em; */
-  height: 2rem;
+  height: 2em;
 }
 
 .quantityBoxParent > input {
-  /* min-width: 25px; */
   width: 2em;
   text-align: center;
   border: solid 2px white;
@@ -90,7 +82,7 @@
   font-weight: bold;
   cursor: default;
   user-select: none;
-  height: 2rem;
+  height: 2em;
 }
 
 .buttons {
@@ -98,7 +90,6 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100% !important;
-  /* background-color: aliceblue; */
 }
 
 .cartBtn div * {
@@ -109,7 +100,7 @@
   background-color: var(---yellowColor) !important;
   color: var(---yellowColor) !important;
   display: flex;
-  width: 7rem;
+  width: 7em;
 }
 
 .cartBtn i,
@@ -144,11 +135,151 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* max-width: 100%; */
 }
 
-/* @media (max-width: 614px) {
+@media (max-width: 926.5px) {
   .card {
-    flex: 0 1 calc(48% - 10px);
+    margin: 0 10px;
+    min-width: 15rem;
+    max-width: 15rem;
+    min-height: 22rem;
+    /* min-width: calc(100% / 5); */
   }
-} */
+
+  .imageContainer {
+    width: 12em;
+    margin: 1em auto 0;
+    border-radius: 50%;
+    height: 12em;
+    padding: 0.3em;
+  }
+
+  .quantityBox {
+    display: flex;
+    gap: 0.3em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+  }
+
+  .quantityBoxParent {
+    display: flex;
+    gap: 0.3em;
+    justify-content: flex-start;
+    align-items: start;
+    height: fit-content;
+  }
+
+  .quantityBoxParent button {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .quantityBoxParent > input {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .quantityBox > div:last-child {
+    font-size: 1em !important;
+  }
+
+  .cartBtn {
+    width: 6em;
+    height: 2em !important;
+  }
+
+  .cartBtn i {
+    position: relative;
+    top: -0.6em;
+  }
+
+  .cartBtn i,
+  .cartBtn div {
+    color: var(---secMainColor) !important;
+    font-weight: bolder;
+    font-size: 0.9em;
+  }
+
+  .buttons {
+    margin: 0 !important;
+    padding: 0.6em !important;
+  }
+}
+
+@media (max-width: 717.5px) {
+  .card {
+    margin: 0 3px;
+    min-width: 10.4rem;
+    max-width: 10rem;
+    min-height: 18rem;
+    /* min-width: calc(100% / 5); */
+  }
+
+  .imageContainer {
+    width: 8em;
+    margin: 1em auto 0;
+    border-radius: 50%;
+    height: 8em;
+    padding: 0.3em;
+  }
+
+  .quantityBox {
+    display: flex;
+    gap: 0.3em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    height: fit-content;
+    /* background-color: rgb(159, 159, 159); */
+    padding: 0;
+    margin: 0;
+  }
+
+  .quantityBoxParent {
+    display: flex;
+    gap: 0.3em;
+    justify-content: flex-start;
+    align-items: start;
+    height: fit-content;
+  }
+
+  .quantityBoxParent button {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .quantityBoxParent > input {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
+  .quantityBox > div:last-child {
+    font-size: 1em !important;
+  }
+
+  .cartBtn {
+    width: 4.5em;
+    height: 2em !important;
+  }
+
+  .cartBtn i {
+    position: relative;
+    top: -0.6em;
+  }
+
+  .cartBtn i,
+  .cartBtn div {
+    color: var(---secMainColor) !important;
+    font-weight: bolder;
+    font-size: 0.8em;
+  }
+
+  .buttons {
+    margin: 0 !important;
+    padding: 0.3em !important;
+  }
+}

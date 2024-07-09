@@ -15,7 +15,10 @@ export default function OrderNow(props) {
           tabindex="0">
           <div class="hidden content">{props.children}</div>
           <div class="visible content">
-            <FontAwesomeIcon icon={faBasketShopping} style={{ color: "red" }} />
+            <FontAwesomeIcon
+              icon={faBasketShopping}
+              style={{ color: "red", position: "relative", top: "-.4em" }}
+            />
           </div>
         </div>
       </Link>
