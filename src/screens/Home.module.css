@@ -124,9 +124,9 @@
   }
 }
 
-@media (max-width: 435.5px) {
+@media (max-width: 480.5px) {
   .showCase {
-    /* flex-direction: column-reverse; */
+    flex-direction: column-reverse;
     padding: 7em 1em 3em;
   }
 
@@ -147,7 +147,6 @@
   }
 
   .showCase {
-    flex-direction: column-reverse;
     padding: 7em 1em 3em;
   }
 
