@@ -203,7 +203,9 @@ export default function Cart() {
                                   deleteCartItem(cartItem.productId._id);
                                 }}
                               />
-                              <OrderNow className={styles.delANDbuyBtn}>
+                              <OrderNow
+                                orderNow={cartItem.productId._id}
+                                className={styles.delANDbuyBtn}>
                                 Buy
                               </OrderNow>
                             </div>

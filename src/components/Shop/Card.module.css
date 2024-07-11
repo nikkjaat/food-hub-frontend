@@ -50,6 +50,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: nowrap;
+  padding: 0.9em;
 }
 
 .quantityBoxParent {
@@ -166,10 +167,10 @@
     display: flex;
     gap: 0.3em;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: nowrap;
     height: fit-content;
-    padding: 0;
+    padding: 0.8em;
     margin: 0;
   }
 
@@ -197,12 +198,7 @@
 
   .cartBtn {
     width: 6em;
-    height: 2em !important;
-  }
-
-  .cartBtn i {
-    position: relative;
-    top: -0.6em;
+    height: 2.6em !important;
   }
 
   .cartBtn i,
@@ -238,12 +234,12 @@
   .quantityBox {
     display: flex;
     gap: 0.3em;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: nowrap;
     height: fit-content;
     /* background-color: rgb(159, 159, 159); */
-    padding: 0;
+    padding: 0.7em;
     margin: 0;
   }
 
@@ -271,19 +267,14 @@
 
   .cartBtn {
     width: 5em;
-    height: 2em !important;
-  }
-
-  .cartBtn i {
-    position: relative;
-    top: -0.6em;
+    height: 2.6em !important;
   }
 
   .cartBtn i,
   .cartBtn div {
     color: var(---secMainColor) !important;
     font-weight: bolder;
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 
   .buttons {
@@ -322,11 +313,11 @@
     display: flex;
     gap: 0.3em;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: nowrap;
     height: fit-content;
     /* background-color: rgb(159, 159, 159); */
-    padding: 0;
+    padding: 0.5em;
     margin: 0;
   }
   .updateandDeleteBtn {
@@ -362,19 +353,14 @@
 
   .cartBtn {
     width: 5em;
-    height: 2em !important;
-  }
-
-  .cartBtn i {
-    position: relative;
-    top: -0.6em;
+    height: 2.5em !important;
   }
 
   .cartBtn i,
   .cartBtn div {
     color: var(---secMainColor) !important;
     font-weight: bolder;
-    font-size: 0.8em;
+    font-size: 0.9em;
   }
 
   .buttons {

@@ -12,6 +12,7 @@ const AuthContext = createContext({
   logoutHandler: () => {},
   alertBoxText: "",
   alertBoxHandler: () => {},
+  userId: "",
 });
 
 export const AuthContextProvider = (props) => {
@@ -54,6 +55,14 @@ export const AuthContextProvider = (props) => {
     }
   }, [isLoggedIn]);
 
+  const userId = useMemo(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+      const decodedToken = jwtDecode(localStorage.getItem("token"));
+      return decodedToken.userId;
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -66,6 +75,7 @@ export const AuthContextProvider = (props) => {
         role,
         alertBoxText,
         alertBoxHandler,
+        userId,
       }}>
       {props.children}
     </AuthContext.Provider>

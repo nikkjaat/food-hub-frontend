@@ -7,18 +7,16 @@ import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 export default function OrderNow(props) {
   return (
     <>
-      <Link to={"/address"}>
+      <Link
+        to={`/address?productId=${props.orderNow}&quantity=${props.quantity}`}>
         {/* <Button className={props.className}>{props.children}</Button> */}
         <div
           style={{ height: "2.8em" }}
           className={`${props.className} ui vertical animated button`}
           tabindex="0">
-          <div class="hidden content">{props.children}</div>
-          <div class="visible content">
-            <FontAwesomeIcon
-              icon={faBasketShopping}
-              style={{ color: "red", position: "relative", top: "-.4em" }}
-            />
+          <div className="hidden content">{props.children}</div>
+          <div className="visible content">
+            <FontAwesomeIcon icon={faBasketShopping} style={{ color: "red" }} />
           </div>
         </div>
       </Link>

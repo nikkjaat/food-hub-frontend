@@ -77,7 +77,9 @@ export default function GetSingleProduct() {
               className={styles.btn}
               addToCart={product && product._id}
             />
-            <OrderNow className={styles.btn}>Order Now</OrderNow>
+            <OrderNow orderNow={product && product._id} className={styles.btn}>
+              Order Now
+            </OrderNow>
           </div>
         </div>
       </div>

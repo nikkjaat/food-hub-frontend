@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
 import NewAddress from "./NewAddress";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapLocation,
@@ -16,6 +16,10 @@ import Button from "./Button";
 import Footer from "./Footer";
 
 export default function MyAddress() {
+  const query = new URLSearchParams(useLocation().search);
+  const productId = query.get("productId");
+  const quantity = query.get("quantity");
+
   const navigate = useNavigate();
   const [addressId, setAddressId] = useState();
   const [address, setAddress] = useState([]);
@@ -31,7 +35,7 @@ export default function MyAddress() {
           },
         }
       );
-      console.log(response);
+      // console.log(response);
       setAddress(response.data.data);
     };
     getAddress();
@@ -53,10 +57,6 @@ export default function MyAddress() {
 
   const editAddress = (addressId) => {
     navigate(`/addaddress?addressId=${addressId}`);
-  };
-
-  const inputHandler = (e) => {
-    setAddressId(e.target.value);
   };
 
   const submitAddress = () => {};
@@ -81,7 +81,11 @@ export default function MyAddress() {
           <div>
             {address.map((add) => {
               return (
-                <div className={styles.addContainer}>
+                <div
+                  onClick={() => {
+                    setAddressId(add._id);
+                  }}
+                  className={styles.addContainer}>
                   <div
                     className={`${styles.address} btn-group`}
                     role="group"
@@ -91,9 +95,6 @@ export default function MyAddress() {
                       class="btn-radio"
                       id={add._id}
                       name="same"
-                      onChange={inputHandler}
-                      value={add._id}
-                      checked
                     />
                     <label class={`${styles.addressPrint} btn`} for={add._id}>
                       <div>
@@ -141,7 +142,8 @@ export default function MyAddress() {
             No Address Found
           </div>
         )}
-        <Link to={`/payment/?addressId=${addressId}`}>
+        <Link
+          to={`/payment/?addressId=${addressId}&productId=${productId}&quantity=${quantity}`}>
           <Button onClick={submitAddress} className={styles.payBtn}>
             Proceed to Pay
           </Button>
