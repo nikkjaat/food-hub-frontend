@@ -66,7 +66,7 @@ export default function Cart() {
           },
         }
       );
-      console.log(response);
+      // console.log(response);
       if (response) {
         setLoader(false);
       }
@@ -136,7 +136,7 @@ export default function Cart() {
         },
       }
     );
-    console.log(response);
+    // console.log(response);
     if (response.status === 200) {
       authCtx.refreshData();
     }
@@ -204,6 +204,7 @@ export default function Cart() {
                                 }}
                               />
                               <OrderNow
+                                quantity={cartItem.quantity}
                                 orderNow={cartItem.productId._id}
                                 className={styles.delANDbuyBtn}>
                                 Buy

@@ -14,6 +14,7 @@ export default function GetSingleProduct() {
   const productId = queryParams.get("productId");
   const authCtx = useContext(AuthContext);
   const [product, setProduct] = useState();
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -63,7 +64,27 @@ export default function GetSingleProduct() {
               <div> Description :</div> {product && product.description}
             </li>
             <li className="list-group-item">
-              <div> Price : </div>Rs. {product && product.price}
+              <div> Price : </div>
+              <div>
+                Rs. {product && product.price * quantity}
+                <div className={`${styles.quantityBox}`}>
+                  <div className={`${styles.quantityBoxParent}`}>
+                    <button
+                      onClick={() => {
+                        quantity > 1 && setQuantity(quantity - 1);
+                      }}>
+                      -
+                    </button>
+                    <input readOnly type="number" value={quantity} />
+                    <button
+                      onClick={() => {
+                        quantity < 10 && setQuantity(quantity + 1);
+                      }}>
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
             </li>
             <li className="list-group-item">
               <div>Delivery Charges : </div> Free Delivery
@@ -77,7 +98,10 @@ export default function GetSingleProduct() {
               className={styles.btn}
               addToCart={product && product._id}
             />
-            <OrderNow orderNow={product && product._id} className={styles.btn}>
+            <OrderNow
+              quantity={quantity}
+              orderNow={product && product._id}
+              className={styles.btn}>
               Order Now
             </OrderNow>
           </div>

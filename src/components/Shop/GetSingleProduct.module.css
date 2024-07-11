@@ -60,6 +60,48 @@
   margin: 0 auto;
 }
 
+.quantityBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 0.9em;
+  height: fit-content;
+}
+
+.quantityBoxParent {
+  display: flex;
+  gap: 0.5em;
+  /* justify-content: space-between; */
+  align-items: center;
+  height: 1.6em;
+}
+
+.quantityBoxParent button {
+  width: 2em;
+  background-color: transparent;
+  color: var(---secMainColor) !important;
+  border: solid 2px var(---secMainColor);
+  text-align: center;
+  font-weight: bolder;
+  border-radius: 6px;
+  height: 2em;
+}
+
+.quantityBoxParent > input {
+  width: 2em;
+  text-align: center;
+  border: solid 2px var(---secMainColor);
+  background-color: var(---secMainColor);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: default;
+  user-select: none;
+  height: 2em;
+}
+
 .buttons {
   display: flex;
   /* background-color: aliceblue; */
