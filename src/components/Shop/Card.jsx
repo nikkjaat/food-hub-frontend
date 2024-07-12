@@ -22,7 +22,7 @@ export default function Card(props) {
 
   const increment = (e) => {
     e.stopPropagation();
-    setQuantity(quantity + 1);
+    if (quantity < 10) setQuantity(quantity + 1);
   };
 
   const decrement = (e) => {

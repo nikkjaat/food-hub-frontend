@@ -14,6 +14,8 @@ import Delete from "./components/Delete";
 import EditButton from "./components/EditButton";
 import Button from "./Button";
 import Footer from "./Footer";
+import StripePayment from "../../util/payment/StripePayment";
+import styled from "styled-components";
 
 export default function MyAddress() {
   const query = new URLSearchParams(useLocation().search);
@@ -23,21 +25,27 @@ export default function MyAddress() {
   const navigate = useNavigate();
   const [addressId, setAddressId] = useState();
   const [address, setAddress] = useState([]);
+  const [defaultAddress, setDefaultAddress] = useState("");
+
   const authCtx = useContext(AuthContext);
+
+  const getAddress = async () => {
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_BACKEND_URL}/getaddress`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + authCtx.token,
+        },
+      }
+    );
+    // console.log(response);
+    setAddress(response.data.data);
+    setDefaultAddress(response.data.defaultAddress);
+    setAddressId(response.data.defaultAddress);
+  };
+
   useEffect(() => {
-    const getAddress = async () => {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BACKEND_URL}/getaddress`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + authCtx.token,
-          },
-        }
-      );
-      // console.log(response);
-      setAddress(response.data.data);
-    };
     getAddress();
   }, [authCtx.refresh]);
 
@@ -51,15 +59,31 @@ export default function MyAddress() {
         },
       }
     );
-    console.log(response);
-    authCtx.refreshData();
+    if (res.state === 200) {
+      getAddress();
+    }
+    // authCtx.refreshData();
   };
 
   const editAddress = (addressId) => {
     navigate(`/addaddress?addressId=${addressId}`);
   };
 
-  const submitAddress = () => {};
+  const makeDefaultAddress = async (addressId) => {
+    try {
+      const res = await axios.post(
+        `${
+          import.meta.env.VITE_API_BACKEND_URL
+        }/setdefaultaddress?addressId=${addressId}&userId=${authCtx.userId}`
+      );
+      if (res.status === 200) {
+        console.log();
+        getAddress();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -95,8 +119,14 @@ export default function MyAddress() {
                       class="btn-radio"
                       id={add._id}
                       name="same"
+                      checked={
+                        add._id === defaultAddress || addressId === add._id
+                      }
+                      onChange={() => {}}
                     />
-                    <label class={`${styles.addressPrint} btn`} for={add._id}>
+                    <label
+                      className={`${styles.addressPrint} btn`}
+                      for={add._id}>
                       <div>
                         <span style={{ color: "var(---secMainColor)" }}>
                           {add.name}
@@ -107,7 +137,15 @@ export default function MyAddress() {
                           {add.contactNo}
                         </span>
                       </div>
-                      <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          gap: "1em",
+                          alignItems: "center",
+                          flexDirection: "row",
+                          flexWrap: "wrap",
+                        }}>
                         <div className={styles.editDelBtn}>
                           <Delete
                             onClick={() => {
@@ -122,6 +160,27 @@ export default function MyAddress() {
                             className={styles.btn}
                           />
                         </div>
+                        <ButtonStyle
+                          onClick={() => {
+                            makeDefaultAddress(add._id);
+                          }}>
+                          {defaultAddress === add._id ? (
+                            <span
+                              style={{
+                                background: "var(---secMainColor)",
+                                height: "100%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                color: "white",
+                                borderRadius: ".2em",
+                              }}>
+                              Default
+                            </span>
+                          ) : (
+                            "Make Default"
+                          )}
+                        </ButtonStyle>
                       </div>
                     </label>
                   </div>
@@ -142,15 +201,35 @@ export default function MyAddress() {
             No Address Found
           </div>
         )}
-        <Link
+        {/* <Link
           to={`/payment/?addressId=${addressId}&productId=${productId}&quantity=${quantity}`}>
           <Button onClick={submitAddress} className={styles.payBtn}>
             Proceed to Pay
           </Button>
-        </Link>
+        </Link> */}
+        <StripePayment
+          addressId={addressId}
+          productId={productId}
+          quantity={quantity}
+        />
       </div>
 
       <Footer />
     </>
   );
 }
+
+const ButtonStyle = styled.button`
+  background-color: #3498db;
+  width: 8em;
+  border: none;
+  height: 2em;
+  font-size: 0.7em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #2980b9;
+  }
+`;

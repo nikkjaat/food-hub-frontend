@@ -56,11 +56,11 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-export default function StripePayment() {
-  const query = useQuery();
-  const addressId = query.get("addressId");
-  const productId = query.get("productId");
-  const quantity = query.get("quantity");
+export default function StripePayment({ addressId, productId, quantity }) {
+  // const query = useQuery();
+  // const addressId = query.get("addressId");
+  // const productId = query.get("productId");
+  // const quantity = query.get("quantity");
   // console.log(productId, addressId);
   const ctx = useContext(AuthContext);
   const [paymentUrl, setPaymentUrl] = useState("");
@@ -90,7 +90,7 @@ export default function StripePayment() {
     }
   };
 
-  console.log(paymentUrl);
+  // console.log(paymentUrl);
   return (
     <button onClick={createPaymentLink} style={buttonStyle}>
       Pay Now
