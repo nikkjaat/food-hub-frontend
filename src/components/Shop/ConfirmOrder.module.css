@@ -1,0 +1,274 @@
+.container {
+  margin: 5em 1em 1em;
+  padding: 1em;
+  border: 2px solid yellow;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  position: relative;
+}
+
+.firstChildOfContainer {
+  width: 65em;
+  min-width: 40em;
+}
+
+.firstChildOfContainer > div:first-child {
+  backdrop-filter: blur(8px) brightness(0.6);
+  padding: 2em;
+}
+
+.deliveryAddressContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.heading {
+  /* font-size: 2em; */
+  color: rgb(218, 218, 218);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.address {
+  font-size: 1.3em;
+  letter-spacing: 0.1em;
+}
+
+.changeButton {
+  height: fit-content;
+}
+
+.changeButton > button {
+  background-color: var(---yellowColor);
+  color: var(---secMainColor);
+  font-size: 1.3em;
+  border: none;
+  outline: none;
+  height: 2em;
+  width: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.2em;
+  font-weight: bold;
+}
+
+.card {
+  backdrop-filter: blur(8px) brightness(0.6);
+  margin-top: 1em;
+}
+
+.card > h2 {
+  background-color: var(---yellowColor);
+  color: var(---secMainColor);
+  padding: 0.3em 1.1em;
+}
+
+.cardBody {
+  display: flex;
+  gap: 1em;
+}
+
+.imageContainer {
+  /* background-color: aliceblue; */
+  padding: 1em;
+}
+
+.imageContainer > img {
+  width: 10em;
+  height: 10em;
+  object-fit: cover;
+}
+
+.quantityContainer {
+  margin: 0.4em auto;
+  display: flex;
+  gap: 0.8em;
+  width: fit-content;
+}
+
+.quantityContainer > button {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: 2px solid var(---yellowColor);
+  background-color: var(---yellowColor);
+  outline: none;
+}
+
+.quantityContainer button * {
+  color: var(---secMainColor);
+}
+
+.quantityContainer > input {
+  width: 3em;
+  border: 2px solid var(---yellowColor);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em;
+  border-radius: 0.1em;
+}
+
+.itemDetails {
+  /* width: 70%; */
+  padding: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemDetails > p {
+  /* background-color: aliceblue; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.confirmOrderContainer {
+  backdrop-filter: blur(8px) brightness(0.6);
+  padding: 1.5em 1em;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.confirmOrderContainer > div {
+  padding: 0 0.3em;
+  font-size: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.secondChildOfContainer1 {
+  /* background-color: aliceblue; */
+  min-width: 20em;
+  height: fit-content;
+  backdrop-filter: blur(8px) brightness(0.6);
+  display: none;
+  padding: 0.2em 0;
+}
+
+.secondChildOfContainer2 {
+  /* background-color: aliceblue; */
+  min-width: 20em;
+  height: fit-content;
+  backdrop-filter: blur(8px) brightness(0.6);
+  position: sticky;
+  top: 4em;
+}
+
+.secondChildOfContainer1 > div > h2,
+.secondChildOfContainer2 > div > h2 {
+  padding: 0.5em 0.8em;
+  margin-top: 0.5em;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.secondChildOfContainer1 > div > div,
+.secondChildOfContainer2 > div > div {
+  display: flex;
+  justify-content: space-between;
+  margin: 2em auto;
+  padding: 0 1em;
+  font-size: 1.3em;
+}
+
+@media (max-width: 914.5px) {
+  .container {
+    flex-wrap: wrap;
+  }
+
+  .firstChildOfContainer {
+    min-width: 10em;
+  }
+
+  .secondChildOfContainer1 {
+    display: block;
+    margin-top: 1em;
+  }
+
+  .secondChildOfContainer2 {
+    display: none;
+  }
+}
+
+@media (max-width: 500.5px) {
+  .heading {
+    font-size: 1.2em;
+  }
+
+  .address {
+    font-size: 1em;
+  }
+
+  .changeButton a {
+    font-size: 1em;
+  }
+
+  .card > h2 {
+    font-size: 1.3em;
+    text-align: center;
+  }
+
+  .cardBody {
+    display: grid;
+    gap: 1em;
+  }
+
+  .imageContainer {
+    /* background-color: aliceblue; */
+    padding: 0em 1em;
+  }
+
+  .imageContainer > img {
+    width: 100%;
+    height: 15em;
+    object-fit: contain;
+  }
+
+  .itemDetails > h1 {
+    font-size: 1.5em;
+  }
+
+  .itemDetails > h2 {
+    font-size: 1.4em;
+  }
+
+  .secondChildOfContainer1 {
+    /* background-color: aliceblue; */
+    min-width: 10em;
+    height: fit-content;
+    backdrop-filter: blur(8px) brightness(0.6);
+  }
+
+  .confirmOrderContainer {
+    display: grid;
+    padding: 1em;
+    gap: 1em;
+  }
+
+  .secondChildOfContainer1 > div > h2 {
+    font-size: 1.4em;
+  }
+
+  .secondChildOfContainer1 > div > div {
+    display: flex;
+    justify-content: space-between;
+    margin: 2em auto;
+    padding: 0 1em;
+    font-size: 1em;
+  }
+
+  .confirmOrderContainer > div {
+    padding: 0 0.3em;
+    font-size: 1em;
+  }
+}

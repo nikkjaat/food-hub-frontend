@@ -8,7 +8,7 @@ export default function OrderNow(props) {
   return (
     <>
       <Link
-        to={`/address?productId=${props.orderNow}&quantity=${props.quantity}`}>
+        to={`/confirmorder?productId=${props.orderNow}&quantity=${props.quantity}`}>
         {/* <Button className={props.className}>{props.children}</Button> */}
         <div
           style={{ height: "2.8em" }}

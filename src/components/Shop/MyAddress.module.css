@@ -1,6 +1,6 @@
 .container {
   background-color: var(---yellowColor);
-  margin: 9rem auto;
+  margin: 6rem auto 2em;
   padding: 2rem;
   border-radius: 1em;
   display: flex;

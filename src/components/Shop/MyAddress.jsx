@@ -17,7 +17,7 @@ import Footer from "./Footer";
 import StripePayment from "../../util/payment/StripePayment";
 import styled from "styled-components";
 
-export default function MyAddress() {
+export default function MyAddress({ setChangeAddress, getSingleAddress }) {
   const query = new URLSearchParams(useLocation().search);
   const productId = query.get("productId");
   const quantity = query.get("quantity");
@@ -59,7 +59,7 @@ export default function MyAddress() {
         },
       }
     );
-    if (res.state === 200) {
+    if (response.status === 200) {
       getAddress();
     }
     // authCtx.refreshData();
@@ -85,9 +85,13 @@ export default function MyAddress() {
     }
   };
 
+  const changeAddress = () => {
+    setChangeAddress(false);
+    getSingleAddress(addressId);
+  };
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className={`${styles.container} field container`}>
         <Link to={"/addaddress"}>
@@ -122,7 +126,9 @@ export default function MyAddress() {
                       checked={
                         add._id === defaultAddress || addressId === add._id
                       }
-                      onChange={() => {}}
+                      onChange={() => {
+                        setAddressId(add._id);
+                      }}
                     />
                     <label
                       className={`${styles.addressPrint} btn`}
@@ -207,17 +213,27 @@ export default function MyAddress() {
             Proceed to Pay
           </Button>
         </Link> */}
-        <StripePayment
-          addressId={addressId}
-          productId={productId}
-          quantity={quantity}
-        />
+        <SaveButton onClick={changeAddress}>Save</SaveButton>
       </div>
 
       <Footer />
     </>
   );
 }
+const SaveButton = styled.button`
+  background-color: #3498db;
+  width: 100%;
+  border: none;
+  height: 2em;
+  font-size: 1.3em;
+  font-weight: bold;
+  border-radius: 0.2em;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #2980b9;
+  }
+`;
 
 const ButtonStyle = styled.button`
   background-color: #3498db;

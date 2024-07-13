@@ -56,7 +56,13 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
-export default function StripePayment({ addressId, productId, quantity }) {
+export default function StripePayment({
+  addressId,
+  productId,
+  quantity,
+  children,
+  onClick,
+}) {
   // const query = useQuery();
   // const addressId = query.get("addressId");
   // const productId = query.get("productId");
@@ -66,6 +72,7 @@ export default function StripePayment({ addressId, productId, quantity }) {
   const [paymentUrl, setPaymentUrl] = useState("");
 
   const createPaymentLink = async () => {
+    onClick();
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_BACKEND_URL}/payment/checkout`,
@@ -93,7 +100,7 @@ export default function StripePayment({ addressId, productId, quantity }) {
   // console.log(paymentUrl);
   return (
     <button onClick={createPaymentLink} style={buttonStyle}>
-      Pay Now
+      {children}
     </button>
   );
 }

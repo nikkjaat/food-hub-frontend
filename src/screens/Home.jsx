@@ -64,7 +64,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <Loader /> */}
       <div>
         <Navbar filterProduct={filterProduct} refresh={authCtx.refresh} />
       </div>

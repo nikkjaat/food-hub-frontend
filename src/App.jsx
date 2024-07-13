@@ -22,6 +22,7 @@ const StripePayment = lazy(() => import("./util/payment/StripePayment"));
 const MyProfile = lazy(() => import("./screens/MyProfile"));
 const ResetPassword = lazy(() => import("./screens/ResetPassword"));
 const SetPassword = lazy(() => import("./screens/SetPassword"));
+const ConfirmOrder = lazy(() => import("./components/Shop/ConfirmOrder"));
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -86,6 +87,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/confirmorder"
+              element={
+                <ProtectedRoute>
+                  <ConfirmOrder />
                 </ProtectedRoute>
               }
             />
