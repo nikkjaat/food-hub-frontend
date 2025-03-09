@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./ConfirmOrder.module.css";
-import Navbar from "./Navbar";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import axios from "axios";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import AuthContext from "../../context/AuthContext";
-import StripePayment from "../../util/payment/StripePayment";
-import Loader from "./components/Loader";
+import CashfreePayment from "../../util/payment/CashfreePayment";
 import MyAddress from "./MyAddress";
 
 export default function ConfirmOrder() {
@@ -41,6 +39,7 @@ export default function ConfirmOrder() {
     // console.log(response);
     if (response.status === 200) {
       setAddress(response.data.data);
+      setAddressId(id);
     }
   };
 
@@ -85,11 +84,15 @@ export default function ConfirmOrder() {
     };
     getProduct();
   }, []);
+
+  console.log(addressId);
+
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       {changeAddress ? (
         <MyAddress
+          id={addressId}
           setChangeAddress={setChangeAddress}
           getSingleAddress={getSingleAddress}
         />
@@ -114,7 +117,8 @@ export default function ConfirmOrder() {
                           </strong>
                         </>
                       ) : (
-                        <Loader />
+                        // <Loader />
+                        <div>No Address found</div>
                       )}
                     </p>
                   ) : (
@@ -124,9 +128,10 @@ export default function ConfirmOrder() {
                 <div className={styles.changeButton}>
                   <button
                     onClick={() => {
-                      setChangeAddress(!changeAddress);
-                    }}>
-                    Change
+                      setChangeAddress(true);
+                    }}
+                  >
+                    {address ? "Change" : " Add"}
                   </button>
                 </div>
               </div>
@@ -134,20 +139,15 @@ export default function ConfirmOrder() {
                 <h2>ORDER SUMMARY</h2>
                 <div className={styles.cardBody}>
                   <div className={styles.imageContainer}>
-                    <img
-                      src={
-                        `${import.meta.env.VITE_ASSET_URL}` +
-                        `${data && data.imgURL}`
-                      }
-                      alt=""
-                    />
+                    <img src={data && data.imgURL} alt="" />
                     <div className={styles.quantityContainer}>
                       <button
                         onClick={() => {
                           if (quantity > 1) {
                             setQuantity(quantity - 1);
                           }
-                        }}>
+                        }}
+                      >
                         <RemoveIcon />
                       </button>
                       <input type="text" readOnly value={quantity} />
@@ -156,7 +156,8 @@ export default function ConfirmOrder() {
                           if (quantity < 10) {
                             setQuantity(quantity + 1);
                           }
-                        }}>
+                        }}
+                      >
                         <AddIcon />
                       </button>
                     </div>
@@ -169,7 +170,9 @@ export default function ConfirmOrder() {
                       {data && data.price * quantity}
                     </h2>
                     <div className={styles.deliveryDetails}>
-                      Delivery in 2 days | <del> 40 </del> &nbsp; Free
+                      Delivery in 2 days |{" "}
+                      <CurrencyRupeeIcon fontSize="small" />{" "}
+                      {data && data.shippingCost}
                     </div>
                   </div>
                 </div>
@@ -190,7 +193,7 @@ export default function ConfirmOrder() {
                     <div>
                       {" "}
                       <CurrencyRupeeIcon />
-                      <del> 40 </del>&nbsp; Free
+                      {data && data.shippingCost}
                     </div>
                   </div>
                   <hr />
@@ -201,7 +204,8 @@ export default function ConfirmOrder() {
                     <div>
                       <strong>
                         {" "}
-                        <CurrencyRupeeIcon /> {data && data.price * quantity}
+                        <CurrencyRupeeIcon />{" "}
+                        {data && data.price * quantity + data.shippingCost}
                       </strong>
                     </div>
                   </div>
@@ -212,15 +216,22 @@ export default function ConfirmOrder() {
                   Order confirmation email will be sent to
                   nikhiljaat327@gmail.com
                 </div>
-                <StripePayment
+                <CashfreePayment
                   onClick={() => {
                     setLoader(true);
                   }}
                   productId={productId}
                   quantity={quantity}
-                  addressId={addressId}>
-                  {loader ? <Loader /> : "Continue"}
-                </StripePayment>
+                  addressId={addressId}
+                  shippingCost={data && data.shippingCost}
+                  amount={
+                    data &&
+                    data.price * quantity +
+                      (quantity == 1 ? data.shippingCost : 0)
+                  }
+                >
+                  Continue
+                </CashfreePayment>
               </div>
             </div>
             <div className={styles.secondChildOfContainer2}>
@@ -239,8 +250,11 @@ export default function ConfirmOrder() {
                   <div>Delivery Charges</div>
                   <div>
                     {" "}
-                    <CurrencyRupeeIcon />
-                    <del> 40 </del>&nbsp; Free
+                    <CurrencyRupeeIcon />{" "}
+                    {data?.shippingCost > 0 && quantity == 1
+                      ? data.shippingCost
+                      : "Free"}
+                    {/* <del> 40 </del>&nbsp; Free */}
                   </div>
                 </div>
                 <hr />
@@ -251,7 +265,10 @@ export default function ConfirmOrder() {
                   <div>
                     <strong>
                       {" "}
-                      <CurrencyRupeeIcon /> {data && data.price * quantity}
+                      <CurrencyRupeeIcon />{" "}
+                      {data &&
+                        data.price * quantity +
+                          (quantity == 1 ? data.shippingCost : 0)}
                     </strong>
                   </div>
                 </div>

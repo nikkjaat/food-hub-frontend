@@ -15,7 +15,7 @@ export default function MyProfile(props) {
     profilePicture: "",
   });
 
-  const [editData, setEditData] = useState(true);
+  const [editData, setEditData] = useState(false);
   const imagePicker = useRef();
   const imagePreview = useRef();
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function MyProfile(props) {
         profilePicture: props.user.profilePicture,
       });
     }
-  }, []);
+  }, [editData]);
 
   const imgPicker = () => {
     imagePicker.current.click();
@@ -50,10 +50,6 @@ export default function MyProfile(props) {
     }
   };
 
-  const editUserData = () => {
-    setEditData(false);
-  };
-
   const inputChangeHandler = (event, value) => {
     setData((prevState) => {
       return { ...prevState, [event]: value };
@@ -65,8 +61,11 @@ export default function MyProfile(props) {
   formData.append("name", data.name);
   formData.append("email", data.email);
   formData.append("profilePicture", data.profilePicture);
+  // formData.append("folderType", data.folderType);
 
   const submitUserData = async () => {
+    console.log([...formData.entries()]);
+
     try {
       const response = await axios.put(
         `${
@@ -92,7 +91,7 @@ export default function MyProfile(props) {
   return (
     <>
       <div className={`${styles.card} ui cards`}>
-        <div className="card">
+        <div className={`${styles.container} card`}>
           <div className="content">
             <input
               hidden
@@ -107,7 +106,7 @@ export default function MyProfile(props) {
                 className="right floated mini ui image"
                 src={
                   data.profilePicture
-                    ? `${import.meta.env.VITE_ASSET_URL}` + data.profilePicture
+                    ? data.profilePicture
                     : "/images/empty.jpg"
                 }
                 ref={imagePreview}
@@ -122,7 +121,8 @@ export default function MyProfile(props) {
             <div className={`${styles.nameContainer} header`}>
               <div>
                 <input
-                  readOnly={editData}
+                  autoFocus={editData && true}
+                  readOnly={!editData}
                   className={`${editData ? styles.name : styles.input} input`}
                   type="text"
                   value={data.name}
@@ -135,14 +135,14 @@ export default function MyProfile(props) {
             </div>
             {props.user &&
               props.user.roles.map((role) => {
-                return <div className="meta">{role}</div>;
+                return <div className={`${styles.role} meta`}>{role}</div>;
               })}
 
             <div className={`${styles.descriptionContainer} description`}>
               <div>
                 <input
                   className={`${editData ? styles.email : styles.input} input`}
-                  readOnly={editData}
+                  readOnly={!editData}
                   type="text"
                   value={data.email}
                   name="email"
@@ -154,17 +154,18 @@ export default function MyProfile(props) {
             </div>
           </div>
           <div className="extra content">
-            <div className="ui two buttons">
-              <div
-                className="ui yellow button"
+            <div className={`${styles.buttonContainer} ui two buttons`}>
+              <button
+                className="ui button"
                 onClick={() => {
-                  editUserData("name");
-                }}>
-                Edit
-              </div>
-              <div onClick={submitUserData} className="ui green button">
+                  setEditData(!editData);
+                }}
+              >
+                {editData ? "Cancel" : "Edit"}
+              </button>
+              <button onClick={submitUserData} className="ui button">
                 Save
-              </div>
+              </button>
             </div>
           </div>
         </div>

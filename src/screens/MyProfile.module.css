@@ -1,7 +1,7 @@
 .card {
   position: absolute;
   top: 5em;
-  right: .3em;
+  right: 0.3em;
   width: 20rem;
   transition: 0.3s;
   z-index: 100;
@@ -14,6 +14,10 @@
   border-radius: 50%;
   position: absolute;
   right: 1rem;
+}
+
+.container {
+  background-color: var(---mainColor) !important;
 }
 
 .imageContainer img {
@@ -41,25 +45,38 @@
   opacity: 1;
 }
 
+.buttonContainer button:first-child {
+  border-right: 1px solid rgba(0, 0, 0, 0.548);
+}
+
 .name,
 .email {
-  background-color: transparent;
-  color: black;
-  border: none;
+  background-color: transparent !important;
+  color: var(---primaryColor) !important;
+  border: none !important;
   font-size: 1rem;
   font-weight: bold;
+  outline: none;
   /* width: 12rem; */
+  cursor: auto;
+}
+.role {
+  background-color: transparent;
+  color: rgb(168, 166, 165) !important;
+  border: none;
+  font-size: 0.8rem !important;
   cursor: auto;
 }
 
 .input {
-  background-color: transparent;
-  color: black;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.448) !important;
-  border: none;
+  background-color: transparent !important;
+  color: rgb(168, 166, 165) !important;
+  border: none !important;
+  outline: none !important;
   font-size: 1rem;
   font-weight: bold;
   width: 12rem;
+  cursor: auto;
 }
 
 .nameContainer i {
@@ -70,8 +87,6 @@
 .nameContainer {
   display: flex !important;
   gap: 1rem;
-  /* background-color: aqua; */
-  /* width: 12rem; */
 }
 
 .descriptionContainer div i,

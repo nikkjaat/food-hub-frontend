@@ -18,9 +18,6 @@ export default function Navbar(props) {
   const profileRef = useRef();
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  const displayProfile = (e) => {
-    setDisplay(!display);
-  };
 
   const logoutHandler = () => {
     authCtx.logoutHandler();
@@ -30,8 +27,8 @@ export default function Navbar(props) {
   const filterProduct = (e) => {
     setCapitalize(e.target.value);
   };
-  if (props.filterProduct) {
-    props.filterProduct(capitalize);
+  if (props.setFilterProduct) {
+    props.setFilterProduct(capitalize);
   }
 
   useEffect(() => {
@@ -90,7 +87,8 @@ export default function Navbar(props) {
             data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
-            aria-label="Toggle navigation">
+            aria-label="Toggle navigation"
+          >
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -133,7 +131,8 @@ export default function Navbar(props) {
               </form>
               <Link
                 to={!authCtx.isLoggedIn ? "/login" : "/cart"}
-                className={styles.myCartBtn}>
+                className={styles.myCartBtn}
+              >
                 <div className={styles.cartHead}>
                   <ShoppingCartIcon />
                 </div>

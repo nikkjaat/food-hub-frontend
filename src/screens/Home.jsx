@@ -11,13 +11,11 @@ import Loader from "../components/Shop/components/Loader/Loader";
 import MyCarousel from "../components/Shop/components/MyCarousel";
 import AdPage from "../components/Shop/AdPage";
 
-export default function Home() {
+export default function Home(props) {
   const queryString = useLocation().search;
-
   const authCtx = useContext(AuthContext);
   const [products, setProducts] = useState([]);
   const [loader, setLoader] = useState(true);
-  // let { loading, data: products, error, get } = useApi();
 
   const getProducts = async () => {
     try {
@@ -30,42 +28,37 @@ export default function Home() {
           },
         }
       );
-      // console.log(response);
+
       if (response.status === 200) {
-        const products = await response.data.products;
-        setProducts(products);
+        setProducts(response.data.products);
         setLoader(false);
       }
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
+
+  // ✅ Fetch products on initial render and when authCtx.refresh changes
   useEffect(() => {
     getProducts();
   }, [authCtx.refresh]);
 
-  const filterProduct = (filter) => {
-    useEffect(() => {
-      const filterProducts = async () => {
-        if (filter.trim() === "") {
-          getProducts();
-        } else {
-          // Filter products based on the search keyword
-          const filteredProducts = products.filter((product) =>
-            product.name.toLowerCase().includes(filter.toLowerCase())
-          );
-          // console.log(filteredProducts);
-          setProducts(filteredProducts);
-        }
-      };
-      filterProducts();
-    }, [filter]);
-  };
+  // ✅ Filter products based on search input
+  useEffect(() => {
+    if (!props.filterProduct || props.filterProduct.trim() === "") {
+      getProducts();
+    } else {
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(props.filterProduct.toLowerCase())
+      );
+      setProducts(filteredProducts);
+    }
+  }, [props.filterProduct]);
 
   return (
     <>
       <div>
-        <Navbar filterProduct={filterProduct} refresh={authCtx.refresh} />
+        {/* <Navbar filterProduct={filterProduct} refresh={authCtx.refresh} /> */}
       </div>
 
       <div className={styles.showCase}>
@@ -86,10 +79,9 @@ export default function Home() {
         <Loader />
       ) : (
         <div className={`${styles.cardContainer}`}>
-          {products &&
-            products.map((product) => {
-              return <Card products={product} key={product._id} />;
-            })}
+          {products.map((product) => (
+            <Card products={product} key={product._id} />
+          ))}
         </div>
       )}
 

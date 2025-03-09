@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import AddToCart from "./components/AddToCart";
 import OrderNow from "./components/OrderNow";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 
 export default function Card(props) {
   const authCtx = useContext(AuthContext);
@@ -35,22 +36,22 @@ export default function Card(props) {
     props.onDelete(props.products.productId._id);
   };
 
+  // console.log(props.products.imgURL);
+
   return (
     <div className={`${styles.card} card mt-2 text-white border-white`}>
       <Link
         to={`/productdetails?productId=${
           props.admin ? props.products.productId._id : props.products._id
         }`}
-        className={styles.link}>
+        className={styles.link}
+      >
         <div className={styles.imageContainer}>
           <img
             src={
-              `${import.meta.env.VITE_ASSET_URL}` +
-              `${
-                props.admin
-                  ? props.products.productId.imgURL
-                  : props.products.imgURL
-              }`
+              props.admin
+                ? props.products.productId.imgURL
+                : props.products.imgURL
             }
             className={`${styles.cardImage} card-img-top`}
             alt="..."
@@ -74,7 +75,7 @@ export default function Card(props) {
           <button onClick={increment}>+</button>
         </div>
         <div className="d-flex justify-content-center align-items-center">
-          Rs. {price * quantity}
+          <CurrencyRupeeIcon fontSize="small" /> {price * quantity}
         </div>
       </div>
       <div className="border-warning border-top"></div>

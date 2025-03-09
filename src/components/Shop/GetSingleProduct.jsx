@@ -6,6 +6,7 @@ import AuthContext from "../../context/AuthContext";
 import styles from "./GetSingleProduct.module.css";
 import Footer from "./Footer";
 import AddToCart from "./components/AddToCart";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import OrderNow from "./components/OrderNow";
 
 export default function GetSingleProduct() {
@@ -40,14 +41,11 @@ export default function GetSingleProduct() {
 
   return (
     <div className={styles.container}>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className={`${styles.itemDetails} card`}>
         <div className={styles.imageContainer}>
           <img
-            src={
-              `${import.meta.env.VITE_ASSET_URL}` +
-              `${product && product.imgURL}`
-            }
+            src={product && product.imgURL}
             className="card-img-top"
             alt="..."
           />
@@ -66,20 +64,24 @@ export default function GetSingleProduct() {
             <li className="list-group-item">
               <div> Price : </div>
               <div>
-                Rs. {product && product.price * quantity}
+                <CurrencyRupeeIcon />
+
+                {product && product.price * quantity}
                 <div className={`${styles.quantityBox}`}>
                   <div className={`${styles.quantityBoxParent}`}>
                     <button
                       onClick={() => {
                         quantity > 1 && setQuantity(quantity - 1);
-                      }}>
+                      }}
+                    >
                       -
                     </button>
                     <input readOnly type="number" value={quantity} />
                     <button
                       onClick={() => {
                         quantity < 10 && setQuantity(quantity + 1);
-                      }}>
+                      }}
+                    >
                       +
                     </button>
                   </div>
@@ -87,12 +89,21 @@ export default function GetSingleProduct() {
               </div>
             </li>
             <li className="list-group-item">
-              <div>Delivery Charges : </div> Free Delivery
+              <div>Delivery Charges :</div>{" "}
+              {product &&
+                (product.shippingCost > 0 ? (
+                  <span>
+                    <CurrencyRupeeIcon /> {product.shippingCost}
+                  </span>
+                ) : (
+                  "Free Delivery"
+                ))}
             </li>
           </ul>
           <div
             className={`${styles.buttons} card-body`}
-            style={{ width: "100%" }}>
+            style={{ width: "100%" }}
+          >
             <AddToCart
               onClick={clickedAddToCart}
               className={styles.btn}
@@ -101,7 +112,8 @@ export default function GetSingleProduct() {
             <OrderNow
               quantity={quantity}
               orderNow={product && product._id}
-              className={styles.btn}>
+              className={styles.btn}
+            >
               Order Now
             </OrderNow>
           </div>

@@ -4,6 +4,8 @@ import "./App.css";
 import AuthContext from "./context/AuthContext";
 import AlertBox from "./components/AlertBox/AlertBox";
 import ProtectedRoute from "./util/ProtectedRoute";
+import MyOrder from "./components/Shop/MyOrder";
+import Navbar from "./components/Shop/Navbar";
 
 const Home = lazy(() => import("./screens/Home"));
 const Login = lazy(() => import("./screens/Login"));
@@ -18,15 +20,17 @@ const GetSingleProduct = lazy(() =>
 );
 const NewAddress = lazy(() => import("./components/Shop/NewAddress"));
 const MyAddress = lazy(() => import("./components/Shop/MyAddress"));
-const StripePayment = lazy(() => import("./util/payment/StripePayment"));
+const CashfreePayment = lazy(() => import("./util/payment/CashfreePayment"));
 const MyProfile = lazy(() => import("./screens/MyProfile"));
 const ResetPassword = lazy(() => import("./screens/ResetPassword"));
 const SetPassword = lazy(() => import("./screens/SetPassword"));
 const ConfirmOrder = lazy(() => import("./components/Shop/ConfirmOrder"));
+const PaymentSuccess = lazy(() => import("./util/payment/PaymentSuccess"));
 
 function App() {
   const authCtx = useContext(AuthContext);
   const [showAlert, setShowAlert] = useState(false);
+  const [filterProduct, setFilterProduct] = useState();
 
   useEffect(() => {
     if (authCtx.alertBoxText) {
@@ -43,9 +47,10 @@ function App() {
     <>
       {showAlert && <AlertBox />}
       <BrowserRouter>
+        {<Navbar setFilterProduct={setFilterProduct} />}
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home filterProduct={filterProduct} />} />
             <Route
               path="/productdetails"
               element={
@@ -118,7 +123,23 @@ function App() {
               path="/payment"
               element={
                 <ProtectedRoute>
-                  <StripePayment />
+                  <CashfreePayment />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/payment/success"
+              element={
+                <ProtectedRoute>
+                  <PaymentSuccess />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/myorder"
+              element={
+                <ProtectedRoute>
+                  <MyOrder />
                 </ProtectedRoute>
               }
             />

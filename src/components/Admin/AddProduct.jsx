@@ -193,7 +193,7 @@ export default function AddProduct() {
 
   return (
     <div>
-      <AdminNavbar />
+      {/* <AdminNavbar /> */}
       <div className="container">
         <form
           onSubmit={productSubmitHandler}

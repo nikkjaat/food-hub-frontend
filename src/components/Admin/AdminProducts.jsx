@@ -53,7 +53,7 @@ export default function AdminProducts() {
   };
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       {loader && <Loader />}
       <div
         style={{ margin: "6em 0" }}

@@ -1,0 +1,140 @@
+.container {
+  /* background-color: rgb(0, 110, 207); */
+  margin: 6em 1em 2em;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.filterBox {
+  min-width: 15em;
+  /* background-color: rgb(108, 108, 108); */
+  backdrop-filter: blur(8px) brightness(0.8);
+  padding-bottom: 1em;
+  border-radius: 0.3em;
+}
+
+.heading {
+  padding: 0.8em 1em 0;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.orderstatus,
+.orderTime {
+  padding: 0.4em 1em;
+  display: grid;
+  gap: 1.5em;
+}
+
+.orderstatus > div:first-child,
+.orderTime > div:first-child {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.orderstatus > div > label,
+.orderTime > div > label {
+  width: 85%;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.orderstatus > div > input,
+.orderTime > div > input {
+  /* width: 10%; */
+  background-color: aliceblue;
+  margin-right: 1em;
+  transform: scale(1.5);
+  -webkit-transform: scale(1.3);
+  -moz-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+}
+
+.orderListContainer {
+  width: 100%;
+}
+
+.orderListContainer .searchBar > input[type="search"] {
+  width: 90%;
+  height: 3em;
+  border: 1px solid white;
+  backdrop-filter: blur(8px) brightness(0.8);
+  background-color: transparent;
+  padding: 0 1em;
+  border-radius: 0.3em;
+  outline: none;
+  margin-bottom: 2em;
+}
+
+.orderListContainer .searchBar > input[type="search"]:focus {
+  outline: 2px solid white;
+}
+
+.card {
+  width: 100%;
+  border-radius: 0.3em;
+  backdrop-filter: blur(8px) brightness(0.8);
+  border: 1px solid white;
+  padding: 1em;
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+  /* max-height: 15rem;  */
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+
+.card:hover {
+  outline: 1.5px solid;
+}
+
+.orderDetails {
+  width: 90%;
+}
+
+.imageContainer {
+  /* background-color: rgb(55, 55, 55); */
+  display: flex;
+  gap: 1em;
+  overflow: hidden;
+  /* width: 70%; */
+}
+
+.imageContainer > img {
+  object-fit: cover;
+  width: 5em;
+  height: 100%;
+}
+
+.imageContainer .name {
+  font-size: 1.4em;
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* max-width: 14em; */
+}
+
+.imageContainer .description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25em;
+}
+
+.itemPrice {
+  /* text-align: center; */
+  margin-top: 1em;
+}
+
+.date {
+  text-align: center;
+}
+
+.aboutOrder {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}

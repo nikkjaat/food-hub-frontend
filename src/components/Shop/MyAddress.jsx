@@ -12,12 +12,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Delete from "./components/Delete";
 import EditButton from "./components/EditButton";
-import Button from "./Button";
 import Footer from "./Footer";
-import StripePayment from "../../util/payment/StripePayment";
 import styled from "styled-components";
 
-export default function MyAddress({ setChangeAddress, getSingleAddress }) {
+export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
   const query = new URLSearchParams(useLocation().search);
   const productId = query.get("productId");
   const quantity = query.get("quantity");
@@ -39,8 +37,8 @@ export default function MyAddress({ setChangeAddress, getSingleAddress }) {
         },
       }
     );
-    // console.log(response);
-    setAddress(response.data.data);
+    // console.log(response.data);
+    setAddress(response.data.data.myAddress);
     setDefaultAddress(response.data.defaultAddress);
     setAddressId(response.data.defaultAddress);
   };
@@ -86,9 +84,14 @@ export default function MyAddress({ setChangeAddress, getSingleAddress }) {
   };
 
   const changeAddress = () => {
-    setChangeAddress(false);
-    getSingleAddress(addressId);
+    if (setChangeAddress) {
+      setChangeAddress(false);
+      getSingleAddress(addressId);
+    } else {
+      console.error("setChangeAddress is not defined");
+    }
   };
+
   return (
     <>
       {/* <Navbar /> */}
@@ -97,7 +100,8 @@ export default function MyAddress({ setChangeAddress, getSingleAddress }) {
         <Link to={"/addaddress"}>
           <div
             className={`${styles.addNewAdd} ui vertical animated button`}
-            tabindex="0">
+            tabindex="0"
+          >
             <div class="hidden content">
               <i class="plus icon"></i>
               <FontAwesomeIcon icon={faMapLocation} />
@@ -108,39 +112,42 @@ export default function MyAddress({ setChangeAddress, getSingleAddress }) {
         {address.length > 0 ? (
           <div>
             {address.map((add) => {
+              // console.log(add)
               return (
                 <div
                   onClick={() => {
-                    setAddressId(add._id);
+                    setAddressId(add.addressId._id);
                   }}
-                  className={styles.addContainer}>
+                  className={styles.addContainer}
+                >
                   <div
                     className={`${styles.address} btn-group`}
                     role="group"
-                    aria-label="Basic radio toggle button">
+                    aria-label="Basic radio toggle button"
+                  >
                     <input
                       type="radio"
                       class="btn-radio"
                       id={add._id}
                       name="same"
                       checked={
-                        add._id === defaultAddress || addressId === add._id
+                        add.addressId._id === id || // Change this line
+                        addressId === add.addressId._id
                       }
-                      onChange={() => {
-                        setAddressId(add._id);
-                      }}
                     />
                     <label
                       className={`${styles.addressPrint} btn`}
-                      for={add._id}>
+                      for={add._id}
+                    >
                       <div>
                         <span style={{ color: "var(---secMainColor)" }}>
-                          {add.name}
+                          {add.addressId.name}
                         </span>{" "}
-                        , {add.houseNo} , {add.street} , {add.city} ,{" "}
-                        {add.pincode} , {add.state} , {add.country} ,{" "}
+                        , {add.addressId.houseNo} , {add.addressId.street} ,{" "}
+                        {add.addressId.city} , {add.addressId.pincode} ,{" "}
+                        {add.addressId.state} , {add.addressId.country} ,{" "}
                         <span style={{ color: "var(---secMainColor)" }}>
-                          {add.contactNo}
+                          {add.addressId.contactNo}
                         </span>
                       </div>
                       <div
@@ -151,26 +158,28 @@ export default function MyAddress({ setChangeAddress, getSingleAddress }) {
                           alignItems: "center",
                           flexDirection: "row",
                           flexWrap: "wrap",
-                        }}>
+                        }}
+                      >
                         <div className={styles.editDelBtn}>
                           <Delete
                             onClick={() => {
-                              deleteAddress(add._id);
+                              deleteAddress(add.addressId._id);
                             }}
                             className={styles.btn}
                           />
                           <EditButton
                             onClick={() => {
-                              editAddress(add._id);
+                              editAddress(add.addressId._id);
                             }}
                             className={styles.btn}
                           />
                         </div>
                         <ButtonStyle
                           onClick={() => {
-                            makeDefaultAddress(add._id);
-                          }}>
-                          {defaultAddress === add._id ? (
+                            makeDefaultAddress(add.addressId._id);
+                          }}
+                        >
+                          {defaultAddress === add.addressId._id ? (
                             <span
                               style={{
                                 background: "var(---secMainColor)",
@@ -180,7 +189,8 @@ export default function MyAddress({ setChangeAddress, getSingleAddress }) {
                                 alignItems: "center",
                                 color: "white",
                                 borderRadius: ".2em",
-                              }}>
+                              }}
+                            >
                               Default
                             </span>
                           ) : (
@@ -203,7 +213,8 @@ export default function MyAddress({ setChangeAddress, getSingleAddress }) {
               color: "black",
               borderRadius: ".7rem",
               fontWeight: "bold",
-            }}>
+            }}
+          >
             No Address Found
           </div>
         )}

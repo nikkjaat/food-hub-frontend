@@ -327,14 +327,7 @@ export default function Address() {
 
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  // const [name, setName] = useState("");
-  // const [street, setStreet] = useState("");
-  // const [houseNo, setHouseNo] = useState("");
-  // const [contactNo, setContactNo] = useState(null);
-  // const [city, setCity] = useState("");
-  // const [pincode, setPincode] = useState(null);
-  // const [state, setState] = useState("");
-  // const [country, setCountry] = useState("");
+
   const [address, setAddress] = useState({
     name: "",
     houseNo: "",

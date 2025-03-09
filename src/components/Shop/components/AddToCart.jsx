@@ -1,6 +1,4 @@
 import React, { useContext, useState } from "react";
-import styles from "./AddToCart.module.css";
-import Button from "../Button";
 import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
 

@@ -16,7 +16,7 @@ export default function PostProduct() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [varients, setVarients] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [shippingCost, setShippingCost] = useState("");
   const [imageUrl, setImageUrl] = useState();
   const [productId, setProductId] = useState("");
   const [loader, setLoader] = useState(true);
@@ -39,11 +39,12 @@ export default function PostProduct() {
           },
         }
       );
+      console.log(response);
       setCatName(response.data.categoryName);
       setName(response.data.name);
       setDescription(response.data.description);
       setVarients(response.data.price);
-      setQuantity(response.data.quantity);
+      setShippingCost(response.data.shippingCost);
       setImageUrl(response.data.imgURL);
       setProductId(response.data._id);
     };
@@ -56,7 +57,7 @@ export default function PostProduct() {
       setDescription("");
       setImageUrl("");
       setName("");
-      setQuantity("");
+      setShippingCost("");
       setVarients("");
     }
   }, [queryString]);
@@ -71,8 +72,8 @@ export default function PostProduct() {
     } else if (input === "imgURL") {
       console.log(value);
       setImageUrl(value);
-    } else if (input === "quantity") {
-      setQuantity(value);
+    } else if (input === "shippingCost") {
+      setShippingCost(value);
     } else if (input === "varients") {
       setVarients(value);
     }
@@ -86,13 +87,16 @@ export default function PostProduct() {
   const submiHandler = async (e) => {
     e.preventDefault();
 
+    console.log(imageUrl);
+
     const formData = new FormData();
     formData.append("categoryName", catName);
     formData.append("name", name);
     formData.append("imgURL", imageUrl);
     formData.append("description", description);
-    formData.append("quantity", quantity);
+    formData.append("shippingCost", shippingCost);
     formData.append("price", varients);
+    formData.append("folderType", "ProductImage");
 
     if (!queryString) {
       const response = await axios.post(
@@ -131,19 +135,20 @@ export default function PostProduct() {
     setDescription("");
     setImageUrl("");
     setName("");
-    setQuantity("");
+    setShippingCost("");
     setVarients("");
   };
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <form
         action="/admin/addproduct"
         method="POST"
         encType="multipart/form-data"
         className={`${styles.container} container`}
-        onSubmit={submiHandler}>
+        onSubmit={submiHandler}
+      >
         <div className={`${styles.categoryBox} row mb-3`}>
           <label htmlFor="categoryname" className="col-sm-2 col-form-label">
             Category Name
@@ -154,7 +159,8 @@ export default function PostProduct() {
             onChange={(e) => {
               inputHandler("categoryName", e.target.value);
             }}
-            className={`${styles.category} form-select`}>
+            className={`${styles.category} form-select`}
+          >
             <option hidden>Select Category</option>
             <option value="Pizza">Pizza</option>
             <option value="Burger">Burger</option>
@@ -212,18 +218,18 @@ export default function PostProduct() {
             </div>
           </div>
           <div className="row mb-3">
-            <label htmlFor="quantity" className="col-sm-2 col-form-label">
-              Quantity
+            <label htmlFor="shippingCost" className="col-sm-2 col-form-label">
+              Shipping Cost
             </label>
             <div className="col-sm-10">
               <input
-                value={quantity}
+                value={shippingCost}
                 onChange={(e) => {
-                  inputHandler("quantity", e.target.value);
+                  inputHandler("shippingCost", e.target.value);
                 }}
                 type="number"
                 className="form-control"
-                id="quantity"
+                id="shippingCost"
               />
             </div>
           </div>

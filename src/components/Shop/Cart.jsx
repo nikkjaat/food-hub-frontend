@@ -149,7 +149,7 @@ export default function Cart() {
   return (
     <>
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         {loader && <Loader />}
         {cartState.cartItems.length > 0 && (
           <section className={`${styles.mainContainer} h-100 gradient-custom`}>
@@ -169,15 +169,14 @@ export default function Cart() {
                           <div className={`${styles.singleCard} row`}>
                             <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
                               <Link
-                                to={`/productdetails?productId=${cartItem.productId._id}`}>
+                                to={`/productdetails?productId=${cartItem.productId._id}`}
+                              >
                                 <div
                                   className={`${styles.imageContainer} bg-image hover-overlay hover-zoom ripple rounded`}
-                                  data-mdb-ripple-color="light">
+                                  data-mdb-ripple-color="light"
+                                >
                                   <img
-                                    src={
-                                      `${import.meta.env.VITE_ASSET_URL}` +
-                                      `${cartItem.productId.imgURL}`
-                                    }
+                                    src={cartItem.productId.imgURL}
                                     className={styles.image}
                                   />
                                 </div>
@@ -206,7 +205,8 @@ export default function Cart() {
                               <OrderNow
                                 quantity={cartItem.quantity}
                                 orderNow={cartItem.productId._id}
-                                className={styles.delANDbuyBtn}>
+                                className={styles.delANDbuyBtn}
+                              >
                                 Buy
                               </OrderNow>
                             </div>
@@ -214,7 +214,8 @@ export default function Cart() {
                             <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
                               <div
                                 className="d-flex mb-4"
-                                style={{ maxWwidth: "300px" }}>
+                                style={{ maxWwidth: "300px" }}
+                              >
                                 <div className={styles.quantityBox}>
                                   <Button
                                     className={styles.child}
@@ -223,7 +224,8 @@ export default function Cart() {
                                         cartItem.productId._id,
                                         -1
                                       );
-                                    }}>
+                                    }}
+                                  >
                                     -
                                   </Button>
                                   <Button className={styles.quantity}>
@@ -237,7 +239,8 @@ export default function Cart() {
                                         cartItem.productId._id,
                                         1
                                       );
-                                    }}>
+                                    }}
+                                  >
                                     +
                                   </Button>
                                 </div>
@@ -326,7 +329,8 @@ export default function Cart() {
                       <Link to={"/address"}>
                         <button
                           type="button"
-                          className={`${styles.orderBtn} btn btn-lg btn-block`}>
+                          className={`${styles.orderBtn} btn btn-lg btn-block`}
+                        >
                           Go to checkout
                         </button>
                       </Link>

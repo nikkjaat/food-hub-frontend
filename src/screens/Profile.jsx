@@ -55,9 +55,10 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
                 margin: "1em",
                 borderRadius: "50%",
                 cursor: "pointer",
+                objectFit: "cover",
               }}
               onClick={handleClick}
-              src={`${import.meta.env.VITE_ASSET_URL}${dp}`}
+              src={dp}
               alt=""
             />
           ) : (
@@ -67,7 +68,8 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
               sx={{ m: 1 }}
               aria-controls={open ? "account-menu" : undefined}
               aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}>
+              aria-expanded={open ? "true" : undefined}
+            >
               <Avatar sx={{ width: 32, height: 32 }}>
                 {firstLetterOfName}
               </Avatar>
@@ -109,13 +111,15 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
           },
         }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}>
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
         <MenuItem
           sx={fontStyle}
           onClick={() => {
             setDisplay(true);
             handleClose();
-          }}>
+          }}
+        >
           {dp ? (
             <img
               style={{
@@ -123,8 +127,9 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
                 height: "2.5em",
                 marginRight: "1em",
                 borderRadius: "50%",
+                objectFit: "cover",
               }}
-              src={`${import.meta.env.VITE_ASSET_URL}${dp}`}
+              src={dp}
               alt=""
             />
           ) : (
@@ -145,13 +150,13 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
         <MenuItem
           sx={fontStyle}
           onClick={() => {
-            setDisplay(true);
             handleClose();
-          }}>
+          }}
+        >
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
-          Settings
+          <Link to={"/myorder"}>My Order</Link>
         </MenuItem>
         <MenuItem sx={fontStyle} onClick={handleClose}>
           <ListItemIcon>
@@ -160,7 +165,8 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
           <Link
             style={{ color: "white" }}
             target="blank"
-            to={"https://wa.me/+919760258097"}>
+            to={"https://wa.me/+919760258097"}
+          >
             Contact
           </Link>
         </MenuItem>
@@ -170,7 +176,8 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
           onClick={() => {
             logoutHandler();
             handleClose();
-          }}>
+          }}
+        >
           <ListItemIcon>
             <Logout />
           </ListItemIcon>
