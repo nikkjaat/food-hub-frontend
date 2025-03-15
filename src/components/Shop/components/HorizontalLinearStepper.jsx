@@ -15,6 +15,7 @@ export default function HorizontalLinearAlternativeLabelStepper() {
         width: "100%",
         height: "auto",
         padding: "0px",
+        background: "",
       }}
     >
       <Stepper
@@ -38,6 +39,7 @@ export default function HorizontalLinearAlternativeLabelStepper() {
                 padding: 0,
                 "@media (max-width: 872px)": {
                   marginBottom: "-0.5em", // Reduce space on small screens
+                  ml: "-2em",
                 },
               }}
             >
@@ -47,7 +49,7 @@ export default function HorizontalLinearAlternativeLabelStepper() {
                   fontSize: "14px",
                   marginTop: "-0.3em", // Reduce space between step and label
                   "@media (max-width: 872px)": {
-                    fontSize: "12px",
+                    fontSize: "8px",
                     marginTop: "-0.4em", // Reduce space even more on small screens
                   },
                 }}

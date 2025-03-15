@@ -81,7 +81,7 @@
 }
 
 .card:hover {
-  outline: 1.5px solid;
+  outline: 1.5px solid white;
 }
 
 .orderDetails {
@@ -163,7 +163,6 @@
     width: 100%;
     border-radius: 0.3em;
     backdrop-filter: blur(8px) brightness(0.8);
-    border: 1px solid white;
     padding: 1em;
     display: flex;
     gap: 1em;
@@ -181,10 +180,15 @@
     height: 10em !important;
   }
 
+  .name {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+  }
+
   .itemPrice {
     /* text-align: center; */
     margin-top: 0.2em !important;
-    font-size: 1.5em !important;
+    font-size: 1.2em !important;
   }
 
   .description {
@@ -197,4 +201,34 @@
 }
 
 @media screen and (max-width: 544.5px) {
+  .imageContainer {
+    display: flex;
+    gap: 1em;
+    overflow: hidden;
+    width: 6em !important;
+    height: 6em !important;
+  }
+
+  .card {
+    width: 100%;
+    border-radius: 0.3em;
+    backdrop-filter: blur(8px) brightness(0.8);
+    padding-left: 0em;
+    display: flex;
+    gap: 0em;
+    justify-content: space-between;
+    max-height: 8rem !important;
+    cursor: pointer;
+    margin-bottom: 1em;
+  }
+
+  .name {
+    font-size: 1em !important;
+    font-weight: bold !important;
+  }
+
+  .itemPrice {
+    margin-top: 0.2em !important;
+    font-size: 1em !important;
+  }
 }

@@ -7,6 +7,7 @@ import AuthContext from "../../context/AuthContext";
 import axios from "axios";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
+import VerticalLinearStepper from "./components/Loader/VerticalLinearStepper";
 
 export default function MyOrder() {
   const authCtx = useContext(AuthContext);
@@ -45,6 +46,8 @@ export default function MyOrder() {
     const handleResize = () => {
       setFilterProduct(window.innerWidth > 872.5);
     };
+
+    handleResize();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -185,7 +188,11 @@ export default function MyOrder() {
 
                       {/* Product Details - Takes all remaining space */}
                       <CardContent sx={{ flex: "1", minWidth: 0 }}>
-                        <Typography gutterBottom variant="h5">
+                        <Typography
+                          className={styles.name}
+                          gutterBottom
+                          variant="h5"
+                        >
                           {order.productId.name}
                         </Typography>
                         <Typography
@@ -208,54 +215,13 @@ export default function MyOrder() {
                         >
                           ₹{order.productId.price}
                         </Typography>
-                        <HorizontalLinearStepper />
+                        <Typography sx={{ fontSize: ".8em", mt: 0.5 }}>
+                          Delivered
+                        </Typography>
+                        {/* <HorizontalLinearStepper /> */}
                       </CardContent>
-
-                      {/* Delivery Details - Takes only necessary space */}
-                      {/* <CardContent
-                        sx={{
-                          flex: "0 0 auto",
-                          textAlign: "right",
-                          whiteSpace: "nowrap",
-                        }}
-                        >
-                        <Typography
-                          variant="body2"
-                          sx={{ fontSize: 15, mt: 1 }}
-                          >
-                          Delivered on 15
-                          </Typography>
-                          </CardContent> */}
                     </Card>
                   </>
-                  // <div
-                  //   className={styles.card}
-                  //   onClick={() => {
-                  //     getProductDetails(order.productId._id);
-                  //   }}
-                  // >
-                  //   <div className={styles.imageContainer}>
-                  //     <img
-                  //       src={
-                  //         order.productId.imgURL ||
-                  //         "https://via.placeholder.com/150"
-                  //       }
-                  //       alt=""
-                  //     />
-                  //     <div className={styles.orderDetails}>
-                  //       <div className={styles.name}>
-                  //         {order.productId.name}
-                  //       </div>
-                  //       <div className={styles.description}>
-                  //         {order.productId.description}
-                  //       </div>
-                  //       <div className={styles.itemPrice}>
-                  //         ₹{order.productId.price}
-                  //       </div>
-                  //     </div>
-                  //   </div>
-                  //   <div className={styles.date}>Delivered on 15</div>
-                  // </div>
                 );
               })}
           </div>
