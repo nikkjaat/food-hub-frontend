@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import VerticalLinearStepper from "./components/VerticalLinearStepper";
+import HorizontalLinearStepper from "./components/HorizontalLinearStepper";
 import Navbar from "./Navbar";
 import styles from "./MyOrder.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import TuneIcon from "@mui/icons-material/Tune";
 
 export default function MyOrder() {
   const authCtx = useContext(AuthContext);
@@ -13,6 +15,7 @@ export default function MyOrder() {
   const order_id = searchParams.get("id");
   const [order, setOrder] = useState();
   const navigate = useNavigate();
+  const [filterProduct, setFilterProduct] = useState(true);
 
   useEffect(() => {
     const session = async () => {
@@ -37,6 +40,15 @@ export default function MyOrder() {
       session();
     }
   }, [order_id]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setFilterProduct(window.innerWidth > 872.5);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const getMyOrder = async () => {
     try {
@@ -86,40 +98,51 @@ export default function MyOrder() {
       {/* <Navbar /> */}
       <div>
         <div className={styles.container}>
-          <div className={styles.filterBox}>
+          <div
+            style={{ height: filterProduct ? "100%" : "4em" }}
+            className={styles.filterBox}
+          >
             <div className={styles.heading}>Filters</div>
             <hr />
             <div>
               <div className={styles.orderstatus}>
                 <div>Order Status</div>
                 <div>
-                  <input type="checkbox" name="ontheway" id="ontheway" />
-                  <label htmlFor="ontheway">On the way</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="delivered" id="delivered" />
-                  <label htmlFor="delivered">Delivered</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="cancelled" id="cancelled" />
-                  <label htmlFor="cancelled">Cancelled</label>
-                </div>
-                <div>
-                  <input type="checkbox" name="returned" id="returned" />
-                  <label htmlFor="returned">Returned</label>
+                  <div>
+                    <input type="checkbox" name="ontheway" id="ontheway" />
+                    <label htmlFor="ontheway">On the way</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="delivered" id="delivered" />
+                    <label htmlFor="delivered">Delivered</label>
+                  </div>
+                  <div>
+                    <input type="checkbox" name="cancelled" id="cancelled" />
+                    <label htmlFor="cancelled">Cancelled</label>
+                  </div>
                 </div>
               </div>
               <hr />
               <div className={styles.orderTime}>
                 {" "}
                 <div>Order Time</div>
-                {["Today", "Last Week", "Last Month"].map((time, index) => (
-                  <div key={index}>
-                    <input type="checkbox" id={time.toLowerCase()} />
-                    <label htmlFor={time.toLowerCase()}>{time}</label>
-                  </div>
-                ))}
+                <div>
+                  {["Today", "Last Week", "Last Month"].map((time, index) => (
+                    <div key={index}>
+                      <input type="checkbox" id={time.toLowerCase()} />
+                      <label htmlFor={time.toLowerCase()}>{time}</label>
+                    </div>
+                  ))}
+                </div>
               </div>
+            </div>
+            <div
+              onClick={() => {
+                setFilterProduct(!filterProduct);
+              }}
+              className={styles.filterIcon}
+            >
+              <TuneIcon />
             </div>
           </div>
           <div className={styles.orderListContainer}>
@@ -133,34 +156,106 @@ export default function MyOrder() {
             {order &&
               order.map((order) => {
                 return (
-                  <div
-                    className={styles.card}
-                    onClick={() => {
-                      getProductDetails(order.productId._id);
-                    }}
-                  >
-                    <div className={styles.imageContainer}>
-                      <img
-                        src={
-                          order.productId.imgURL ||
-                          "https://via.placeholder.com/150"
-                        }
-                        alt=""
+                  <>
+                    <Card
+                      className={styles.card}
+                      sx={{
+                        maxWidth: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        backgroundColor: "transparent",
+                        marginBottom: "10px",
+                        backdropFilter: "blur(10px)",
+                      }}
+                    >
+                      {/* Product Image - Takes only necessary space */}
+                      <CardMedia
+                        className={styles.imageContainer}
+                        sx={{
+                          height: "13em",
+                          width: "13em",
+                          borderRadius: "10px",
+                          backgroundColor: "red",
+                          padding: "10px",
+                          flex: "0 0 auto", // Fixed width, does not shrink/grow
+                        }}
+                        image={order.productId.imgURL}
+                        title={order.productId.name}
                       />
-                      <div className={styles.orderDetails}>
-                        <div className={styles.name}>
+
+                      {/* Product Details - Takes all remaining space */}
+                      <CardContent sx={{ flex: "1", minWidth: 0 }}>
+                        <Typography gutterBottom variant="h5">
                           {order.productId.name}
-                        </div>
-                        <div className={styles.description}>
+                        </Typography>
+                        <Typography
+                          className={styles.description}
+                          variant="body2"
+                          sx={{
+                            display: "-webkit-box",
+                            WebkitBoxOrient: "vertical",
+                            WebkitLineClamp: 2, // Limits to 2 lines
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
                           {order.productId.description}
-                        </div>
-                        <div className={styles.itemPrice}>
+                        </Typography>
+                        <Typography
+                          className={styles.itemPrice}
+                          variant="body2"
+                          sx={{ fontSize: 25, mt: 1 }}
+                        >
                           ₹{order.productId.price}
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.date}>Delivered on 15</div>
-                  </div>
+                        </Typography>
+                        <HorizontalLinearStepper />
+                      </CardContent>
+
+                      {/* Delivery Details - Takes only necessary space */}
+                      {/* <CardContent
+                        sx={{
+                          flex: "0 0 auto",
+                          textAlign: "right",
+                          whiteSpace: "nowrap",
+                        }}
+                        >
+                        <Typography
+                          variant="body2"
+                          sx={{ fontSize: 15, mt: 1 }}
+                          >
+                          Delivered on 15
+                          </Typography>
+                          </CardContent> */}
+                    </Card>
+                  </>
+                  // <div
+                  //   className={styles.card}
+                  //   onClick={() => {
+                  //     getProductDetails(order.productId._id);
+                  //   }}
+                  // >
+                  //   <div className={styles.imageContainer}>
+                  //     <img
+                  //       src={
+                  //         order.productId.imgURL ||
+                  //         "https://via.placeholder.com/150"
+                  //       }
+                  //       alt=""
+                  //     />
+                  //     <div className={styles.orderDetails}>
+                  //       <div className={styles.name}>
+                  //         {order.productId.name}
+                  //       </div>
+                  //       <div className={styles.description}>
+                  //         {order.productId.description}
+                  //       </div>
+                  //       <div className={styles.itemPrice}>
+                  //         ₹{order.productId.price}
+                  //       </div>
+                  //     </div>
+                  //   </div>
+                  //   <div className={styles.date}>Delivered on 15</div>
+                  // </div>
                 );
               })}
           </div>

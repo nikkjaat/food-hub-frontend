@@ -326,7 +326,7 @@ export default function Cart() {
                         </li>
                       </ul>
 
-                      <Link to={"/address"}>
+                      <Link to={"/confirmorder"}>
                         <button
                           type="button"
                           className={`${styles.orderBtn} btn btn-lg btn-block`}

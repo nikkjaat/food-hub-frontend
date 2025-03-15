@@ -70,6 +70,7 @@
 .cardBody {
   display: flex;
   gap: 1em;
+  /* background: #c6adad; */
 }
 
 .imageContainer {

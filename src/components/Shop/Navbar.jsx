@@ -80,7 +80,7 @@ export default function Navbar(props) {
             food<span>H</span>ub
           </span>
           <button
-            style={{ backgroundColor: "white" }}
+            style={{ backgroundColor: "yellow" }}
             className="navbar-toggler primary-color"
             type="button"
             data-bs-toggle="collapse"

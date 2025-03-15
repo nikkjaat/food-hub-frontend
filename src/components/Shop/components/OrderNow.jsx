@@ -8,12 +8,13 @@ export default function OrderNow(props) {
   return (
     <>
       <Link
-        to={`/confirmorder?productId=${props.orderNow}&quantity=${props.quantity}`}>
+        to={`/confirmorder?productId=${props.orderNow}&quantity=${props.quantity}`}
+      >
         {/* <Button className={props.className}>{props.children}</Button> */}
         <div
-          style={{ height: "2.8em" }}
           className={`${props.className} ui vertical animated button`}
-          tabindex="0">
+          tabindex="0"
+        >
           <div className="hidden content">{props.children}</div>
           <div className="visible content">
             <FontAwesomeIcon icon={faBasketShopping} style={{ color: "red" }} />

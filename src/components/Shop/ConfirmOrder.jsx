@@ -13,15 +13,16 @@ export default function ConfirmOrder() {
   const authCtx = useContext(AuthContext);
   const query = new URLSearchParams(useLocation().search);
   const productId = query.get("productId");
-  const [quantity, setQuantity] = useState(1);
-  const [data, setData] = useState();
+  const [qty, setQty] = useState(1);
+  const [data, setData] = useState([]);
   const [addressId, setAddressId] = useState("");
   const [address, setAddress] = useState();
   const [changeAddress, setChangeAddress] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    setQuantity(parseInt(query.get("quantity")));
+    setQty(parseInt(query.get("quantity")));
   }, []);
 
   const getSingleAddress = async (id) => {
@@ -77,15 +78,74 @@ export default function ConfirmOrder() {
           },
         }
       );
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
-        setData(response.data);
+        setData([response.data]);
       }
     };
-    getProduct();
+    if (productId) {
+      getProduct();
+    }
   }, []);
 
-  console.log(addressId);
+  useEffect(() => {
+    if (data.length > 0) {
+      const total = data.reduce(
+        (acc, product) =>
+          acc + product.price * qty + (qty > 1 ? 0 : product.shippingCost),
+        0
+      );
+      setTotalAmount(total);
+    }
+  }, [data, qty]);
+
+  // console.log(data);
+  // console.log(totalAmount);
+
+  useEffect(() => {
+    const getCart = async () => {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BACKEND_URL}/getcartitem`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + authCtx.token,
+          },
+        }
+      );
+      // console.log(response.data.data);
+
+      if (response) {
+        setLoader(false);
+      }
+      if (response) {
+        setLoader(false);
+      }
+      // console.log(authCtx.refresh);
+      setData(response.data.data);
+    };
+
+    if (!productId) {
+      getCart();
+    }
+  }, [authCtx.refresh, qty]);
+
+  useEffect(() => {
+    if (data.length > 0 && !productId) {
+      const total = data.reduce(
+        (acc, item) => acc + item.productId.price * item.quantity,
+        0
+      );
+      setTotalAmount(total);
+    } else {
+      const total = data.reduce(
+        (acc, product) =>
+          acc + product.price * qty + (qty > 1 ? 0 : product.shippingCost),
+        0
+      );
+      setTotalAmount(total);
+    }
+  }, [data, qty]); // Dependencies ensure it updates when data or qty changes
 
   return (
     <>
@@ -137,55 +197,110 @@ export default function ConfirmOrder() {
               </div>
               <div className={styles.card}>
                 <h2>ORDER SUMMARY</h2>
-                <div className={styles.cardBody}>
-                  <div className={styles.imageContainer}>
-                    <img src={data && data.imgURL} alt="" />
-                    <div className={styles.quantityContainer}>
-                      <button
-                        onClick={() => {
-                          if (quantity > 1) {
-                            setQuantity(quantity - 1);
-                          }
-                        }}
-                      >
-                        <RemoveIcon />
-                      </button>
-                      <input type="text" readOnly value={quantity} />
-                      <button
-                        onClick={() => {
-                          if (quantity < 10) {
-                            setQuantity(quantity + 1);
-                          }
-                        }}
-                      >
-                        <AddIcon />
-                      </button>
-                    </div>
-                  </div>
-                  <div className={styles.itemDetails}>
-                    <h1>{data && data.name}</h1>
-                    <p>{data && data.description}</p>
-                    <h2>
-                      <CurrencyRupeeIcon />
-                      {data && data.price * quantity}
-                    </h2>
-                    <div className={styles.deliveryDetails}>
-                      Delivery in 2 days |{" "}
-                      <CurrencyRupeeIcon fontSize="small" />{" "}
-                      {data && data.shippingCost}
-                    </div>
-                  </div>
-                </div>
+                {Array.isArray(data) ? (
+                  data.map((item) => {
+                    const { productId, quantity } = item; // Extract productId and qty
+
+                    return (
+                      <div className={styles.cardBody} key={item.id}>
+                        <div className={styles.imageContainer}>
+                          <img
+                            src={productId ? productId.imgURL : item.imgURL}
+                            alt={productId ? productId.name : item.name}
+                          />
+                          <div className={styles.quantityContainer}>
+                            <button
+                              onClick={() => {
+                                if (qty && qty > 1) {
+                                  setQty(qty - 1);
+                                } else {
+                                  setData((prevData) =>
+                                    prevData.map((item) =>
+                                      item.productId === productId &&
+                                      item.quantity > 1
+                                        ? {
+                                            ...item,
+                                            quantity: item.quantity - 1,
+                                          }
+                                        : item
+                                    )
+                                  );
+                                }
+                              }}
+                              disabled={
+                                qty === 1 ||
+                                data.find(
+                                  (item) => item.productId === productId
+                                )?.quantity === 1
+                              }
+                            >
+                              <RemoveIcon />
+                            </button>
+
+                            <input
+                              type="text"
+                              readOnly
+                              value={qty ? qty : quantity}
+                            />
+                            <button
+                              onClick={() => {
+                                if (qty) {
+                                  setQty(qty + 1);
+                                } else {
+                                  setData((prevData) =>
+                                    prevData.map((item) =>
+                                      item.productId === productId
+                                        ? {
+                                            ...item,
+                                            quantity: (item.quantity || 1) + 1,
+                                          }
+                                        : item
+                                    )
+                                  );
+                                }
+                              }}
+                            >
+                              <AddIcon />
+                            </button>
+                          </div>
+                        </div>
+                        <div className={styles.itemDetails}>
+                          <h1>{productId ? productId.name : item.name}</h1>
+                          <p>
+                            {productId
+                              ? productId.description
+                              : item.description}
+                          </p>
+                          <h2>
+                            <CurrencyRupeeIcon />
+                            {productId
+                              ? productId.price * quantity
+                              : item.price * qty}
+                          </h2>
+                          <div className={styles.deliveryDetails}>
+                            Delivery in 2 days |{" "}
+                            <CurrencyRupeeIcon fontSize="small" />{" "}
+                            {productId
+                              ? productId.shippingCost
+                              : item.shippingCost}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div>No products found</div>
+                )}
               </div>
               <div className={styles.secondChildOfContainer1}>
-                <div>
+                {/* <div>
                   <h2>PRICE DETAILS</h2>
                   <hr />
                   <div>
                     <div>Price</div>
                     <div>
                       {" "}
-                      <CurrencyRupeeIcon /> {data && data.price * quantity}
+                      <CurrencyRupeeIcon /> {data && data.price * qty}
                     </div>
                   </div>
                   <div>
@@ -193,6 +308,7 @@ export default function ConfirmOrder() {
                     <div>
                       {" "}
                       <CurrencyRupeeIcon />
+                      {}
                       {data && data.shippingCost}
                     </div>
                   </div>
@@ -205,11 +321,11 @@ export default function ConfirmOrder() {
                       <strong>
                         {" "}
                         <CurrencyRupeeIcon />{" "}
-                        {data && data.price * quantity + data.shippingCost}
+                        {data && data.price * qty + data.shippingCost}
                       </strong>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className={styles.confirmOrderContainer}>
                 <div>
@@ -221,14 +337,10 @@ export default function ConfirmOrder() {
                     setLoader(true);
                   }}
                   productId={productId}
-                  quantity={quantity}
+                  qty={qty}
                   addressId={addressId}
                   shippingCost={data && data.shippingCost}
-                  amount={
-                    data &&
-                    data.price * quantity +
-                      (quantity == 1 ? data.shippingCost : 0)
-                  }
+                  amount={totalAmount}
                 >
                   Continue
                 </CashfreePayment>
@@ -243,7 +355,13 @@ export default function ConfirmOrder() {
                   <div>
                     {" "}
                     <CurrencyRupeeIcon />
-                    {data && data.price * quantity}
+                    {productId
+                      ? data?.map((data) => {
+                          return data.price * qty;
+                        })
+                      : data?.reduce((amount, item) => {
+                          return amount + item.productId.price * item.quantity;
+                        }, 0)}
                   </div>
                 </div>
                 <div>
@@ -251,9 +369,17 @@ export default function ConfirmOrder() {
                   <div>
                     {" "}
                     <CurrencyRupeeIcon />{" "}
-                    {data?.shippingCost > 0 && quantity == 1
-                      ? data.shippingCost
-                      : "Free"}
+                    {productId
+                      ? data?.map((item) => {
+                          return qty > 1 ? 0 : item.shippingCost;
+                        })
+                      : data?.reduce((amount, item) => {
+                          return (
+                            (item.quantity > 1
+                              ? ""
+                              : item.productId.shippingCost) + amount
+                          );
+                        }, 0)}
                     {/* <del> 40 </del>&nbsp; Free */}
                   </div>
                 </div>
@@ -265,10 +391,13 @@ export default function ConfirmOrder() {
                   <div>
                     <strong>
                       {" "}
-                      <CurrencyRupeeIcon />{" "}
-                      {data &&
-                        data.price * quantity +
-                          (quantity == 1 ? data.shippingCost : 0)}
+                      <CurrencyRupeeIcon />
+                      {totalAmount +
+                        (Array.isArray(data) && data?.length > 1
+                          ? 0
+                          : data?.length === 1 && data[0].quantity == 1
+                          ? data[0]?.productId?.shippingCost ?? 0
+                          : 0)}
                     </strong>
                   </div>
                 </div>

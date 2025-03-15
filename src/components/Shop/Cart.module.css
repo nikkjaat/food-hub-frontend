@@ -64,6 +64,7 @@ hr {
 .delANDbuyBtn {
   background-color: var(---secMainColor) !important;
   width: 6em;
+  /* height: 3em; */
 }
 
 .delANDbuyBtn * {
