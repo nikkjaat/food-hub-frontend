@@ -92,7 +92,7 @@ import AuthContext from "../../context/AuthContext";
 export default function CashfreePayment({
   amount,
   productId,
-  quantity,
+  qty: quantity,
   addressId,
   shippingCost,
 }) {
