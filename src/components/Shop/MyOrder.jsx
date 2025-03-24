@@ -5,6 +5,7 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
 import styles from "./MyOrder.module.css";
 import AuthContext from "../../context/AuthContext";
+import socket from "../../../SocketIO.js/Socketio";
 
 export default function MyOrder() {
   const authCtx = useContext(AuthContext);
@@ -16,6 +17,8 @@ export default function MyOrder() {
   const [order, setOrder] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterProduct, setFilterProduct] = useState(true);
+  const [filteredOrders, setFilteredOrders] = useState(order);
+  const [selectedStatuses, setSelectedStatuses] = useState([]);
 
   useEffect(() => {
     const session = async () => {
@@ -60,7 +63,7 @@ export default function MyOrder() {
           },
         }
       );
-      console.log(res.data.data);
+      // console.log(res.data.data);
       setOrder(res.data.data);
     } catch (error) {
       console.error(error);
@@ -68,17 +71,64 @@ export default function MyOrder() {
   };
 
   useEffect(() => {
-    getMyOrder();
+    getMyOrder(); // Initial call
   }, []);
 
   const getProductDetails = (id) => {
     navigate("/productdetails?productId=" + id);
   };
 
-  // **Filter orders based on search term**
-  const filteredOrders = order.filter((order) =>
-    order.productId.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    setFilteredOrders(
+      order.filter((o) =>
+        o.productId.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+  }, [searchTerm, order]);
+
+  // Function to filter by order status
+  const filterByStatus = (status) => {
+    setSelectedStatuses((prev) =>
+      prev.includes(status)
+        ? prev.filter((s) => s !== status)
+        : [...prev, status]
+    );
+  };
+
+  // console.log(order);
+
+  useEffect(() => {
+    console.log("📡 Listening for order status updates...");
+
+    socket.on("orderStatusUpdated", ({ orderId, status }) => {
+      console.log(`🔄 Order ${orderId} updated to ${status}`);
+
+      setOrder((prevOrders) =>
+        prevOrders.map((order) =>
+          order.orderId._id === orderId
+            ? { ...order, orderId: { ...order.orderId, orderStatus: status } }
+            : order
+        )
+      );
+    });
+
+    return () => {
+      socket.off("orderStatusUpdated");
+    };
+  }, []);
+
+  // Apply filtering when order status changes
+  useEffect(() => {
+    if (selectedStatuses.length === 0) {
+      setFilteredOrders(order);
+    } else {
+      setFilteredOrders(
+        order.filter((o) =>
+          selectedStatuses.includes(o.orderId.orderStatus.toLowerCase())
+        )
+      );
+    }
+  }, [selectedStatuses, order]);
 
   return (
     <div>
@@ -94,15 +144,47 @@ export default function MyOrder() {
               <div>Order Status</div>
               <div>
                 <div>
-                  <input type="checkbox" name="ontheway" id="ontheway" />
+                  <input
+                    onClick={(e) => {
+                      filterByStatus("preparing");
+                    }}
+                    type="checkbox"
+                    name="preparing"
+                    id="preparing"
+                  />
+                  <label htmlFor="preparing">Preparing</label>
+                </div>
+                <div>
+                  <input
+                    onClick={(e) => {
+                      filterByStatus("on the way");
+                    }}
+                    type="checkbox"
+                    name="ontheway"
+                    id="ontheway"
+                  />
                   <label htmlFor="ontheway">On the way</label>
                 </div>
                 <div>
-                  <input type="checkbox" name="delivered" id="delivered" />
+                  <input
+                    onClick={(e) => {
+                      filterByStatus("delivered");
+                    }}
+                    type="checkbox"
+                    name="delivered"
+                    id="delivered"
+                  />
                   <label htmlFor="delivered">Delivered</label>
                 </div>
                 <div>
-                  <input type="checkbox" name="cancelled" id="cancelled" />
+                  <input
+                    onClick={(e) => {
+                      filterByStatus("cancelled");
+                    }}
+                    type="checkbox"
+                    name="cancelled"
+                    id="cancelled"
+                  />
                   <label htmlFor="cancelled">Cancelled</label>
                 </div>
               </div>
@@ -160,7 +242,6 @@ export default function MyOrder() {
                     height: "13em",
                     width: "13em",
                     borderRadius: "10px",
-                    backgroundColor: "red",
                     padding: "10px",
                     flex: "0 0 auto",
                     cursor: "pointer",

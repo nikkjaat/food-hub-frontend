@@ -187,6 +187,12 @@ const states = [
     text: "Chhattisgarh",
     className: styles.optionTag,
   },
+  {
+    key: "Chandigarh",
+    value: "Chandigarh",
+    text: "Chandigarh",
+    className: styles.optionTag,
+  },
   { key: "Goa", value: "Goa", text: "Goa", className: styles.optionTag },
   {
     key: "Gujarat",

@@ -45,11 +45,12 @@
 .descriptionData {
   width: 100%;
   word-wrap: normal;
+  display: flex;
 }
 
 .imageContainer {
-  width: 60%;
-  height: fit-content;
+  width: 30rem;
+  height: 30rem;
   margin: 2em auto;
 }
 
@@ -115,10 +116,11 @@
   border: 3px solid var(---secMainColor);
   color: var(---primaryColor);
   font-weight: bold;
-  display: flex;
-  width: 10rem;
-  /* gap: 2rem; */
+  width: 10em;
+  height: 2.5em;
   margin: 1rem 0 !important;
+  border-radius: 0.3em;
+  transition: 0.2s;
 }
 
 .btn i,
@@ -127,8 +129,8 @@
 }
 
 .btn:hover {
-  border: 3px solid var(---secMainColor);
-  color: var(---secMainColor);
+  box-shadow: 9px 9px 16px 0 rgba(0, 0, 0, 0.2),
+    -9px -9px 16px 0 rgba(255, 255, 255, 0.2);
 }
 
 .title {
@@ -175,22 +177,21 @@
     display: grid;
   }
   .itemDetails .imageContainer {
-    /* background-color: aliceblue !important; */
     margin: 0 auto;
   }
 
   .descriptionData {
     width: 100%;
-    /* background-color: aliceblue; */
-    font-size: 1em;
-  }
-
-  .description {
-    font-size: 1em;
+    display: grid;
   }
 
   .ulList {
     padding: 0;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   @media screen and (max-width: 522px) {
@@ -198,6 +199,12 @@
       width: 100%;
       height: fit-content;
       margin: 2em auto;
+    }
+
+    .descriptionData {
+      width: 100%;
+      word-wrap: normal;
+      display: grid;
     }
 
     .ulList {
@@ -214,6 +221,11 @@
       color: var(---secMainColor);
       font-weight: bold;
       font-size: 2rem;
+    }
+
+    .btn {
+      width: 100%;
+      margin: 0.5em 0 !important;
     }
   }
 }

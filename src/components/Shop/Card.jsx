@@ -10,7 +10,6 @@ export default function Card(props) {
   const authCtx = useContext(AuthContext);
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState(1);
-
   useEffect(() => {
     const getPrice = () => {
       const price = props.admin

@@ -111,6 +111,16 @@ export default function Navbar(props) {
                       Add Product
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/admin/neworder">
+                      New Order
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/admin/delivered">
+                      Delivered
+                    </Link>
+                  </li>
                 </>
               )}
             </ul>

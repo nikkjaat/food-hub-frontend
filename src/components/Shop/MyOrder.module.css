@@ -13,11 +13,10 @@
   backdrop-filter: blur(8px) brightness(0.8);
   padding-bottom: 1em;
   border-radius: 0.3em;
-  max-height: 100vh; /* Ensures it fits within the viewport */
-  overflow: hidden; /* Disables scrolling */
-  position: sticky; /* Keeps it in place while scrolling */
-  top: 6em; /* Distance from the top */
-  z-index: 1; /* Allows it to be on top of other elements */
+  max-height: 100vh;
+  overflow: hidden;
+  position: sticky;
+  z-index: 1;
 }
 
 .heading {

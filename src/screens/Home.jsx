@@ -12,9 +12,9 @@ import MyCarousel from "../components/Shop/components/MyCarousel";
 import AdPage from "../components/Shop/AdPage";
 
 export default function Home(props) {
-  const queryString = useLocation().search;
   const authCtx = useContext(AuthContext);
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [loader, setLoader] = useState(true);
 
   const getProducts = async () => {
@@ -46,14 +46,15 @@ export default function Home(props) {
   // ✅ Filter products based on search input
   useEffect(() => {
     if (!props.filterProduct || props.filterProduct.trim() === "") {
-      getProducts();
+      setFilteredProducts(products);
     } else {
-      const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(props.filterProduct.toLowerCase())
+      setFilteredProducts(
+        products.filter((product) =>
+          product.name.toLowerCase().includes(props.filterProduct.toLowerCase())
+        )
       );
-      setProducts(filteredProducts);
     }
-  }, [props.filterProduct]);
+  }, [props.filterProduct, products]);
 
   return (
     <>
@@ -79,7 +80,7 @@ export default function Home(props) {
         <Loader />
       ) : (
         <div className={`${styles.cardContainer}`}>
-          {products.map((product) => (
+          {filteredProducts?.map((product) => (
             <Card products={product} key={product._id} />
           ))}
         </div>

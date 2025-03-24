@@ -6,6 +6,7 @@ import AlertBox from "./components/AlertBox/AlertBox";
 import ProtectedRoute from "./util/ProtectedRoute";
 import MyOrder from "./components/Shop/MyOrder";
 import Navbar from "./components/Shop/Navbar";
+import NewOrder from "./components/Shop/NewOrder";
 
 const Home = lazy(() => import("./screens/Home"));
 const Login = lazy(() => import("./screens/Login"));
@@ -140,6 +141,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <MyOrder />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/neworder"
+              element={
+                <ProtectedRoute>
+                  <NewOrder />
                 </ProtectedRoute>
               }
             />
