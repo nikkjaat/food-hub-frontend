@@ -16,6 +16,7 @@
   max-height: 100vh;
   overflow: hidden;
   position: sticky;
+  top: 6em;
   z-index: 1;
 }
 

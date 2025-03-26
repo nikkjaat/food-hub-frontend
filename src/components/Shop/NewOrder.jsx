@@ -12,7 +12,19 @@ export default function NewOrder() {
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
+  const [filterProduct, setFilterProduct] = useState(true);
+
   const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setFilterProduct(window.innerWidth > 872.5);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const fetchOrders = async () => {
     try {
@@ -80,7 +92,7 @@ export default function NewOrder() {
       if (order) {
         sendNotification(order);
       }
-      setOrders((prevOrders) => [order, ...prevOrders]);
+      setOrders((prevOrders) => [...prevOrders, order]);
     });
 
     return () => {
@@ -91,14 +103,20 @@ export default function NewOrder() {
 
   const sendNotification = (order) => {
     if (Notification.permission === "granted") {
-      let notification = new Notification("📦 New Order Received", {
-        body: `Order from ${order.userId.name}, Status: ${order.orderStatus}`,
-        icon: "https://via.placeholder.com/150",
-        tag: order._id,
-      });
+      let notification = new Notification(
+        `📦 New Order Received (${order.productId.name})`,
+        {
+          body: `Order from ${order.userId.name}, Status: ${order.orderStatus}`,
+          icon: order.productId.imgURL,
+          tag: order._id,
+        }
+      );
 
       notification.onclick = () => {
-        window.open(`https://yourwebsite.com/orders/${order._id}`, "_blank");
+        window.open(
+          `${import.meta.env.VITE_FRONTEND_URL}/admin/neworder`,
+          "_blank"
+        );
       };
     }
   };
@@ -141,135 +159,149 @@ export default function NewOrder() {
   };
 
   return (
-    <div style={{ margin: "5em 1em 1em", display: "flex" }}>
-      <div className={styles.filterBox} style={{ margin: "1em 0" }}>
-        <div className={styles.heading}>Filters</div>
-        <hr />
-        <div>
-          <div className={styles.orderstatus}>
-            <div>Order Status</div>
-            <div>
-              {[
-                "Requests",
-                "Preparing",
-                "On the way",
-                "Delivered",
-                "Cancelled",
-              ].map((status) => (
-                <div key={status}>
-                  <input
-                    onChange={() => handleStatusChange(status)}
-                    type="checkbox"
-                    id={status}
-                  />
-                  <label htmlFor={status}>
-                    {status.charAt(0).toUpperCase() +
-                      status.slice(1).toLowerCase()}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </div>
+    <div>
+      <div className={styles.container}>
+        <div
+          style={{ height: filterProduct ? "100%" : "4em" }}
+          className={styles.filterBox}
+        >
+          <div className={styles.heading}>Filters</div>
           <hr />
-          <div className={styles.orderTime}>
-            <div>Order Time</div>
-            <div>
-              {["Today", "Last Week", "Last Month"].map((time) => (
-                <div key={time}>
-                  <input type="checkbox" id={time.toLowerCase()} />
-                  <label htmlFor={time.toLowerCase()}>{time}</label>
-                </div>
-              ))}
+          <div>
+            <div className={styles.orderstatus}>
+              <div>Order Status</div>
+              <div>
+                {[
+                  "Requests",
+                  "Preparing",
+                  "On the way",
+                  "Delivered",
+                  "Cancelled",
+                ].map((status) => (
+                  <div key={status}>
+                    <input
+                      onChange={() => handleStatusChange(status)}
+                      type="checkbox"
+                      id={status}
+                    />
+                    <label htmlFor={status}>
+                      {status.charAt(0).toUpperCase() +
+                        status.slice(1).toLowerCase()}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <hr />
+            <div className={styles.orderTime}>
+              <div>Order Time</div>
+              <div>
+                {["Today", "Last Week", "Last Month"].map((time) => (
+                  <div key={time}>
+                    <input type="checkbox" id={time.toLowerCase()} />
+                    <label htmlFor={time.toLowerCase()}>{time}</label>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.filterIcon}>
-          <TuneIcon />
-        </div>
-      </div>
-
-      <div style={{ width: "100%" }}>
-        {filteredOrders.map((order, index) => (
-          <Card
-            key={index}
-            sx={{
-              backgroundColor: "transparent",
-              padding: "1em",
-              margin: "1em",
-              backdropFilter: "blur(8px)",
-              display: "flex",
+          <div
+            onClick={() => {
+              setFilterProduct(!filterProduct);
             }}
+            className={styles.filterIcon}
           >
-            <CardMedia
-              sx={{
-                minWidth: "10em",
-                height: "10rem",
-                mr: "2em",
-                borderRadius: ".2em",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
-              }}
-            >
-              <img
-                src={
-                  order.productId?.imgURL || "https://via.placeholder.com/150"
-                }
-                alt="Product"
-                style={{
-                  width: "10em",
-                  height: "100%",
-                  objectFit: "cover",
+            <TuneIcon />
+          </div>
+        </div>
+
+        <div style={{ width: "100%" }}>
+          {filteredOrders
+            .slice()
+            .reverse()
+            .map((order, index) => (
+              <Card
+                key={index}
+                sx={{
+                  backgroundColor: "transparent",
+                  padding: "1em",
+                  margin: "1em",
+                  backdropFilter: "blur(8px)",
+                  display: "flex",
                 }}
-              />
-            </CardMedia>
-            <Box sx={{ flex: "auto", display: "grid", gap: ".4em" }}>
-              <Typography variant="h6">
-                {order.productId?.name || "Product"}
-              </Typography>
-              <Typography variant="body1">
-                Status: {order.orderStatus}
-              </Typography>
-              <Typography variant="body1">
-                {order.addressId?.name || "Name"}
-              </Typography>
-              <Typography variant="body1">
-                {order.addressId?.houseNo || "House No"},{" "}
-                {order.addressId?.street || "Street"},{" "}
-                {order.addressId?.city || "City"},{" "}
-                {order.addressId?.state || "State"},{" "}
-                {order.addressId?.contactNo || "Contact No"},{" "}
-                {order.addressId?.country || "Country"},{" "}
-                {order.addressId?.pincode || "Pincode"}
-              </Typography>
-              <Stack
-                className="buttons"
-                mt={1}
-                direction="row"
-                spacing={2}
-                style={{ display: order.hideButtons ? "none" : "flex" }}
               >
-                <Button
-                  onClick={(e) => requestAccepted(e, order._id)}
-                  color="success"
-                  variant="contained"
+                <CardMedia
+                  sx={{
+                    minWidth: "10em",
+                    height: "10rem",
+                    mr: "2em",
+                    borderRadius: ".2em",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    overflow: "hidden",
+                  }}
                 >
-                  {order.orderStatus === "Pending"
-                    ? "Accept"
-                    : "Out for Delivery"}
-                </Button>
-                <Button
-                  onClick={() => requestAccepted("Cancelled")}
-                  variant="contained"
-                  color="error"
-                >
-                  Reject
-                </Button>
-              </Stack>
-            </Box>
-          </Card>
-        ))}
+                  <img
+                    src={
+                      order.productId?.imgURL ||
+                      "https://via.placeholder.com/150"
+                    }
+                    alt="Product"
+                    style={{
+                      width: "10em",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </CardMedia>
+                <Box sx={{ flex: "auto", display: "grid", gap: ".4em" }}>
+                  <Typography variant="h6">
+                    {order.productId?.name || "Product"}
+                  </Typography>
+                  <Typography variant="body1">
+                    Status: {order.orderStatus}
+                  </Typography>
+                  <Typography variant="body1">
+                    {order.addressId?.name || "Name"}
+                  </Typography>
+                  <Typography variant="body1">
+                    {order.addressId?.houseNo || "House No"},{" "}
+                    {order.addressId?.street || "Street"},{" "}
+                    {order.addressId?.city || "City"},{" "}
+                    {order.addressId?.state || "State"},{" "}
+                    {order.addressId?.contactNo || "Contact No"},{" "}
+                    {order.addressId?.country || "Country"},{" "}
+                    {order.addressId?.pincode || "Pincode"}
+                  </Typography>
+                  <Stack
+                    className="buttons"
+                    mt={1}
+                    direction="row"
+                    spacing={2}
+                    style={{ display: order.hideButtons ? "none" : "flex" }}
+                  >
+                    <Button
+                      onClick={(e) => requestAccepted(e, order._id)}
+                      color="success"
+                      variant="contained"
+                    >
+                      {order.orderStatus === "Requests"
+                        ? "Accept"
+                        : "Out for Delivery"}
+                    </Button>
+                    <Button
+                      onClick={() => requestAccepted("Cancelled")}
+                      variant="contained"
+                      color="error"
+                    >
+                      Reject
+                    </Button>
+                  </Stack>
+                </Box>
+              </Card>
+            ))}
+        </div>
       </div>
     </div>
   );
