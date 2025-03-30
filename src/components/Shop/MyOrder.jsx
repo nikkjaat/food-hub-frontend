@@ -140,7 +140,7 @@ export default function MyOrder() {
           <div className={styles.heading}>Filters</div>
           <hr />
           <div>
-            <div className={styles.orderstatus}>
+            {/* <div className={styles.orderstatus}>
               <div>Order Status</div>
               <div>
                 <div>
@@ -188,6 +188,51 @@ export default function MyOrder() {
                   <label htmlFor="cancelled">Cancelled</label>
                 </div>
               </div>
+            </div> */}
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div
+                style={{
+                  margin: "1em",
+                  fontSize: "1em",
+                  textTransform: "uppercase",
+                  color: "var(---yellowColor)",
+                  fontWeight: "bold",
+                }}
+              >
+                Order Status
+              </div>
+              {[
+                "pending",
+                "preparing",
+                "on the way",
+                "delivered",
+                "cancelled",
+              ].map((status) => (
+                <div
+                  style={{
+                    display: "flex",
+                    margin: ".7em 1em",
+                    gap: "1em",
+                    fontSize: "1.1em",
+                  }}
+                  key={status}
+                >
+                  <input
+                    style={{ transform: "scale(1.35)" }}
+                    id={status}
+                    name={status}
+                    type="checkbox"
+                    checked={selectedStatuses.includes(status)}
+                    onChange={() => filterByStatus(status)}
+                  />
+                  <label
+                    style={{ cursor: "pointer", width: "85%" }}
+                    htmlFor={status}
+                  >
+                    {status.charAt(0).toUpperCase() + status.slice(1)}
+                  </label>
+                </div>
+              ))}
             </div>
             <hr />
             <div className={styles.orderTime}>
@@ -222,63 +267,92 @@ export default function MyOrder() {
           </div>
 
           {filteredOrders.length > 0 ? (
-            filteredOrders.map((order) => (
-              <Card
-                key={order._id}
-                className={styles.card}
-                sx={{
-                  maxWidth: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "transparent",
-                  marginBottom: "10px",
-                  backdropFilter: "blur(10px)",
-                }}
-              >
-                <CardMedia
-                  onClick={() => getProductDetails(order.productId._id)}
-                  className={styles.imageContainer}
+            filteredOrders
+              .slice()
+              .reverse()
+              .map((order) => (
+                <Card
+                  key={order._id}
+                  className={styles.card}
                   sx={{
-                    height: "13em",
-                    width: "13em",
-                    borderRadius: "10px",
-                    padding: "10px",
-                    flex: "0 0 auto",
-                    cursor: "pointer",
+                    maxWidth: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    backgroundColor: "transparent",
+                    marginBottom: "10px",
+                    backdropFilter: "blur(10px)",
                   }}
-                  image={order.productId.imgURL}
-                  title={order.productId.name}
-                />
-                <CardContent sx={{ flex: "1", minWidth: 0 }}>
-                  <Typography className={styles.name} gutterBottom variant="h5">
-                    {order.productId.name}
-                  </Typography>
-                  <Typography
-                    className={styles.description}
-                    variant="body2"
+                >
+                  <CardMedia
+                    onClick={() => getProductDetails(order.productId._id)}
+                    className={styles.imageContainer}
                     sx={{
-                      display: "-webkit-box",
-                      WebkitBoxOrient: "vertical",
-                      WebkitLineClamp: 2,
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
+                      height: "13em",
+                      width: "13em",
+                      borderRadius: "10px",
+                      padding: "10px",
+                      flex: "0 0 auto",
+                      cursor: "pointer",
                     }}
-                  >
-                    {order.productId.description}
-                  </Typography>
-                  <Typography
-                    className={styles.itemPrice}
-                    variant="body2"
-                    sx={{ fontSize: 25, mt: 1 }}
-                  >
-                    ₹{order.productId.price}
-                  </Typography>
-                  <Typography sx={{ fontSize: ".8em", mt: 0.5 }}>
-                    {order.orderId.orderStatus}
-                  </Typography>
-                </CardContent>
-              </Card>
-            ))
+                    image={order.productId.imgURL}
+                    title={order.productId.name}
+                  />
+                  <CardContent sx={{ flex: "1", minWidth: 0 }}>
+                    <Typography
+                      className={styles.name}
+                      gutterBottom
+                      variant="h5"
+                    >
+                      {order.productId.name}
+                    </Typography>
+                    <Typography
+                      className={styles.description}
+                      variant="body2"
+                      sx={{
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 2,
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {order.productId.description}
+                    </Typography>
+                    <Typography
+                      className={styles.itemPrice}
+                      variant="body2"
+                      sx={{ fontSize: 25, mt: 1 }}
+                    >
+                      ₹{order.productId.price}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "1em",
+                        mt: 0.5,
+                        fontWeight: "bold",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      Status&nbsp;: &nbsp;
+                      <Typography
+                        sx={{
+                          color:
+                            order.orderId.orderStatus === "Cancelled"
+                              ? "red"
+                              : "" || order.orderId.orderStatus === "Delivered"
+                              ? "green"
+                              : "",
+                          fontWeight: "bold",
+                          fontSize: "100%",
+                        }}
+                      >
+                        {order.orderId.orderStatus}
+                      </Typography>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))
           ) : (
             <Typography
               className={styles.noOrdersFound}

@@ -38,21 +38,14 @@ export default function NewOrder() {
         }
       );
 
-      // Process orders and add "hideButtons" flag
       const newOrders = res.data.order.map((orderObj) => ({
         ...orderObj.order,
-        hideButtons: orderObj.order.orderStatus === "On the way",
+        hideButtons: ["On the way", "Delivered", "Cancelled"].includes(
+          orderObj.order.orderStatus
+        ),
       }));
 
-      setOrders((prevOrders) => {
-        const uniqueOrders = newOrders.filter(
-          (newOrder) =>
-            !prevOrders.some(
-              (existingOrder) => existingOrder._id === newOrder._id
-            )
-        );
-        return [...uniqueOrders, ...prevOrders];
-      });
+      setOrders(newOrders);
     } catch (error) {
       console.error("❌ Error fetching orders:", error);
     }
@@ -121,13 +114,15 @@ export default function NewOrder() {
     }
   };
 
-  const requestAccepted = async (e, id) => {
+  const requestAccepted = async (e, id, status) => {
     let newStatus = "";
 
-    if (e.target.textContent === "Accept") {
+    if (e.target.textContent === "Approve") {
       newStatus = "Preparing";
     } else if (e.target.textContent === "Out for Delivery") {
       newStatus = "On the way";
+    } else {
+      newStatus = "Cancelled";
     }
 
     if (newStatus) {
@@ -149,7 +144,10 @@ export default function NewOrder() {
               ? {
                   ...order,
                   orderStatus: newStatus,
-                  hideButtons: newStatus === "On the way",
+                  hideButtons:
+                    newStatus === "On the way" ||
+                    newStatus === "Cancelled" ||
+                    newStatus === "Delivered",
                 }
               : order
           )
@@ -172,7 +170,7 @@ export default function NewOrder() {
               <div>Order Status</div>
               <div>
                 {[
-                  "Requests",
+                  "Pending",
                   "Preparing",
                   "On the way",
                   "Delivered",
@@ -259,8 +257,20 @@ export default function NewOrder() {
                   <Typography variant="h6">
                     {order.productId?.name || "Product"}
                   </Typography>
-                  <Typography variant="body1">
-                    Status: {order.orderStatus}
+                  <Typography sx={{ display: "flex" }} variant="body1">
+                    Status &nbsp;: &nbsp;
+                    <Typography
+                      sx={{
+                        color:
+                          order.orderStatus == "Cancelled"
+                            ? "red"
+                            : "" || order.orderStatus == "Delivered"
+                            ? "green"
+                            : "",
+                      }}
+                    >
+                      {order.orderStatus}
+                    </Typography>
                   </Typography>
                   <Typography variant="body1">
                     {order.addressId?.name || "Name"}
@@ -286,12 +296,12 @@ export default function NewOrder() {
                       color="success"
                       variant="contained"
                     >
-                      {order.orderStatus === "Requests"
-                        ? "Accept"
+                      {order.orderStatus === "Pending"
+                        ? "Approve"
                         : "Out for Delivery"}
                     </Button>
                     <Button
-                      onClick={() => requestAccepted("Cancelled")}
+                      onClick={(e) => requestAccepted(e, order._id)}
                       variant="contained"
                       color="error"
                     >

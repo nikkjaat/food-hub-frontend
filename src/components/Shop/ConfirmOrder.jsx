@@ -278,7 +278,7 @@ export default function ConfirmOrder() {
                               : item.price * qty}
                           </h2>
                           <div className={styles.deliveryDetails}>
-                            Delivery in 2 days |{" "}
+                            Delivery in 15 min |{" "}
                             <CurrencyRupeeIcon fontSize="small" />{" "}
                             {productId
                               ? productId.shippingCost
@@ -292,41 +292,7 @@ export default function ConfirmOrder() {
                   <div>No products found</div>
                 )}
               </div>
-              <div className={styles.secondChildOfContainer1}>
-                {/* <div>
-                  <h2>PRICE DETAILS</h2>
-                  <hr />
-                  <div>
-                    <div>Price</div>
-                    <div>
-                      {" "}
-                      <CurrencyRupeeIcon /> {data && data.price * qty}
-                    </div>
-                  </div>
-                  <div>
-                    <div>Delivery Charges</div>
-                    <div>
-                      {" "}
-                      <CurrencyRupeeIcon />
-                      {}
-                      {data && data.shippingCost}
-                    </div>
-                  </div>
-                  <hr />
-                  <div>
-                    <div>
-                      <strong>Total Payable</strong>
-                    </div>
-                    <div>
-                      <strong>
-                        {" "}
-                        <CurrencyRupeeIcon />{" "}
-                        {data && data.price * qty + data.shippingCost}
-                      </strong>
-                    </div>
-                  </div>
-                </div> */}
-              </div>
+              <div className={styles.secondChildOfContainer1}></div>
               <div className={styles.confirmOrderContainer}>
                 <div>
                   Order confirmation email will be sent to
