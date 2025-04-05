@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
@@ -6,6 +6,7 @@ import TuneIcon from "@mui/icons-material/Tune";
 import styles from "./MyOrder.module.css";
 import AuthContext from "../../context/AuthContext";
 import socket from "../../../SocketIO.js/Socketio";
+import OrderDetails from "./components/OrderDetails";
 
 export default function MyOrder() {
   const authCtx = useContext(AuthContext);
@@ -19,6 +20,9 @@ export default function MyOrder() {
   const [filterProduct, setFilterProduct] = useState(true);
   const [filteredOrders, setFilteredOrders] = useState(order);
   const [selectedStatuses, setSelectedStatuses] = useState([]);
+  const [showPopup, setShowPopup] = useState(null); // holds the clicked card's id or index
+  const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 });
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const session = async () => {
@@ -52,6 +56,30 @@ export default function MyOrder() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    let filtered = order;
+
+    // Filter by selected statuses
+    if (selectedStatuses.length > 0) {
+      filtered = filtered.filter((o) =>
+        selectedStatuses.includes(o.orderId.orderStatus.toLowerCase())
+      );
+    }
+
+    // Filter by search term (search in product name and type)
+    if (searchTerm.trim()) {
+      filtered = filtered.filter(
+        (o) =>
+          o.productId.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          o.productId.categoryName
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredOrders(filtered);
+  }, [selectedStatuses, order, searchTerm]);
+
   const getMyOrder = async () => {
     try {
       const res = await axios.get(
@@ -77,14 +105,6 @@ export default function MyOrder() {
   const getProductDetails = (id) => {
     navigate("/productdetails?productId=" + id);
   };
-
-  useEffect(() => {
-    setFilteredOrders(
-      order.filter((o) =>
-        o.productId.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-  }, [searchTerm, order]);
 
   // Function to filter by order status
   const filterByStatus = (status) => {
@@ -271,87 +291,90 @@ export default function MyOrder() {
               .slice()
               .reverse()
               .map((order) => (
-                <Card
-                  key={order._id}
-                  className={styles.card}
-                  sx={{
-                    maxWidth: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    backgroundColor: "transparent",
-                    marginBottom: "10px",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  <CardMedia
-                    onClick={() => getProductDetails(order.productId._id)}
-                    className={styles.imageContainer}
+                <>
+                  <Card
+                    key={order._id}
+                    className={styles.card}
                     sx={{
-                      height: "13em",
-                      width: "13em",
-                      borderRadius: "10px",
-                      padding: "10px",
-                      flex: "0 0 auto",
-                      cursor: "pointer",
+                      maxWidth: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "transparent",
+                      marginBottom: "10px",
+                      backdropFilter: "blur(10px)",
                     }}
-                    image={order.productId.imgURL}
-                    title={order.productId.name}
-                  />
-                  <CardContent sx={{ flex: "1", minWidth: 0 }}>
-                    <Typography
-                      className={styles.name}
-                      gutterBottom
-                      variant="h5"
-                    >
-                      {order.productId.name}
-                    </Typography>
-                    <Typography
-                      className={styles.description}
-                      variant="body2"
+                  >
+                    <CardMedia
+                      className={styles.imageContainer}
+                      onClick={() => getProductDetails(order.productId._id)}
                       sx={{
-                        display: "-webkit-box",
-                        WebkitBoxOrient: "vertical",
-                        WebkitLineClamp: 2,
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
+                        height: "13em",
+                        width: "13em",
+                        borderRadius: "10px",
+                        padding: "10px",
+                        flex: "0 0 auto",
+                        cursor: "pointer",
                       }}
-                    >
-                      {order.productId.description}
-                    </Typography>
-                    <Typography
-                      className={styles.itemPrice}
-                      variant="body2"
-                      sx={{ fontSize: 25, mt: 1 }}
-                    >
-                      ₹{order.productId.price}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: "1em",
-                        mt: 0.5,
-                        fontWeight: "bold",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      Status&nbsp;: &nbsp;
+                      image={order.productId.imgURL}
+                      title={order.productId.name}
+                    />
+                    <CardContent sx={{ flex: "1", minWidth: 0 }}>
                       <Typography
+                        className={styles.name}
+                        gutterBottom
+                        variant="h5"
+                      >
+                        {order.productId.name}
+                      </Typography>
+                      <Typography
+                        className={styles.description}
+                        variant="body2"
                         sx={{
-                          color:
-                            order.orderId.orderStatus === "Cancelled"
-                              ? "red"
-                              : "" || order.orderId.orderStatus === "Delivered"
-                              ? "green"
-                              : "",
-                          fontWeight: "bold",
-                          fontSize: "100%",
+                          display: "-webkit-box",
+                          WebkitBoxOrient: "vertical",
+                          WebkitLineClamp: 2,
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
                         }}
                       >
-                        {order.orderId.orderStatus}
+                        {order.productId.description}
                       </Typography>
-                    </Typography>
-                  </CardContent>
-                </Card>
+                      <Typography
+                        className={styles.itemPrice}
+                        variant="body2"
+                        sx={{ fontSize: 25, mt: 1 }}
+                      >
+                        ₹{order.productId.price}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: "1em",
+                          mt: 0.5,
+                          fontWeight: "bold",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        Status&nbsp;: &nbsp;
+                        <Typography
+                          sx={{
+                            color:
+                              order.orderId.orderStatus === "Cancelled"
+                                ? "red"
+                                : "" ||
+                                  order.orderId.orderStatus === "Delivered"
+                                ? "green"
+                                : "",
+                            fontWeight: "bold",
+                            fontSize: "100%",
+                          }}
+                        >
+                          {order.orderId.orderStatus}
+                        </Typography>
+                      </Typography>
+                    </CardContent>
+                  </Card>{" "}
+                </>
               ))
           ) : (
             <Typography
