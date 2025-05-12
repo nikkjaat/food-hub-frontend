@@ -32,6 +32,7 @@ export const AuthContextProvider = (props) => {
     // console.log(authToken);
     localStorage.setItem("token", authToken);
     setIsLoggedIn(true);
+    refreshData();
   };
 
   const logoutHandler = () => {
@@ -76,7 +77,8 @@ export const AuthContextProvider = (props) => {
         alertBoxText,
         alertBoxHandler,
         userId,
-      }}>
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );
