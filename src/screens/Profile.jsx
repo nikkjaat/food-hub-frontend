@@ -156,7 +156,7 @@ export default function Profile({ setDisplay, user, logoutHandler }) {
           <ListItemIcon>
             <Settings />
           </ListItemIcon>
-          <Link to={"/myorder"}>My Order</Link>
+          <Link to={"/myorder"}>View Orders</Link>
         </MenuItem>
         <MenuItem sx={fontStyle} onClick={handleClose}>
           <ListItemIcon>

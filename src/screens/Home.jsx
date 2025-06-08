@@ -57,11 +57,7 @@ export default function Home(props) {
   }, [props.filterProduct, products]);
 
   return (
-    <>
-      <div>
-        {/* <Navbar filterProduct={filterProduct} refresh={authCtx.refresh} /> */}
-      </div>
-
+    <div className={styles.home}>
       <div className={styles.showCase}>
         <div className={styles.text}>
           <p>
@@ -89,6 +85,6 @@ export default function Home(props) {
       <div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 }

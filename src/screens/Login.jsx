@@ -33,7 +33,6 @@ export default function Login() {
         password: password.current.value,
       }
     );
-    console.log(response);
     const json = await response.data;
 
     if (json.success) {
@@ -48,7 +47,6 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
       <div
         style={{
           display: "flex",
@@ -56,11 +54,13 @@ export default function Login() {
           justifyContent: "center",
           paddingTop: "5rem",
           alignItems: "center",
-        }}>
+        }}
+      >
         <form
           onSubmit={loginSubmit}
           className={`p-3 rounded ${styles.form}`}
-          action="/">
+          action="/"
+        >
           <div className="mb-3">
             <label for="exampleInputEmail1" className="form-label">
               Email address

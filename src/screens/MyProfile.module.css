@@ -1,6 +1,6 @@
 .card {
   position: absolute;
-  top: 5em;
+  top: 0em;
   right: 0.3em;
   width: 20rem;
   transition: 0.3s;
@@ -96,9 +96,9 @@
   /* background-color: aqua; */
 }
 
-@media screen and (max-width: 991.5px) {
+/* @media screen and (max-width: 780.5px) {
   .card {
-    top: 14.7em !important;
+    top: 1.7em !important;
     right: 0;
   }
-}
+} */

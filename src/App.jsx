@@ -7,6 +7,7 @@ import ProtectedRoute from "./util/ProtectedRoute";
 import MyOrder from "./components/Shop/MyOrder";
 import Navbar from "./components/Shop/Navbar";
 import NewOrder from "./components/Shop/NewOrder";
+import Loader from "./components/Shop/components/Loader/Loader";
 
 const Home = lazy(() => import("./screens/Home"));
 const Login = lazy(() => import("./screens/Login"));
@@ -49,7 +50,7 @@ function App() {
       {showAlert && <AlertBox />}
       <BrowserRouter>
         {<Navbar setFilterProduct={setFilterProduct} />}
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Home filterProduct={filterProduct} />} />
             <Route

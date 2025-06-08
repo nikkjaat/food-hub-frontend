@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./MyAddress.module.css";
-import Navbar from "./Navbar";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
-import NewAddress from "./NewAddress";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapLocation,
@@ -15,15 +13,15 @@ import EditButton from "./components/EditButton";
 import Footer from "./Footer";
 import styled from "styled-components";
 
-export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
+export default function MyAddress({ id, setChangeAddress, getSingleAddress }) {
   const query = new URLSearchParams(useLocation().search);
   const productId = query.get("productId");
   const quantity = query.get("quantity");
 
-  const navigate = useNavigate();
-  const [addressId, setAddressId] = useState();
+  const [addressId, setAddressId] = useState(id);
   const [address, setAddress] = useState([]);
   const [defaultAddress, setDefaultAddress] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState(id);
 
   const authCtx = useContext(AuthContext);
 
@@ -37,10 +35,12 @@ export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
         },
       }
     );
-    // console.log(response.data);
     setAddress(response.data.data.myAddress);
     setDefaultAddress(response.data.defaultAddress);
-    setAddressId(response.data.defaultAddress);
+    if (!addressId) {
+      setAddressId(response.data.defaultAddress);
+      setSelectedAddress(response.data.defaultAddress);
+    }
   };
 
   useEffect(() => {
@@ -60,11 +60,10 @@ export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
     if (response.status === 200) {
       getAddress();
     }
-    // authCtx.refreshData();
   };
 
   const editAddress = (addressId) => {
-    navigate(`/addaddress?addressId=${addressId}`);
+    window.location.href = `/addaddress?addressId=${addressId}`;
   };
 
   const makeDefaultAddress = async (addressId) => {
@@ -75,7 +74,6 @@ export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
         }/setdefaultaddress?addressId=${addressId}&userId=${authCtx.userId}`
       );
       if (res.status === 200) {
-        console.log();
         getAddress();
       }
     } catch (error) {
@@ -84,39 +82,37 @@ export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
   };
 
   const changeAddress = () => {
-    if (setChangeAddress) {
+    if (typeof setChangeAddress === 'function') {
       setChangeAddress(false);
-      getSingleAddress(addressId);
-    } else {
-      console.error("setChangeAddress is not defined");
+    }
+    if (typeof getSingleAddress === 'function' && selectedAddress) {
+      getSingleAddress(selectedAddress);
     }
   };
 
   return (
     <>
-      {/* <Navbar /> */}
-
       <div className={`${styles.container} field container`}>
-        <Link to={"/addaddress"}>
+        <Link to="/addaddress" state={{ fromConfirmOrder: true }}>
           <div
             className={`${styles.addNewAdd} ui vertical animated button`}
-            tabindex="0"
+            tabIndex="0"
           >
-            <div class="hidden content">
-              <i class="plus icon"></i>
+            <div className="hidden content">
+              <i className="plus icon"></i>
               <FontAwesomeIcon icon={faMapLocation} />
             </div>
-            <div class="visible content">Add New Address</div>
+            <div className="visible content">Add New Address</div>
           </div>
         </Link>
         {address.length > 0 ? (
           <div>
             {address.map((add) => {
-              // console.log(add)
               return (
                 <div
+                  key={add._id}
                   onClick={() => {
-                    setAddressId(add.addressId._id);
+                    setSelectedAddress(add.addressId._id);
                   }}
                   className={styles.addContainer}
                 >
@@ -127,17 +123,17 @@ export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
                   >
                     <input
                       type="radio"
-                      class="btn-radio"
+                      className="btn-radio"
                       id={add._id}
                       name="same"
                       checked={
-                        add.addressId._id === id || // Change this line
-                        addressId === add.addressId._id
+                        add.addressId._id === selectedAddress
                       }
+                      onChange={() => {}}
                     />
                     <label
                       className={`${styles.addressPrint} btn`}
-                      for={add._id}
+                      htmlFor={add._id}
                     >
                       <div>
                         <span style={{ color: "var(---secMainColor)" }}>
@@ -162,20 +158,23 @@ export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
                       >
                         <div className={styles.editDelBtn}>
                           <Delete
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.stopPropagation();
                               deleteAddress(add.addressId._id);
                             }}
                             className={styles.btn}
                           />
                           <EditButton
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.stopPropagation();
                               editAddress(add.addressId._id);
                             }}
                             className={styles.btn}
                           />
                         </div>
                         <ButtonStyle
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.stopPropagation();
                             makeDefaultAddress(add.addressId._id);
                           }}
                         >
@@ -218,19 +217,13 @@ export default function MyAddress({ setChangeAddress, getSingleAddress, id }) {
             No Address Found
           </div>
         )}
-        {/* <Link
-          to={`/payment/?addressId=${addressId}&productId=${productId}&quantity=${quantity}`}>
-          <Button onClick={submitAddress} className={styles.payBtn}>
-            Proceed to Pay
-          </Button>
-        </Link> */}
         <SaveButton onClick={changeAddress}>Save</SaveButton>
       </div>
-
       <Footer />
     </>
   );
 }
+
 const SaveButton = styled.button`
   background-color: #3498db;
   width: 100%;
