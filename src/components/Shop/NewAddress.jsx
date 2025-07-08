@@ -435,7 +435,7 @@ export default function Address() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className={`${styles.container} container`}>
         <form className="ui form" onSubmit={submitAddress}>
           <h4 className="ui dividing header">Shipping Information</h4>

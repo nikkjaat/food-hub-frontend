@@ -490,14 +490,10 @@ export default function Navbar(props) {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [visible, setVisible] = useState(true);
 
-  const controlNavbar = useCallback(() => {
-    if (typeof window !== "undefined") {
-      if (window.scrollY < 100) {
-        // Always show when near top
-        setVisible(true);
-        return;
-      }
+  // Add this inside your Navbar component, before the return statement
 
+  const controlNavbar = () => {
+    if (typeof window !== "undefined") {
       if (window.scrollY > lastScrollY) {
         // if scrolling down
         setVisible(false);
@@ -507,21 +503,16 @@ export default function Navbar(props) {
       }
       setLastScrollY(window.scrollY);
     }
-  }, [lastScrollY]);
+  };
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Debounce the scroll handler
-      setTimeout(controlNavbar, 100);
-    };
-
     if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", controlNavbar);
       return () => {
-        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("scroll", controlNavbar);
       };
     }
-  }, [controlNavbar]);
+  }, [lastScrollY]);
 
   // Set active nav based on current route
   useEffect(() => {

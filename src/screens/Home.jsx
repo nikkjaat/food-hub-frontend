@@ -1,12 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import Navbar from "../components/Shop/Navbar";
 import Card from "../components/Shop/Card";
-import Footer from "../components/Shop/Footer";
-import Carousele from "../components/Shop/Carousele";
 import styles from "./Home.module.css";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
-import { useLocation } from "react-router-dom";
 import Loader from "../components/Shop/components/Loader/Loader";
 import MyCarousel from "../components/Shop/components/MyCarousel";
 import AdPage from "../components/Shop/AdPage";
@@ -82,9 +78,9 @@ export default function Home(props) {
         </div>
       )}
 
-      <div>
+      {/* <div>
         <Footer />
-      </div>
+      </div> */}
     </div>
   );
 }

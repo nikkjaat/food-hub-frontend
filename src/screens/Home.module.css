@@ -5,10 +5,10 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: space-evenly;
+  padding-bottom: 2em;
 }
 
 .showCase {
-  /* background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2lzMTYwNjItaW1hZ2Uta3d2eWZrd3IuanBn.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
@@ -19,36 +19,7 @@
   height: fit-content;
 }
 
-/* .showCase::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: inherit;
-  background-size: inherit;
-  background-repeat: inherit;
-  filter: blur(3px) brightness(0.3);
-  z-index: 0;
-  transform: scale(1.05);
-  height: 43rem;
-}
-
-.showCase::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(36, 36, 36, 0.494);
-  z-index: -1;
-  pointer-events: none;
-} */
-
 .text {
-  /* position: absolute; */
   z-index: 1;
 }
 

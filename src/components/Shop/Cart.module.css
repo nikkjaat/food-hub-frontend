@@ -1,17 +1,12 @@
 .mainContainer {
-  /* background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2lzMTYwNjItaW1hZ2Uta3d2eWZrd3IuanBn.jpg"); */
   position: absolute;
   background-size: cover;
-  /* background-repeat: no-repeat; */
-  /* background-attachment: fixed; */
   width: 100%;
 }
 
 .container {
-  /* background-color: antiquewhite; */
   border: 2px solid var(---yellowColor);
-  margin: 6rem auto;
-  /* padding: 2rem; */
+  margin: 2rem auto;
   border-radius: 1rem;
 }
 
@@ -51,20 +46,17 @@ hr {
 }
 
 .singleCard {
-  /* background-color: aliceblue !important; */
   color: black !important;
 }
 
 .allProductDetails div:nth-child(1) {
   position: sticky !important;
   top: 6em !important;
-  /* background-color: var(---yellowColor); */
 }
 
 .delANDbuyBtn {
   background-color: var(---secMainColor) !important;
   width: 6em;
-  /* height: 3em; */
 }
 
 .delANDbuyBtn * {
@@ -98,11 +90,9 @@ hr {
   color: var(---primaryColor) !important;
   font-weight: bold;
   border: 2px solid var(---secMainColor) !important;
-  /* border-right: 2px solid var(---secMainColor) !important; */
 }
 
 .quantityBox .child {
-  /* background-color: var(---secMainColor); */
   border: 2px solid var(---secMainColor) !important;
 }
 
@@ -120,9 +110,7 @@ hr {
 }
 
 .orderBtn {
-  /* width: 10rem; */
   background-color: var(---secMainColor) !important;
-  /* margin-top: 4rem !important; */
   color: white;
 }
 

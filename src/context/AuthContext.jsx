@@ -1,6 +1,5 @@
 import { jwtDecode } from "jwt-decode";
 import { createContext, useMemo, useState } from "react";
-import { Navigate } from "react-router-dom";
 
 const AuthContext = createContext({
   refresh: false,

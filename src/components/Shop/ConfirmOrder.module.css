@@ -1,11 +1,12 @@
 .container {
-  margin: 5em 1em 1em;
+  margin: 1em 1em;
   padding: 1em;
   border: 2px solid yellow;
   display: flex;
   justify-content: space-between;
   gap: 1em;
   position: relative;
+  padding-bottom: 4em !important;
 }
 
 .firstChildOfContainer {
