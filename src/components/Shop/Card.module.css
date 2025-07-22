@@ -5,22 +5,50 @@
 .card {
   overflow: hidden;
   margin: 0 10px;
-  background-color: rgba(0, 0, 0, 0.322);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   min-width: 20rem;
   max-width: 20rem;
   display: flex;
   flex-wrap: nowrap;
   min-height: 28rem;
-  border-radius: 20em 20em 1em 1em;
-  min-width: calc(100% / 5);
-  backdrop-filter: blur(8px);
+  border-radius: var(--borderRadiusLarge);
+  transition: var(--transition);
+  box-shadow: var(--shadowLight);
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientPrimary);
+  opacity: 0;
+  border-radius: var(--borderRadiusLarge);
+  transition: var(--transition);
+  z-index: -1;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadowHeavy);
+}
+
+.card:hover::before {
+  opacity: 0.1;
 }
 
 #cardTitle {
-  color: var(---yellowColor);
+  color: var(--yellowColor);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .imageContainer {
@@ -29,12 +57,26 @@
   margin: 1em auto;
   border-radius: 50%;
   height: 17em;
-  border: 2px solid;
+  border: 3px solid var(--yellowColor);
   padding: 0.7em;
+  position: relative;
+  background: linear-gradient(45deg, var(--yellowColor), var(--secMainColor));
+}
+
+.imageContainer::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  background: var(--mainColor);
+  border-radius: 50%;
+  z-index: 0;
 }
 
 .imageContainer:hover .cardImage {
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(5deg);
 }
 
 .cardImage {
@@ -42,7 +84,9 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover !important;
-  transition: 0.3s ease-in-out;
+  transition: var(--transition);
+  position: relative;
+  z-index: 1;
 }
 
 .quantityBox {
@@ -51,6 +95,10 @@
   justify-content: space-between;
   flex-wrap: nowrap;
   padding: 0.9em;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: var(--borderRadius);
+  margin: 0 1em;
 }
 
 .quantityBoxParent {
@@ -63,23 +111,29 @@
 
 .quantityBoxParent button {
   width: 2em;
-  background-color: transparent;
+  background: var(--gradientPrimary);
   color: white !important;
-  border: solid 2px white;
+  border: none;
   text-align: center;
   font-weight: bolder;
-  border-radius: 6px;
+  border-radius: 50%;
   height: 2em;
+  transition: var(--transition);
+  box-shadow: var(--shadowLight);
+}
+
+.quantityBoxParent button:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadowMedium);
 }
 
 .quantityBoxParent > input {
   width: 2em;
   text-align: center;
-  border: solid 2px white;
-  background-color: white;
-  border: none;
-  color: black;
-  border-radius: 6px;
+  border: 2px solid var(--yellowColor);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--mainColor);
+  border-radius: var(--borderRadius);
   font-weight: bold;
   cursor: default;
   user-select: none;
@@ -91,22 +145,46 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100% !important;
-}
-
-.cartBtn div * {
-  color: var(---secMainColor);
+  padding: 0 1em 1em;
+  gap: 0.5em;
 }
 
 .cartBtn {
-  background-color: var(---yellowColor) !important;
-  color: var(---yellowColor) !important;
+  background: var(--gradientPrimary) !important;
+  color: white !important;
   display: flex;
   width: 7em;
+  border: none;
+  border-radius: var(--borderRadius);
+  transition: var(--transition);
+  box-shadow: var(--shadowLight);
+  overflow: hidden;
+  position: relative;
+}
+
+.cartBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.cartBtn:hover::before {
+  left: 100%;
+}
+
+.cartBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadowMedium);
 }
 
 .cartBtn i,
 .cartBtn div {
-  color: var(---secMainColor) !important;
+  color: white !important;
   font-weight: bolder;
 }
 
@@ -114,36 +192,41 @@
   display: flex;
   justify-content: space-between;
   gap: 1em;
+  padding: 0 1em 1em;
 }
 
 .cartAndOrderBtn,
 .updateandDeleteBtn {
-  background-color: var(---yellowColor);
-  color: var(---secMainColor) !important;
+  background: var(--gradientSecondary);
+  color: white !important;
   font-weight: bolder;
-  border: 2px solid var(---yellowColor);
-  transition: 0.2s;
+  border: none;
+  transition: var(--transition);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadowLight);
 }
 
 .cartAndOrderBtn:hover,
 .updateandDeleteBtn:hover {
-  border: 2px solid var(---yellowColor);
-  color: aliceblue;
-  background-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: var(--shadowMedium);
 }
 
 .updateandDeleteBtn {
   text-decoration: none;
   padding: 0.6em 0.7em;
   margin: 1em 0.7em;
-  border-radius: 6px;
+  border-radius: var(--borderRadius);
   width: 5em;
+  text-align: center;
 }
 
 .descriptionText {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
 }
 
 @media (max-width: 926.5px) {
@@ -152,7 +235,6 @@
     min-width: 15rem;
     max-width: 15rem;
     min-height: 22rem;
-    /* min-width: calc(100% / 5); */
   }
 
   .imageContainer {
@@ -171,7 +253,7 @@
     flex-wrap: nowrap;
     height: fit-content;
     padding: 0.8em;
-    margin: 0;
+    margin: 0 1em;
   }
 
   .quantityBoxParent {
@@ -203,7 +285,7 @@
 
   .cartBtn i,
   .cartBtn div {
-    color: var(---secMainColor) !important;
+    color: white !important;
     font-weight: bolder;
     font-size: 0.9em;
   }
@@ -220,7 +302,6 @@
     min-width: 11rem;
     max-width: 13rem;
     min-height: 18rem;
-    /* min-width: calc(100% / 5); */
   }
 
   .imageContainer {
@@ -238,9 +319,8 @@
     justify-content: space-between;
     flex-wrap: nowrap;
     height: fit-content;
-    /* background-color: rgb(159, 159, 159); */
     padding: 0.7em;
-    margin: 0;
+    margin: 0 1em;
   }
 
   .quantityBoxParent {
@@ -272,7 +352,7 @@
 
   .cartBtn i,
   .cartBtn div {
-    color: var(---secMainColor) !important;
+    color: white !important;
     font-weight: bolder;
     font-size: 0.9em;
   }
@@ -284,7 +364,7 @@
 
   .updateandDeleteBtn {
     margin: 0.5em;
-    border-radius: 6px;
+    border-radius: var(--borderRadius);
     height: 2.5em;
     display: flex;
     justify-content: center;
@@ -298,7 +378,6 @@
     min-width: 12rem;
     max-width: 12rem;
     min-height: 18rem;
-    /* min-width: calc(100% / 5); */
   }
 
   .imageContainer {
@@ -316,13 +395,13 @@
     justify-content: space-between;
     flex-wrap: nowrap;
     height: fit-content;
-    /* background-color: rgb(159, 159, 159); */
     padding: 0.5em;
-    margin: 0;
+    margin: 0 1em;
   }
+  
   .updateandDeleteBtn {
     margin: 0.3em;
-    border-radius: 6px;
+    border-radius: var(--borderRadius);
     height: 2em;
     display: flex;
     justify-content: center;
@@ -358,7 +437,7 @@
 
   .cartBtn i,
   .cartBtn div {
-    color: var(---secMainColor) !important;
+    color: white !important;
     font-weight: bolder;
     font-size: 0.9em;
   }

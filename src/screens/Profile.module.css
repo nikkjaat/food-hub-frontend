@@ -1,3 +1,9 @@
 .icons {
-  color: aquamarine !important;
+  color: var(--yellowColor) !important;
+  transition: var(--transition);
+}
+
+.icons:hover {
+  color: var(--secMainColor) !important;
+  transform: scale(1.1);
 }

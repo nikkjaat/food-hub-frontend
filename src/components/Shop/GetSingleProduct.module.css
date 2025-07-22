@@ -1,64 +1,70 @@
 .container {
-  /* background-image: url("https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2lzMTYwNjItaW1hZ2Uta3d2eWZrd3IuanBn.jpg"); */
   position: absolute;
   width: 100%;
-}
-
-.container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: inherit;
-  background-size: inherit;
-  background-repeat: inherit;
-  filter: blur(3px) brightness(0.3);
-  z-index: 0;
-  transform: scale(1.05);
-}
-
-.container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(36, 36, 36, 0.5);
-  z-index: -1;
-  pointer-events: none;
+  min-height: 100vh;
+  padding-bottom: 2rem;
 }
 
 .itemDetails {
   width: 90%;
+  max-width: 1200px;
   margin: 6rem auto 3em;
-  padding: 1rem 1em;
-  background-color: var(---yellowColor);
-  border: 2px solid var(---yellowColor);
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--borderRadiusLarge);
   display: flex;
-  /* flex-direction: row; */
-  /* gap: 3rem; */
+  box-shadow: var(--shadowHeavy);
+  position: relative;
+  overflow: hidden;
+}
+
+.itemDetails::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientPrimary);
+  opacity: 0.05;
+  border-radius: var(--borderRadiusLarge);
+}
+
+.itemDetails > * {
+  position: relative;
+  z-index: 1;
 }
 
 .descriptionData {
   width: 100%;
   word-wrap: normal;
   display: flex;
+  gap: 2rem;
 }
 
 .imageContainer {
   width: 30rem;
   height: 30rem;
-  margin: 2em auto;
+  margin: 0;
+  flex-shrink: 0;
+  border-radius: var(--borderRadius);
+  overflow: hidden;
+  box-shadow: var(--shadowMedium);
+  transition: var(--transition);
+}
+
+.imageContainer:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadowHeavy);
 }
 
 .imageContainer > img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  margin: 0 auto;
+  object-fit: cover;
+  transition: var(--transition);
 }
 
 .quantityBox {
@@ -66,166 +72,228 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  margin-top: 0.9em;
+  margin-top: 1em;
   height: fit-content;
 }
 
 .quantityBoxParent {
   display: flex;
   gap: 0.5em;
-  /* justify-content: space-between; */
   align-items: center;
   height: 1.6em;
 }
 
 .quantityBoxParent button {
-  width: 2em;
-  background-color: transparent;
-  color: var(---secMainColor) !important;
-  border: solid 2px var(---secMainColor);
+  width: 2.5em;
+  height: 2.5em;
+  background: var(--gradientPrimary);
+  color: white !important;
+  border: none;
   text-align: center;
   font-weight: bolder;
-  border-radius: 6px;
-  height: 2em;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadowLight);
+}
+
+.quantityBoxParent button:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadowMedium);
+}
+
+.quantityBoxParent button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .quantityBoxParent > input {
-  width: 2em;
+  width: 3em;
+  height: 2.5em;
   text-align: center;
-  border: solid 2px var(---secMainColor);
-  background-color: var(---secMainColor);
-  border: none;
-  color: white;
-  border-radius: 6px;
+  border: 2px solid var(--yellowColor);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primaryColor);
+  border-radius: var(--borderRadius);
   font-weight: bold;
   cursor: default;
   user-select: none;
-  height: 2em;
+  outline: none;
 }
 
 .buttons {
   display: flex;
-  /* background-color: aliceblue; */
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100% !important;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .btn {
-  background-color: var(---secMainColor) !important;
-  border: 3px solid var(---secMainColor);
-  color: var(---primaryColor);
-  font-weight: bold;
+  background: var(--gradientPrimary) !important;
+  border: none;
+  color: white;
+  font-weight: 600;
   width: 10em;
-  height: 2.5em;
-  margin: 1rem 0 !important;
-  border-radius: 0.3em;
-  transition: 0.2s;
+  height: 3em;
+  border-radius: 25px;
+  transition: var(--transition);
+  box-shadow: var(--shadowMedium);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadowHeavy);
 }
 
 .btn i,
 .btn div {
-  color: var(---primaryColor);
-}
-
-.btn:hover {
-  box-shadow: 9px 9px 16px 0 rgba(0, 0, 0, 0.2),
-    -9px -9px 16px 0 rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 .title {
-  color: var(---secMainColor);
-  font-weight: bold;
-  font-size: 3rem;
+  background: var(--gradientPrimary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .ulList {
-  background-color: transparent !important;
+  background: transparent !important;
   width: 100%;
   display: grid;
-  gap: 1.4rem;
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
 }
 
 .ulList li {
-  color: var(---secMainColor);
-  font-weight: bold;
-  font-size: 1.2rem;
+  color: var(--primaryColor);
+  font-weight: 500;
+  font-size: 1.1rem;
   display: flex;
-  /* justify-content: space-between; */
+  align-items: flex-start;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: var(--borderRadius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
 }
 
-.ulList li div {
+.ulList li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.ulList li div:first-child {
   min-width: 12em;
-  color: var(---primaryColor);
-  /* background-color: aqua; */
+  color: var(--yellowColor);
+  font-weight: 600;
+}
+
+.ulList li div:last-child {
+  color: var(--primaryColor);
+  flex: 1;
 }
 
 @media screen and (max-width: 768px) {
   .imageContainer {
-    width: 80%;
-    height: fit-content;
-    margin: 2em auto;
+    width: 100%;
+    height: 20em;
+    margin: 0 0 2em 0;
   }
 
   .title {
-    color: var(---secMainColor);
-    font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    text-align: center;
   }
 
   .itemDetails {
-    display: grid;
-  }
-  .itemDetails .imageContainer {
-    margin: 0 auto;
+    padding: 1.5rem;
   }
 
   .descriptionData {
     width: 100%;
     display: grid;
+    gap: 1rem;
   }
 
   .ulList {
     padding: 0;
   }
+
   .buttons {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 1rem;
   }
 
-  @media screen and (max-width: 522px) {
-    .imageContainer {
-      width: 100%;
-      height: fit-content;
-      margin: 2em auto;
-    }
+  .btn {
+    width: 100%;
+    margin: 0;
+  }
+}
 
-    .descriptionData {
-      width: 100%;
-      word-wrap: normal;
-      display: grid;
-    }
+@media screen and (max-width: 522px) {
+  .imageContainer {
+    width: 100%;
+    height: 15em;
+    margin: 0 0 1em 0;
+  }
 
-    .ulList {
-      padding: 0;
-    }
+  .descriptionData {
+    width: 100%;
+    word-wrap: normal;
+    display: grid;
+    gap: 1rem;
+  }
 
-    .ulList li {
-      display: grid;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
+  .ulList {
+    padding: 0;
+  }
 
-    .title {
-      color: var(---secMainColor);
-      font-weight: bold;
-      font-size: 2rem;
-    }
+  .ulList li {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem !important;
+    margin: 0 !important;
+  }
 
-    .btn {
-      width: 100%;
-      margin: 0.5em 0 !important;
-    }
+  .ulList li div:first-child {
+    min-width: auto;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    width: 100%;
+    margin: 0.5em 0 !important;
   }
 }

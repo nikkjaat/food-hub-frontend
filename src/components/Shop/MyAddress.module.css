@@ -1,11 +1,33 @@
 .container {
-  background-color: var(---yellowColor);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   margin: 6rem auto 2em;
   padding: 2rem;
-  border-radius: 1em;
+  border-radius: var(--borderRadiusLarge);
   display: flex;
   flex-direction: column;
   gap: 2em;
+  box-shadow: var(--shadowHeavy);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientSecondary);
+  opacity: 0.05;
+  border-radius: var(--borderRadiusLarge);
+}
+
+.container > * {
+  position: relative;
+  z-index: 1;
 }
 
 .container div:nth-child(2) {
@@ -15,20 +37,29 @@
 }
 
 .addContainer {
-  border-radius: 1rem;
-  background-color: aliceblue;
+  border-radius: var(--borderRadius);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0 0 0 0.5rem;
   text-align: start;
-  color: black !important;
+  transition: var(--transition);
+  box-shadow: var(--shadowLight);
+}
+
+.addContainer:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: var(--shadowMedium);
 }
 
 .address {
   width: 100%;
-  color: black !important;
+  color: var(--primaryColor) !important;
 }
 
 .address div {
-  color: black !important;
+  color: var(--primaryColor) !important;
 }
 
 .addressPrint {
@@ -39,12 +70,13 @@
 .addContainer label {
   text-align: start;
   padding: 1rem;
-  /* border: 1px solid red; */
-  /* background-color: aqua; */
   height: 100% !important;
   width: 100% !important;
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--primaryColor) !important;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
 .addContainer label:active {
@@ -52,63 +84,120 @@
 }
 
 .addContainer input[type="radio"]:checked {
-  background-color: yellow !important;
-  accent-color: var(---secMainColor) !important;
+  accent-color: var(--yellowColor) !important;
+}
+
+.addContainer input[type="radio"]:checked + label {
+  background: rgba(255, 174, 0, 0.1);
+  border-radius: var(--borderRadius);
 }
 
 .container p {
-  color: black;
+  color: var(--primaryColor);
 }
 
 .addNewAdd {
-  color: var(---mainColor);
+  color: white;
   min-width: 11rem !important;
   width: 100%;
-  font-weight: bold;
-  background-color: var(---secMainColor) !important;
+  font-weight: 600;
+  background: var(--gradientPrimary) !important;
+  border: none;
+  border-radius: var(--borderRadius);
+  transition: var(--transition);
+  box-shadow: var(--shadowMedium);
+  position: relative;
+  overflow: hidden;
+}
+
+.addNewAdd::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.addNewAdd:hover::before {
+  left: 100%;
+}
+
+.addNewAdd:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadowHeavy);
 }
 
 .addNewAdd div:last-child {
-  /* background-color: aliceblue; */
-  /* color: black; */
   text-align: center !important;
   display: flex;
   flex-wrap: wrap;
+  color: white !important;
 }
 
 .container a {
   max-width: 10rem !important;
-  /* background-color: aqua; */
   width: 100% !important;
 }
 
 .editDelBtn {
   display: flex;
-  /* background-color: aqua; */
-  width: 9em;
-  /* margin: 0em auto !important; */
+  width: 12em;
   justify-content: space-between;
+  gap: 0.5rem;
 }
+
 .editDelBtn .btn {
   width: 5em;
-  background-color: var(---secMainColor) !important;
+  background: var(--gradientSecondary) !important;
+  border: none;
+  border-radius: var(--borderRadius);
+  transition: var(--transition);
+  box-shadow: var(--shadowLight);
+}
+
+.editDelBtn .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadowMedium);
 }
 
 .editDelBtn .btn div {
-  color: var(---primaryColor) !important;
-  /* background-color: var(---secMainColor); */
+  color: white !important;
 }
 
 .payBtn {
-  background-color: var(---secMainColor);
-  color: var(---primaryColor);
-  font-weight: bold;
+  background: var(--gradientPrimary);
+  color: white;
+  font-weight: 600;
   font-size: 1.2rem;
   width: 10rem;
-  border: 2px solid var(---secMainColor);
+  border: none;
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  transition: var(--transition);
+  box-shadow: var(--shadowMedium);
+  position: relative;
+  overflow: hidden;
+}
+
+.payBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.payBtn:hover::before {
+  left: 100%;
 }
 
 .payBtn:hover {
-  border: 2px solid var(---secMainColor);
-  color: var(---secMainColor);
+  transform: translateY(-2px);
+  box-shadow: var(--shadowHeavy);
 }

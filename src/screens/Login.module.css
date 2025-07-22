@@ -1,40 +1,109 @@
 input:focus {
-  box-shadow: none !important;
-  /* border: transparent !important; */
+  box-shadow: 0 0 0 3px rgba(255, 174, 0, 0.3) !important;
+  border-color: var(--yellowColor) !important;
 }
+
 .form {
   width: 90% !important;
-  background-color: var(---yellowColor) !important;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--borderRadiusLarge) !important;
   margin-bottom: 3em;
   font-weight: bold;
+  box-shadow: var(--shadowHeavy);
+  position: relative;
+  overflow: hidden;
+}
+
+.form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientPrimary);
+  opacity: 0.05;
+  border-radius: var(--borderRadiusLarge);
+}
+
+.form > * {
+  position: relative;
+  z-index: 1;
 }
 
 .form label {
-  color: var(---secMainColor) !important;
+  color: var(--primaryColor) !important;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .form input {
-  font-weight: bold !important;
+  font-weight: 500 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  color: var(--primaryColor) !important;
+  border-radius: var(--borderRadius) !important;
+  padding: 0.75rem 1rem !important;
+  transition: var(--transition) !important;
+}
+
+.form input:focus {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: var(--yellowColor) !important;
+  box-shadow: 0 0 0 3px rgba(255, 174, 0, 0.2) !important;
+}
+
+.form input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .form span {
   user-select: none;
-  color: var(---secMainColor);
-  /* background-color: #c51605 !important; */
+  color: var(--yellowColor);
   cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  padding: 0.5rem 0;
+}
+
+.form span:hover {
+  color: var(--secMainColor);
 }
 
 .submitBtn {
-  background-color: var(---secMainColor);
-  color: var(---primaryColor);
-  font-weight: bold;
-  border: 2px solid var(---secMainColor);
+  background: var(--gradientPrimary) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border: none !important;
+  border-radius: 25px !important;
+  padding: 0.75rem 2rem !important;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadowMedium) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.submitBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.submitBtn:hover::before {
+  left: 100%;
 }
 
 .submitBtn:hover {
-  border: 2px solid var(---secMainColor);
-  color: var(---secMainColor) !important;
-  background-color: transparent;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadowHeavy) !important;
 }
 
 input {
@@ -44,12 +113,21 @@ input {
 .newAccountBtn {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .newAccountBtn a {
-  /* text-decoration: none; */
-  color: var(---secMainColor);
-  font-weight: bold;
+  color: var(--yellowColor);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  padding: 0.25rem 0;
+}
+
+.newAccountBtn a:hover {
+  color: var(--secMainColor);
+  text-decoration: underline;
 }
 
 .rolesContainer {
@@ -57,33 +135,41 @@ input {
 }
 
 .rolesContainer div:first-child {
-  color: var(---secMainColor) !important;
+  color: var(--primaryColor) !important;
   margin-bottom: 0.6rem;
+  font-weight: 600;
 }
 
 .rolesContainer div:last-child {
-  /* background-color: aliceblue; */
-  width: 40%;
+  width: 100%;
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .rolesContainer div:last-child label {
-  width: 10rem;
-  background-color: aliceblue !important;
-  border-radius: 1rem !important;
-  border: 2px solid aliceblue;
-  font-weight: bold;
-  color: var(---mainColor) !important;
+  min-width: 8rem;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
+  border-radius: var(--borderRadius) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  font-weight: 500 !important;
+  color: var(--primaryColor) !important;
+  padding: 0.75rem 1rem !important;
+  transition: var(--transition) !important;
+  cursor: pointer;
+  text-align: center;
 }
 
 .rolesContainer div:last-child label:hover {
-  border: 2px solid var(---secMainColor);
-  color: var(---secMainColor) !important;
+  border-color: var(--yellowColor) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-2px);
 }
 
 .rolesContainer div:last-child input:checked + label {
-  background-color: var(---secMainColor) !important;
-  border: 2px solid aliceblue;
-  color: var(---primaryColor) !important;
+  background: var(--gradientPrimary) !important;
+  border-color: transparent !important;
+  color: white !important;
+  box-shadow: var(--shadowMedium);
 }

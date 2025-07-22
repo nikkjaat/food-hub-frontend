@@ -3,9 +3,31 @@
   top: 0em;
   right: 0.3em;
   width: 20rem;
-  transition: 0.3s;
+  transition: var(--transition);
   z-index: 100;
-  /* position: relative; */
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadowHeavy);
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientSecondary);
+  opacity: 0.05;
+  border-radius: var(--borderRadius);
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .card .imageContainer {
@@ -14,10 +36,13 @@
   border-radius: 50%;
   position: absolute;
   right: 1rem;
+  border: 2px solid var(--yellowColor);
+  overflow: hidden;
+  box-shadow: var(--shadowMedium);
 }
 
 .container {
-  background-color: var(---mainColor) !important;
+  background: transparent !important;
 }
 
 .imageContainer img {
@@ -26,79 +51,133 @@
   border-radius: inherit !important;
   object-fit: cover;
   cursor: pointer;
+  transition: var(--transition);
+}
+
+.imageContainer:hover img {
+  transform: scale(1.1);
 }
 
 .editBtn {
-  background-color: rgba(0, 0, 0, 0.337);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 10;
   border-radius: inherit;
   padding: 1rem 0;
   width: 100%;
   position: absolute !important;
-  transition: 0.3s;
-  /* top: 1rem; */
+  transition: var(--transition);
   opacity: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellowColor);
 }
 
 .imageContainer:hover .editBtn {
   opacity: 1;
 }
 
+.buttonContainer {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.buttonContainer button {
+  background: transparent;
+  color: var(--primaryColor);
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  flex: 1;
+}
+
 .buttonContainer button:first-child {
-  border-right: 1px solid rgba(0, 0, 0, 0.548);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.buttonContainer button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--yellowColor);
 }
 
 .name,
 .email {
-  background-color: transparent !important;
-  color: var(---primaryColor) !important;
+  background: transparent !important;
+  color: var(--primaryColor) !important;
   border: none !important;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   outline: none;
-  /* width: 12rem; */
   cursor: auto;
+  padding: 0.5rem;
+  border-radius: var(--borderRadius);
+  transition: var(--transition);
 }
+
+.name:focus,
+.email:focus {
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 0 0 2px rgba(255, 174, 0, 0.3);
+}
+
 .role {
-  background-color: transparent;
-  color: rgb(168, 166, 165) !important;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7) !important;
   border: none;
   font-size: 0.8rem !important;
   cursor: auto;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  display: inline-block;
 }
 
 .input {
-  background-color: transparent !important;
-  color: rgb(168, 166, 165) !important;
-  border: none !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--primaryColor) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
   outline: none !important;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 500;
   width: 12rem;
   cursor: auto;
+  padding: 0.5rem;
+  border-radius: var(--borderRadius);
+  transition: var(--transition);
+}
+
+.input:focus {
+  border-color: var(--yellowColor) !important;
+  box-shadow: 0 0 0 2px rgba(255, 174, 0, 0.2);
 }
 
 .nameContainer i {
   font-size: 1rem !important;
+  color: var(--yellowColor) !important;
 }
 
 .descriptionContainer,
 .nameContainer {
   display: flex !important;
   gap: 1rem;
+  align-items: center;
+  padding: 1rem;
 }
 
 .descriptionContainer div i,
 .nameContainer div i {
   cursor: pointer;
-  color: var(---secMainColor) !important;
-  /* background-color: aqua; */
+  color: var(--yellowColor) !important;
+  transition: var(--transition);
 }
 
-/* @media screen and (max-width: 780.5px) {
-  .card {
-    top: 1.7em !important;
-    right: 0;
-  }
-} */
+.descriptionContainer div i:hover,
+.nameContainer div i:hover {
+  transform: scale(1.2);
+  color: var(--secMainColor) !important;
+}

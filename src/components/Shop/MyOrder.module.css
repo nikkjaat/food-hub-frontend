@@ -1,34 +1,42 @@
 .container {
-  /* background-color: rgb(0, 110, 207); */
-  margin: 1em 1em 2em;
+  margin: 1em;
   display: flex;
   justify-content: space-between;
-  gap: 1em;
+  gap: 2em;
   position: relative;
 }
 
 .filterBox {
   min-width: 20em;
   height: 100%;
-  backdrop-filter: blur(8px) brightness(0.8);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--borderRadius);
   padding-bottom: 1em;
-  border-radius: 0.3em;
   max-height: 100vh;
   overflow: hidden;
   position: sticky;
   top: 6em;
   z-index: 1;
+  box-shadow: var(--shadowMedium);
 }
 
 .heading {
-  padding: 0.8em 1em 0;
+  padding: 1em;
   font-size: 1.4em;
-  font-weight: bold;
+  font-weight: 600;
+  color: var(--primaryColor);
+  background: var(--gradientPrimary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
 }
 
 .orderstatus > div:last-child,
 .orderTime > div:last-child {
-  padding: 0.4em 1em;
+  padding: 0.8em 1em;
   display: grid;
   gap: 1.5em;
 }
@@ -36,28 +44,31 @@
 .orderstatus > div:first-child,
 .orderTime > div:first-child {
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 600;
   margin: 1em;
-  color: var(---yellowColor);
+  color: var(--yellowColor);
+  font-size: 1em;
 }
 
 .orderstatus div > label,
 .orderTime div > label {
   width: 85%;
-  font-size: 1.1em;
+  font-size: 1em;
   cursor: pointer;
+  color: var(--primaryColor);
+  transition: var(--transition);
+}
+
+.orderstatus div > label:hover,
+.orderTime div > label:hover {
+  color: var(--yellowColor);
 }
 
 .orderstatus div > input,
 .orderTime div > input {
-  /* width: 10%; */
-  background-color: aliceblue;
   margin-right: 1em;
-  transform: scale(1.5);
-  -webkit-transform: scale(1.3);
-  -moz-transform: scale(1.5);
-  -o-transform: scale(1.5);
-  -ms-transform: scale(1.5);
+  transform: scale(1.3);
+  accent-color: var(--yellowColor);
 }
 
 .orderListContainer {
@@ -66,28 +77,56 @@
 
 .orderListContainer .searchBar > input[type="search"] {
   width: 100% !important;
-  height: 3em;
-  border: 1px solid white;
-  backdrop-filter: blur(8px) brightness(0.8);
-  background-color: transparent;
-  padding: 0 1em;
-  border-radius: 0.3em;
+  height: 3.5em;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: var(--primaryColor);
+  padding: 0 1.5em;
+  border-radius: 25px;
   outline: none;
   margin-bottom: 2em;
+  transition: var(--transition);
+  font-size: 1em;
+}
+
+.orderListContainer .searchBar > input[type="search"]::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .orderListContainer .searchBar > input[type="search"]:focus {
-  outline: 2px solid white;
+  border-color: var(--yellowColor);
+  box-shadow: 0 0 0 3px rgba(255, 174, 0, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .noOrdersFound {
   width: 100%;
   text-align: center;
-  padding: 2em 0;
+  padding: 3em 0;
+  color: var(--primaryColor);
+  font-size: 1.2em;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: var(--borderRadius);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: var(--borderRadius) !important;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadowLight) !important;
+  margin-bottom: 1.5em !important;
 }
 
 .card:hover {
-  outline: 1.5px solid white;
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: var(--shadowHeavy) !important;
+  border-color: var(--yellowColor) !important;
 }
 
 .orderDetails {
@@ -98,6 +137,7 @@
   object-fit: cover;
   width: 5em;
   height: 100%;
+  border-radius: var(--borderRadius);
 }
 
 .imageContainer .name {
@@ -106,11 +146,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* max-width: 14em; */
+  color: var(--primaryColor);
+  font-weight: 600;
 }
 
 .date {
   text-align: center;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .aboutOrder {
@@ -121,6 +163,24 @@
 
 .filterIcon {
   display: none;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  background: var(--gradientPrimary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  cursor: pointer;
+  box-shadow: var(--shadowMedium);
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.filterIcon:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadowHeavy);
 }
 
 @media screen and (max-width: 872.5px) {
@@ -132,42 +192,31 @@
   .filterBox {
     min-width: 15rem;
     height: 4em;
-    backdrop-filter: blur(8px) brightness(0.8);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding-bottom: 1em;
-    border-radius: 0.3em;
-    max-height: 100vh; /* Ensures it fits within the viewport */
-    overflow: hidden; /* Disables scrolling */
-    position: sticky; /* Keeps it in place while scrolling */
-    top: 5.5em; /* Distance from the top */
-    transition: 0.2s ease-in;
+    border-radius: var(--borderRadius);
+    max-height: 100vh;
+    overflow: hidden;
+    position: sticky;
+    top: 5.5em;
+    transition: var(--transition);
     z-index: 1;
   }
 
   .filterIcon {
-    display: block;
-    position: fixed;
-    top: 1em;
-    right: 1em;
-    cursor: pointer;
-  }
-
-  /* .orderstatus > div:last-child,
-  .orderTime > div:last-child {
-    padding: 0.4em 1em;
     display: flex;
-    gap: 2em;
+    align-items: center;
+    justify-content: center;
   }
-
-  .orderstatus > div:last-child > div,
-  .orderTime > div:last-child > div {
-    padding: 0.4em 1em;
-    display: flex;
-  } */
 
   .card {
     width: 100%;
-    border-radius: 0.3em;
-    backdrop-filter: blur(8px) brightness(0.8);
+    border-radius: var(--borderRadius);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1em;
     display: flex;
     gap: 1em;
@@ -175,6 +224,7 @@
     max-height: 12rem !important;
     cursor: pointer;
     margin-bottom: 1em;
+    transition: var(--transition);
   }
 
   .imageContainer {
@@ -187,13 +237,15 @@
 
   .name {
     font-size: 1.2em !important;
-    font-weight: bold !important;
+    font-weight: 600 !important;
+    color: var(--primaryColor) !important;
   }
 
   .itemPrice {
-    /* text-align: center; */
     margin-top: 0.2em !important;
     font-size: 1.2em !important;
+    color: var(--yellowColor) !important;
+    font-weight: 600 !important;
   }
 
   .description {
@@ -202,6 +254,7 @@
     -webkit-line-clamp: 1 !important;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: rgba(255, 255, 255, 0.8) !important;
   }
 }
 
@@ -209,29 +262,29 @@
   .container {
     display: grid;
     position: relative;
-    margin: 1em 1em 2em;
+    margin: 1em;
   }
 
   .filterBox {
     min-width: 15rem;
     height: 4em;
-    backdrop-filter: blur(8px) brightness(0.8);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     padding-bottom: 1em;
-    border-radius: 0.3em;
-    max-height: 100vh; /* Ensures it fits within the viewport */
-    overflow: hidden; /* Disables scrolling */
-    position: sticky; /* Keeps it in place while scrolling */
-    top: 1em; /* Distance from the top */
-    transition: 0.2s ease-in;
+    border-radius: var(--borderRadius);
+    max-height: 100vh;
+    overflow: hidden;
+    position: sticky;
+    top: 1em;
+    transition: var(--transition);
     z-index: 1;
   }
 
   .filterIcon {
-    display: block;
-    position: fixed;
-    top: 1em;
-    right: 1em;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -251,20 +304,23 @@
 
   .card {
     width: 100%;
-    border-radius: 0.3em;
-    backdrop-filter: blur(8px) brightness(0.8);
-    padding-left: 0em;
+    border-radius: var(--borderRadius);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5em;
     display: flex;
-    gap: 0em;
+    gap: 0.5em;
     justify-content: space-between;
     max-height: 8rem !important;
     cursor: pointer;
     margin-bottom: 1em;
+    transition: var(--transition);
   }
 
   .name {
     font-size: 1em !important;
-    font-weight: bold !important;
+    font-weight: 600 !important;
   }
 
   .itemPrice {

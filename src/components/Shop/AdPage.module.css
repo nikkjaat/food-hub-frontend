@@ -1,110 +1,243 @@
 @import url("https://fonts.googleapis.com/css2?family=Margarine&family=Oleo+Script:wght@400;700&family=Rowdies:wght@300;400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
 .container {
-  background-color: var(---yellowColor);
-  padding: 3em;
-  margin-bottom: 3em;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--borderRadiusLarge);
+  padding: 4em 3em;
+  margin: 3em 1em;
   display: flex;
-  gap: 1em;
+  gap: 2em;
+  box-shadow: var(--shadowHeavy);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientSecondary);
+  opacity: 0.05;
+  border-radius: var(--borderRadiusLarge);
 }
 
 .container > div {
   width: 50%;
-}
-
-.contentContainer {
-  /* background-color: rgb(119, 119, 119); */
+  z-index: 1;
 }
 
 .contentContainer h2 {
-  font-size: 4em;
+  font-size: 3.5em;
   font-family: "Oleo Script", system-ui;
   font-weight: 700;
   font-style: normal;
+  background: var(--gradientPrimary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1em;
+  line-height: 1.2;
 }
 
 .contentContainer h2 span {
-  color: var(---secMainColor);
+  background: var(--gradientSecondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .contentContainer p {
-  color: var(---mainColor);
+  color: rgba(255, 255, 255, 0.9);
   font-family: "Ubuntu Mono", monospace;
-  font-weight: 700;
+  font-weight: 500;
   font-style: normal;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .btnContainer {
-  margin-top: 6em;
+  margin-top: 3em;
   display: flex;
   justify-content: space-between;
-  padding: 0 1em;
-  gap: 1em;
+  gap: 1.5em;
+  flex-wrap: wrap;
 }
 
 .btnContainer div {
-  width: 8em;
-  background-color: var(---secMainColor);
+  padding: 1em 2em;
+  background: var(--gradientPrimary);
   border: none;
-  border-radius: 2em 0 2em 0;
+  border-radius: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadowMedium);
+  position: relative;
+  overflow: hidden;
+}
+
+.btnContainer div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.btnContainer div:hover::before {
+  left: 100%;
+}
+
+.btnContainer div:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadowHeavy);
 }
 
 .btnContainer a {
-  /* background-color: var(---secMainColor); */
-  width: 10em;
+  padding: 1em 2em;
+  background: var(--gradientSecondary);
+  color: white;
   text-align: center;
-  padding: 0.3em;
-  font-weight: bold;
-  /* color: var(---textColor); */
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: var(--transition);
+  box-shadow: var(--shadowMedium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btnContainer a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition);
+}
+
+.btnContainer a:hover::before {
+  left: 100%;
+}
+
+.btnContainer a:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadowHeavy);
 }
 
 .imageContainer {
   display: flex;
   gap: 1em;
+  height: 100%;
 }
 
 .imageContainer > div {
   width: 50%;
-  /* background-color: aliceblue; */
   display: grid;
   gap: 1em;
-  /* padding: 1em; */
 }
 
 .doubleImage div {
   margin: auto;
   width: 100%;
   height: 15em;
-  border-radius: 2em;
-  /* background-color: aqua; */
+  border-radius: var(--borderRadiusLarge);
   overflow: hidden;
+  box-shadow: var(--shadowMedium);
+  transition: var(--transition);
+  position: relative;
+}
+
+.doubleImage div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientPrimary);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.doubleImage div:hover::before {
+  opacity: 0.2;
+}
+
+.doubleImage div:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadowHeavy);
 }
 
 .doubleImage div img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: var(--transition);
 }
 
 .singleImage div {
-  border-radius: 2em;
+  border-radius: var(--borderRadiusLarge);
   overflow: hidden;
+  box-shadow: var(--shadowMedium);
+  transition: var(--transition);
+  position: relative;
+}
+
+.singleImage div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientSecondary);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 1;
+}
+
+.singleImage div:hover::before {
+  opacity: 0.2;
+}
+
+.singleImage div:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadowHeavy);
 }
 
 .singleImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: var(--transition);
 }
 
 @media (max-width: 1023.5px) {
   .container {
-    padding: 1.5em;
+    padding: 3em 2em;
   }
+  
   .contentContainer h2 {
     font-size: 3em;
   }
@@ -114,7 +247,7 @@
   .container {
     display: flex;
     flex-direction: column-reverse;
-    padding: 1em;
+    padding: 2em 1.5em;
   }
 
   .container > div {
@@ -123,6 +256,15 @@
 
   .contentContainer h2 {
     font-size: 2.5em;
+    text-align: center;
+  }
+
+  .contentContainer p {
+    text-align: center;
+  }
+
+  .btnContainer {
+    justify-content: center;
   }
 
   .imageContainer > div:first-child {

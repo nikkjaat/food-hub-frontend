@@ -1,16 +1,20 @@
 .container {
-  /* background-color: aliceblue; */
   width: 100%;
   height: 83vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: var(--borderRadius);
 }
 
 .container h1 {
   position: relative;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 5em;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 4em;
+  font-family: "Kalam", cursive;
+  text-shadow: 0 0 20px rgba(255, 174, 0, 0.3);
 }
 
 .container h1::before {
@@ -19,12 +23,19 @@
   overflow: hidden;
   max-width: 7em;
   white-space: nowrap;
-  color: #fff;
+  background: var(--gradientPrimary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   animation: loading 2s linear infinite;
+  text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
 }
 
 @keyframes loading {
   0% {
     max-width: 0;
+  }
+  100% {
+    max-width: 7em;
   }
 }

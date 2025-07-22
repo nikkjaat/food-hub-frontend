@@ -3,77 +3,106 @@
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: space-evenly;
-  padding-bottom: 2em;
+  padding: 2em 1em 4em;
+  margin-bottom: 2em;
 }
 
 .showCase {
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--borderRadiusLarge);
   overflow: hidden;
-  padding: 10em 6em;
+  padding: 6em 4em;
   display: flex;
-  gap: 1em;
+  gap: 2em;
   justify-content: space-between;
+  align-items: center;
   height: fit-content;
+  margin: 2em 1em;
+  box-shadow: var(--shadowHeavy);
+  position: relative;
+}
+
+.showCase::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradientPrimary);
+  opacity: 0.05;
+  border-radius: var(--borderRadiusLarge);
 }
 
 .text {
   z-index: 1;
+  flex: 1;
 }
 
 .text > p:nth-of-type(1) {
   font-family: "Pacifico", cursive;
   font-weight: 400;
   font-style: normal;
-  font-size: 5em;
+  font-size: 4.5em;
   padding: 0;
   margin: 0;
+  background: var(--gradientPrimary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .text > p:nth-of-type(2) {
   font-family: "Playwrite IT Trad", cursive;
   font-optical-sizing: auto;
-  font-weight: bold;
+  font-weight: 600;
   font-style: normal;
-  font-size: 2.4em;
+  font-size: 2em;
   word-spacing: 0.4em;
   padding: 0;
-  margin: 1em 1em;
+  margin: 1.5em 0;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .text > p span {
-  color: var(---yellowColor);
+  color: var(--yellowColor);
+  text-shadow: 0 0 20px rgba(255, 174, 0, 0.5);
 }
 
 @media (max-width: 1184.5px) {
   .showCase {
-    padding: 7em 3em 3em;
+    padding: 5em 3em;
   }
 
   .text > p:nth-of-type(1) {
-    font-size: 4.2em;
+    font-size: 4em;
   }
 }
 
 @media (max-width: 950.5px) {
   .showCase {
-    padding: 5em 2em 3em;
+    padding: 4em 2em;
   }
 
   .text > p:nth-of-type(1) {
-    font-size: 3.7em;
+    font-size: 3.5em;
   }
 
   .text > p:nth-of-type(2) {
-    font-size: 2em;
+    font-size: 1.8em;
   }
 }
 
 @media (max-width: 854.5px) {
   .showCase {
-    padding: 7em 2em 3em;
+    padding: 4em 2em;
   }
 
   .text > p:nth-of-type(1) {
@@ -83,13 +112,13 @@
 
 @media (max-width: 742.5px) {
   .showCase {
-    /* flex-direction: column-reverse; */
-    padding: 7em 1em 3em;
+    padding: 4em 1.5em;
   }
 
   .text > p:nth-of-type(1) {
-    font-size: 3em;
+    font-size: 2.8em;
   }
+  
   .text > p:nth-of-type(2) {
     font-size: 1.5em;
   }
@@ -98,14 +127,16 @@
 @media (max-width: 480.5px) {
   .showCase {
     flex-direction: column-reverse;
-    padding: 7em 1em 3em;
+    padding: 3em 1em;
+    text-align: center;
   }
 
   .text > p:nth-of-type(1) {
-    font-size: 2.9em;
+    font-size: 2.5em;
   }
+  
   .text > p:nth-of-type(2) {
-    font-size: 1em;
+    font-size: 1.2em;
   }
 }
 
@@ -113,17 +144,19 @@
   .cardContainer {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.1rem;
+    gap: 1rem;
     justify-content: space-evenly;
+    padding: 1em;
   }
 
   .showCase {
-    padding: 7em 1em 3em;
+    padding: 2em 1em;
   }
 
   .text > p:nth-of-type(1) {
     font-size: 2.2em;
   }
+  
   .text > p:nth-of-type(2) {
     font-size: 1em;
   }
